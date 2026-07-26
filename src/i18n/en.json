@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "government": "Government Structure",
+    "potentials": "Potentials",
+    "facilities": "Facilities",
+    "umkm": "UMKM",
+    "gallery": "Gallery",
+    "location": "Location",
+    "contact": "Contact",
+    "login": "Admin Login",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Kelurahan Tiromanda",
+    "subtitle": "Discover the Natural Beauty, Local Culture, and Community of Tiromanda, Tana Toraja.",
+    "btn_location": "Our Location",
+    "btn_about": "About Kelurahan"
+  },
+  "about": {
+    "title": "About the Village",
+    "subtitle": "Get to know Kelurahan Tiromanda more closely",
+    "video_title": "Video Profile",
+    "vision": "Vision",
+    "mission": "Mission",
+    "area": "Total Area",
+    "population": "Population",
+    "geography": "Geographical Location",
+    "people": "People"
+  },
+  "government": {
+    "title": "Government Structure",
+    "subtitle": "Officials and staff serving the community",
+    "village_head": "Village Head",
+    "staff": "Village Staff",
+    "neighborhoods": "Neighborhood Heads & RT",
+    "phone": "Phone"
+  },
+  "potentials": {
+    "title": "Village Potentials",
+    "subtitle": "Various superior potentials of Kelurahan Tiromanda"
+  },
+  "facilities": {
+    "title": "Public Facilities",
+    "subtitle": "Infrastructure and facilities available in Kelurahan Tiromanda",
+    "location_label": "Location"
+  },
+  "umkm": {
+    "title": "UMKM — Local Products",
+    "subtitle": "Featured products from the people of Kelurahan Tiromanda",
+    "contact_btn": "Contact via WhatsApp",
+    "contact_label": "Contact"
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "subtitle": "Documentation of activities and beauty of Kelurahan Tiromanda"
+  },
+  "location": {
+    "title": "Location",
+    "subtitle": "Find and visit Kelurahan Tiromanda",
+    "address": "Full Address",
+    "office_hours": "Office Hours",
+    "contact_info": "Contact Information",
+    "open_maps": "Open Google Maps",
+    "get_directions": "Get Directions"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Reach out to us through the following communication channels"
+  },
+  "footer": {
+    "description": "Kelurahan Tiromanda is a village in Makale Selatan District, Tana Toraja Regency, South Sulawesi. Official portal for community information and services.",
+    "quick_links": "Quick Links",
+    "contact_info": "Contact Info",
+    "social_media": "Social Media",
+    "copyright": "© 2026 Kelurahan Tiromanda. All Rights Reserved."
+  }
+}

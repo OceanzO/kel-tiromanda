@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "government": "Struktur Pemerintahan",
+    "potentials": "Potensi",
+    "facilities": "Fasilitas",
+    "umkm": "UMKM",
+    "gallery": "Galeri",
+    "location": "Lokasi",
+    "contact": "Kontak",
+    "login": "Admin Login",
+    "language": "Bahasa"
+  },
+  "hero": {
+    "title": "Kelurahan Tiromanda",
+    "subtitle": "Temukan Keindahan Alam, Budaya Lokal, dan Komunitas Tiromanda, Tana Toraja.",
+    "btn_location": "Lokasi Kami",
+    "btn_about": "Tentang Kelurahan"
+  },
+  "about": {
+    "title": "Tentang Kelurahan",
+    "subtitle": "Mengenal lebih dekat Kelurahan Tiromanda",
+    "video_title": "Profil Video",
+    "vision": "Visi",
+    "mission": "Misi",
+    "area": "Luas Wilayah",
+    "population": "Jumlah Penduduk",
+    "geography": "Letak Geografis",
+    "people": "Jiwa"
+  },
+  "government": {
+    "title": "Struktur Pemerintahan",
+    "subtitle": "Pejabat dan perangkat kelurahan yang melayani masyarakat",
+    "village_head": "Lurah",
+    "staff": "Perangkat Kelurahan",
+    "neighborhoods": "Kepala Lingkungan & RT",
+    "phone": "Telepon"
+  },
+  "potentials": {
+    "title": "Potensi Kelurahan",
+    "subtitle": "Ragam potensi unggulan yang dimiliki Kelurahan Tiromanda"
+  },
+  "facilities": {
+    "title": "Fasilitas Umum",
+    "subtitle": "Sarana dan prasarana yang tersedia di Kelurahan Tiromanda",
+    "location_label": "Lokasi"
+  },
+  "umkm": {
+    "title": "UMKM — Produk Lokal",
+    "subtitle": "Produk unggulan dari masyarakat Kelurahan Tiromanda",
+    "contact_btn": "Hubungi via WhatsApp",
+    "contact_label": "Kontak"
+  },
+  "gallery": {
+    "title": "Galeri Foto",
+    "subtitle": "Dokumentasi kegiatan dan keindahan Kelurahan Tiromanda"
+  },
+  "location": {
+    "title": "Lokasi",
+    "subtitle": "Temukan dan kunjungi Kelurahan Tiromanda",
+    "address": "Alamat Lengkap",
+    "office_hours": "Jam Operasional",
+    "contact_info": "Informasi Kontak",
+    "open_maps": "Buka Google Maps",
+    "get_directions": "Petunjuk Arah"
+  },
+  "contact": {
+    "title": "Hubungi Kami",
+    "subtitle": "Silakan hubungi kami melalui berbagai saluran komunikasi berikut"
+  },
+  "footer": {
+    "description": "Kelurahan Tiromanda merupakan salah satu kelurahan di Kecamatan Makale Selatan, Kabupaten Tana Toraja, Sulawesi Selatan. Portal resmi informasi dan layanan masyarakat.",
+    "quick_links": "Tautan Cepat",
+    "contact_info": "Informasi Kontak",
+    "social_media": "Media Sosial",
+    "copyright": "© 2026 Kelurahan Tiromanda. Hak Cipta Dilindungi."
+  }
+}

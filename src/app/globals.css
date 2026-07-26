@@ -1,26 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+/* ========================================
+   DESIGN TOKENS — Kelurahan Tiromanda
+   ======================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #1F5E3B;
+  --primary-light: #2d7a4f;
+  --primary-dark: #174a2e;
+  --secondary: #B32E2E;
+  --secondary-light: #d44444;
+  --secondary-dark: #8a2222;
+  --accent: #C79A2D;
+  --accent-light: #dbb44d;
+  --accent-dark: #a57e1f;
+  --background: #F7F5EF;
+  --background-alt: #EDE9DF;
+  --foreground: #1a1a1a;
+  --foreground-light: #4a4a4a;
+  --foreground-muted: #7a7a7a;
+  --white: #ffffff;
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --toraja-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L35 10L30 20L25 10Z' fill='%23C79A2D' opacity='0.08'/%3E%3C/svg%3E");
+  --navbar-height: 80px;
 }
 
+/* ========================================
+   TAILWIND THEME INLINE
+   ======================================== */
 @theme inline {
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-dark: var(--secondary-dark);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
   --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-light: var(--foreground-light);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-card-bg: var(--card-bg);
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
+  --animate-slide-down: slide-down 0.4s ease-out forwards;
+  --animate-scale-in: scale-in 0.5s ease-out forwards;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-scroll-hint: scroll-hint 2s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(31, 94, 59, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(31, 94, 59, 0.6); }
+  }
+  @keyframes scroll-hint {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.5; transform: translateY(10px); }
+  }
+  @keyframes ken-burns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   BASE STYLES
+   ======================================== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-height);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* ========================================
+   GLASSMORPHISM UTILITIES
+   ======================================== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   TORAJA ACCENT DIVIDER
+   ======================================== */
+.toraja-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.toraja-divider::before,
+.toraja-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.toraja-divider .toraja-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   CARD STYLES
+   ======================================== */
+.premium-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.premium-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-6px);
+}
+
+/* ========================================
+   SWIPER CUSTOMIZATION
+   ======================================== */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5) !important;
+  width: 12px !important;
+  height: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent) !important;
+  width: 32px !important;
+  border-radius: 6px !important;
+}
+
+/* ========================================
+   ORG CHART CONNECTOR LINES
+   ======================================== */
+.org-connector-vertical {
+  position: relative;
+}
+
+.org-connector-vertical::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -32px;
+  width: 2px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--primary), var(--accent));
+}
+
+.org-connector-horizontal {
+  position: relative;
+}
+
+.org-connector-horizontal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--primary), var(--accent), var(--primary));
+}
+
+/* ========================================
+   SECTION PATTERN BACKGROUND
+   ======================================== */
+.section-pattern {
+  background-image: var(--toraja-pattern);
+  background-size: 60px 60px;
+}
+
+/* ========================================
+   SELECTION COLOR
+   ======================================== */
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* ========================================
+   LIGHTBOX OVERRIDES
+   ======================================== */
+.yarl__container {
+  background: rgba(0, 0, 0, 0.92) !important;
 }
