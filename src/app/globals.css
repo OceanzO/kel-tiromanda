@@ -35,6 +35,19 @@
   --navbar-height: 80px;
 }
 
+.dark {
+  --background: #0f1c15;
+  --background-alt: #162a1f;
+  --foreground: #fcfcfc;
+  --foreground-light: #d1d1d1;
+  --foreground-muted: #a1a1a1;
+  --card-bg: rgba(31, 58, 44, 0.6);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(15, 28, 21, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+
 
 /* ========================================
    TAILWIND THEME INLINE

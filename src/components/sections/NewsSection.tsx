@@ -40,7 +40,7 @@ export default function NewsSection() {
   const { language, t } = useLanguage();
 
   return (
-    <section id="news" className="relative py-20 md:py-28 bg-white dark:bg-[#0f1c15] overflow-hidden">
+    <section id="news" className="relative py-20 md:py-28 bg-background overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
 

@@ -30,7 +30,7 @@ export default function Footer() {
   );
 
   return (
-    <footer className="relative bg-primary-dark text-white overflow-hidden">
+    <footer id="footer" className="relative bg-primary-dark text-white overflow-hidden">
       {/* Toraja Decorative Top Border */}
       <div className="h-1 bg-gradient-to-r from-accent via-secondary to-accent" />
 

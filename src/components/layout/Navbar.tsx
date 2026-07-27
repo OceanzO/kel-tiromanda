@@ -70,12 +70,9 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = () => {
     setIsMobileOpen(false);
     setOpenDropdown(null);
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   // Determine if a nav item or any of its children is "active"
@@ -92,7 +89,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
           ? 'bg-[#1F3A2C]/97 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-white/10'
-          : 'bg-gradient-to-b from-black/40 to-transparent'
+          : 'bg-gradient-to-b from-black/50 to-transparent border-b border-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,7 +97,7 @@ export default function Navbar() {
             {/* Logo */}
             <motion.a
               href="#home"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
+              onClick={handleNavClick}
               className="flex items-center gap-3 group"
               whileHover={{ scale: 1.02 }}
             >
@@ -138,7 +135,7 @@ export default function Navbar() {
                     // ── Regular link ──
                     <a
                       href={item.href}
-                      onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+                      onClick={handleNavClick}
                       className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 block ${
                         isItemActive(item) ? 'text-accent' : 'text-white/75 hover:text-white'
                       }`}
@@ -166,7 +163,7 @@ export default function Navbar() {
                           {item.children.map((child, i) => (
                             <button
                               key={child.id}
-                              onClick={() => handleNavClick(child.href)}
+                              onClick={handleNavClick}
                               className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-all duration-150 flex items-center gap-2 ${
                                 activeSection === child.id
                                   ? 'text-accent bg-accent/10'
@@ -193,7 +190,7 @@ export default function Navbar() {
               <div className="relative">
                 <button onClick={() => setIsLangOpen(!isLangOpen)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 text-white/75 hover:text-white hover:bg-white/10">
                   <FaGlobe className="text-base" />
-                  <span className="hidden sm:inline">{language === 'id' ? 'ID' : 'EN'}</span>
+                  <span className="hidden sm:inline">Language Switcher</span>
                 </button>
                 <AnimatePresence>
                   {isLangOpen && (
@@ -223,6 +220,14 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </button>
+
+              <a
+                href="#footer"
+                onClick={handleNavClick}
+                className="hidden xl:flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent-light text-white rounded-xl text-sm font-semibold transition-all shadow-md"
+              >
+                {language === 'id' ? 'Tentang Kami' : 'About Us'}
+              </a>
 
               <button onClick={() => setIsMobileOpen(!isMobileOpen)} className="xl:hidden p-2.5 rounded-xl transition-all duration-300 text-white hover:bg-white/10">
                 {isMobileOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
@@ -303,7 +308,7 @@ export default function Navbar() {
                     ) : (
                       <motion.a
                         href={item.href}
-                        onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+                        onClick={handleNavClick}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}
