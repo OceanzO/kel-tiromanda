@@ -46,7 +46,7 @@ export default function LocationSection() {
               {/* Address Card */}
               <div className="premium-card p-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                     <FaMapMarkerAlt className="text-primary text-xl" />
                   </div>
                   <div>
@@ -117,7 +117,7 @@ export default function LocationSection() {
                   href={LOCATION.maps_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary-dark text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-primary-dark hover:bg-[#162d22] text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
                 >
                   <FaExternalLinkAlt className="text-xs" />
                   {t('location.open_maps')}
@@ -126,7 +126,7 @@ export default function LocationSection() {
                   href={LOCATION.directions_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-accent hover:bg-accent-dark text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-accent hover:bg-accent-dark text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg hover:shadow-accent/25 transition-all duration-300 hover:scale-[1.02]"
                 >
                   <FaDirections className="text-xs" />
                   {t('location.get_directions')}

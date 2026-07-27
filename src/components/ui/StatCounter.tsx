@@ -50,15 +50,15 @@ export default function StatCounter({ value, label, icon, suffix = '' }: StatCou
   return (
     <motion.div
       ref={ref}
-      className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-white/20 shadow-sm"
+      className="flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-md border border-primary/10 hover:shadow-lg hover:border-accent/20 transition-all duration-300"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       {icon && (
-        <div className="text-primary text-3xl mb-3">{icon}</div>
+        <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3 text-primary text-2xl">{icon}</div>
       )}
-      <span className="font-heading text-3xl md:text-4xl font-bold text-primary">
+      <span className="font-heading text-3xl md:text-4xl font-bold text-accent">
         {displayValue}{suffix}
       </span>
       <span className="text-foreground-muted text-sm md:text-base mt-2 font-medium">

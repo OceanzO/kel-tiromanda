@@ -36,10 +36,10 @@ export default function AboutSection() {
               </p>
 
               {/* Vision */}
-              <div className="premium-card p-6">
+              <div className="premium-card p-6 border-l-4 border-accent">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <FaEye className="text-primary text-lg" />
+                  <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center">
+                    <FaEye className="text-accent text-lg" />
                   </div>
                   <h3 className="font-heading font-bold text-xl text-foreground">
                     {t('about.vision')}
@@ -51,10 +51,10 @@ export default function AboutSection() {
               </div>
 
               {/* Mission */}
-              <div className="premium-card p-6">
+              <div className="premium-card p-6 border-l-4 border-primary">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center">
-                    <FaBullseye className="text-secondary text-lg" />
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <FaBullseye className="text-primary text-lg" />
                   </div>
                   <h3 className="font-heading font-bold text-xl text-foreground">
                     {t('about.mission')}
@@ -63,7 +63,7 @@ export default function AboutSection() {
                 <ul className="space-y-2.5 pl-[52px]">
                   {missions.map((mission, index) => (
                     <li key={index} className="flex items-start gap-2.5 text-foreground-light text-sm leading-relaxed">
-                      <FaCheckCircle className="text-primary mt-0.5 flex-shrink-0 text-xs" />
+                      <FaCheckCircle className="text-accent mt-0.5 flex-shrink-0 text-xs" />
                       {mission}
                     </li>
                   ))}
@@ -111,11 +111,11 @@ export default function AboutSection() {
               icon={<FaUsers />}
               suffix={` ${t('about.people')}`}
             />
-            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-white/20 shadow-sm">
-              <div className="text-primary text-3xl mb-3">
-                <FaGlobeAsia />
+            <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-md border border-primary/10 hover:shadow-lg hover:border-accent/20 transition-all duration-300">
+              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                <FaGlobeAsia className="text-primary text-2xl" />
               </div>
-              <span className="font-heading text-lg font-bold text-primary mb-2">
+              <span className="font-heading text-lg font-bold text-accent mb-2">
                 {t('about.geography')}
               </span>
               <span className="text-foreground-muted text-xs leading-relaxed">

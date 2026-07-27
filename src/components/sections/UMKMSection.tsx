@@ -63,7 +63,7 @@ export default function UMKMSection() {
                   href={`https://wa.me/${product.contact.replace(/[\s\-\+]/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-xl text-xs font-semibold transition-all duration-300 group-hover:shadow-md group-hover:shadow-green-500/25"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-accent hover:bg-accent-dark text-white rounded-xl text-xs font-semibold transition-all duration-300 group-hover:shadow-md group-hover:shadow-accent/25"
                 >
                   <FaWhatsapp className="text-sm" />
                   {t('umkm.contact_btn')}

@@ -53,8 +53,8 @@ export default function HeroSection() {
         ))}
       </Swiper>
 
-      {/* Dark Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10" />
+      {/* Dark Gradient Overlay — deep forest green */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1F3A2C]/80 via-[#1F3A2C]/40 to-black/65 z-10" />
 
       {/* Toraja Pattern Overlay */}
       <div className="absolute inset-0 z-10 opacity-[0.04]" style={{
@@ -80,7 +80,7 @@ export default function HeroSection() {
               priority
             />
           </div>
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium shadow-lg">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/15 backdrop-blur-md border border-accent/40 text-white/95 text-sm font-semibold shadow-lg shadow-accent/10">
             <FaMapMarkerAlt className="text-accent" />
             KKN-T 116 Gelombang 116 • Makale Selatan, Tana Toraja
           </span>

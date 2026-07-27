@@ -5,30 +5,36 @@
    DESIGN TOKENS — Kelurahan Tiromanda
    ======================================== */
 :root {
-  --primary: #1F5E3B;
-  --primary-light: #2d7a4f;
-  --primary-dark: #174a2e;
-  --secondary: #B32E2E;
-  --secondary-light: #d44444;
-  --secondary-dark: #8a2222;
-  --accent: #C79A2D;
-  --accent-light: #dbb44d;
-  --accent-dark: #a57e1f;
-  --background: #F7F5EF;
-  --background-alt: #EDE9DF;
+  /* Deep forest green — navbar, footer, dark sections */
+  --primary-dark: #1F3A2C;
+  /* Medium forest green — secondary buttons, icon bg, subheadings */
+  --primary: #5B7F5E;
+  --primary-light: #7a9e7d;
+  /* Sage / muted rose-sage — tags, badges, dividers */
+  --secondary: #C7A59D;
+  --secondary-light: #d4b5af;
+  --secondary-dark: #a8897f;
+  /* Mustard gold — CTA, highlights, active states */
+  --accent: #E3A73A;
+  --accent-light: #ebbe5f;
+  --accent-dark: #c48e28;
+  /* Cream / off-white — main background */
+  --background: #FCFBF1;
+  --background-alt: #F0EDE2;
   --foreground: #1a1a1a;
   --foreground-light: #4a4a4a;
   --foreground-muted: #7a7a7a;
   --white: #ffffff;
   --card-bg: #ffffff;
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --card-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --toraja-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L35 10L30 20L25 10Z' fill='%23C79A2D' opacity='0.08'/%3E%3C/svg%3E");
+  --card-shadow: 0 4px 24px rgba(31, 58, 44, 0.08);
+  --card-shadow-hover: 0 16px 48px rgba(31, 58, 44, 0.16);
+  --glass-bg: rgba(252, 251, 241, 0.80);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px rgba(31, 58, 44, 0.12);
+  --toraja-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L35 10L30 20L25 10Z' fill='%23E3A73A' opacity='0.07'/%3E%3C/svg%3E");
   --navbar-height: 80px;
 }
+
 
 /* ========================================
    TAILWIND THEME INLINE
@@ -81,8 +87,8 @@
     50% { transform: translateY(-10px); }
   }
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 5px rgba(31, 94, 59, 0.3); }
-    50% { box-shadow: 0 0 20px rgba(31, 94, 59, 0.6); }
+    0%, 100% { box-shadow: 0 0 5px rgba(91, 127, 94, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(227, 167, 58, 0.5); }
   }
   @keyframes scroll-hint {
     0%, 100% { opacity: 1; transform: translateY(0); }

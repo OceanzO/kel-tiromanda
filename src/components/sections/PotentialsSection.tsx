@@ -52,11 +52,11 @@ export default function PotentialsSection() {
               className="group premium-card overflow-hidden cursor-pointer"
             >
               {/* Image */}
-              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/15">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1F3A2C]/70 via-transparent to-transparent z-10" />
 
                 {/* Icon Overlay */}
-                <div className="absolute top-4 right-4 z-20 w-12 h-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center text-white text-xl group-hover:bg-accent/80 group-hover:scale-110 transition-all duration-300">
+                <div className="absolute top-4 right-4 z-20 w-12 h-12 rounded-xl bg-accent/20 backdrop-blur flex items-center justify-center text-accent text-xl group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-300">
                   {iconMap[potential.icon] || <FaMapMarkedAlt />}
                 </div>
 
@@ -75,7 +75,7 @@ export default function PotentialsSection() {
               </div>
 
               {/* Bottom Accent Line */}
-              <div className="h-1 bg-gradient-to-r from-primary via-accent to-secondary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+              <div className="h-1 bg-gradient-to-r from-primary via-accent to-accent-dark transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
             </motion.div>
           ))}
         </div>

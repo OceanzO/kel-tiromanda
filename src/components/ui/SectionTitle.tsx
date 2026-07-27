@@ -26,7 +26,7 @@ export default function SectionTitle({
   }[align];
 
   const textColor = theme === 'dark' ? 'text-white' : 'text-foreground';
-  const subtitleColor = theme === 'dark' ? 'text-white/70' : 'text-foreground-muted';
+  const subtitleColor = theme === 'dark' ? 'text-white/70' : 'text-primary';
 
   return (
     <motion.div

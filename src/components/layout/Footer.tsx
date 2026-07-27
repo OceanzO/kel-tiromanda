@@ -132,7 +132,7 @@ export default function Footer() {
                   href={contact.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white/10 hover:bg-accent/20 flex items-center justify-center text-white/70 hover:text-accent transition-all duration-300 hover:scale-110"
+                  className="w-11 h-11 rounded-xl bg-secondary/15 hover:bg-accent/25 flex items-center justify-center text-white/60 hover:text-accent transition-all duration-300 hover:scale-110 border border-white/10 hover:border-accent/30"
                   aria-label={contact.type}
                 >
                   <span className="text-lg">{socialIcons[contact.type]}</span>

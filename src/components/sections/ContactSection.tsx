@@ -34,9 +34,9 @@ const COLOR_MAP: Record<string, { bg: string; text: string; gradient: string }> 
     gradient: 'from-primary to-primary-dark',
   },
   email: {
-    bg: 'bg-secondary/10',
-    text: 'text-secondary',
-    gradient: 'from-secondary to-secondary-dark',
+    bg: 'bg-accent/10',
+    text: 'text-accent-dark',
+    gradient: 'from-accent to-accent-dark',
   },
   instagram: {
     bg: 'bg-pink-500/10',

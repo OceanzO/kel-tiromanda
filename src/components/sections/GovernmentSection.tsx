@@ -39,7 +39,7 @@ function OfficialCard({ name, position, phone, featured = false, delay = 0 }: Of
 
       {/* Badge */}
       {featured && (
-        <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-2">
+        <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent/15 text-accent-dark text-xs font-semibold mb-2 border border-accent/30">
           ⭐ Lurah
         </span>
       )}
@@ -48,10 +48,11 @@ function OfficialCard({ name, position, phone, featured = false, delay = 0 }: Of
       <h4 className="font-heading font-bold text-sm md:text-base text-foreground mb-1 group-hover:text-primary transition-colors">
         {name}
       </h4>
+      <div className={`h-0.5 w-10 rounded-full bg-accent mb-2 mx-auto ${featured ? 'w-16' : 'w-8'}`} />
       <p className="text-foreground-muted text-xs mb-3">{position}</p>
       <a
         href={`tel:${phone.replace(/\s/g, '')}`}
-        className="flex items-center gap-1.5 text-xs text-primary hover:text-primary-light transition-colors"
+        className="flex items-center gap-1.5 text-xs text-primary hover:text-accent transition-colors"
       >
         <FaPhone className="text-[10px]" />
         {phone}
@@ -138,7 +139,7 @@ export default function GovernmentSection() {
                 {/* Neighborhood Header */}
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <span className="text-primary font-bold text-sm">{nIndex + 1}</span>
+                    <span className="text-accent font-bold text-sm">{nIndex + 1}</span>
                   </div>
                   <div>
                     <h4 className="font-heading font-bold text-base text-foreground">
@@ -157,10 +158,10 @@ export default function GovernmentSection() {
                       key={rtIndex}
                       className="group bg-background/60 rounded-xl p-4 text-center hover:bg-primary/5 transition-colors duration-300 border border-transparent hover:border-primary/10"
                     >
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover:bg-primary/20 transition-colors">
-                        <FaUserTie className="text-primary/60 text-sm" />
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover:bg-accent/10 transition-colors">
+                        <FaUserTie className="text-primary/60 text-sm group-hover:text-accent/70 transition-colors" />
                       </div>
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 text-accent text-[10px] font-bold mb-1.5">
+                      <span className="inline-block px-2 py-0.5 rounded-full bg-accent/15 text-accent-dark text-[10px] font-bold mb-1.5 border border-accent/20">
                         {rt.position}
                       </span>
                       <p className="text-xs font-medium text-foreground">{rt.name}</p>

@@ -43,20 +43,20 @@ export default function FacilitiesSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Counter Badge */}
-                <div className="absolute top-3 left-3 w-8 h-8 rounded-lg bg-primary/80 flex items-center justify-center text-white text-xs font-bold">
+                <div className="absolute top-3 left-3 w-8 h-8 rounded-lg bg-primary/90 flex items-center justify-center text-white text-xs font-bold shadow-md">
                   {String(index + 1).padStart(2, '0')}
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-4">
-                <h3 className="font-heading font-bold text-sm text-foreground mb-1.5 group-hover:text-primary transition-colors duration-300 line-clamp-1">
+                <h3 className="font-heading font-bold text-sm text-foreground mb-1.5 group-hover:text-accent transition-colors duration-300 line-clamp-1">
                   {language === 'id' ? facility.name_id : facility.name_en}
                 </h3>
                 <p className="text-foreground-muted text-xs leading-relaxed mb-3 line-clamp-2">
                   {language === 'id' ? facility.description_id : facility.description_en}
                 </p>
-                <div className="flex items-center gap-1.5 text-xs text-primary/70">
+                <div className="flex items-center gap-1.5 text-xs text-primary/70 group-hover:text-accent/80 transition-colors">
                   <FaMapMarkerAlt className="text-[10px] flex-shrink-0" />
                   <span className="line-clamp-1">{facility.location}</span>
                 </div>
