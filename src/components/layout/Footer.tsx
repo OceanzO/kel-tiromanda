@@ -34,11 +34,7 @@ export default function Footer() {
       {/* Toraja Decorative Top Border */}
       <div className="h-1 bg-gradient-to-r from-accent via-secondary to-accent" />
 
-      {/* Decorative Pattern Overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L50 15L40 30L30 15Z' fill='white'/%3E%3Cpath d='M0 40L10 55L0 70L-10 55Z' fill='white'/%3E%3Cpath d='M80 40L90 55L80 70L70 55Z' fill='white'/%3E%3C/svg%3E")`,
-        backgroundSize: '80px 80px'
-      }} />
+
 
       {/* Decorative radial glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-accent/5 blur-[80px] pointer-events-none" />

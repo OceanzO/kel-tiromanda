@@ -89,7 +89,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
           ? 'bg-[#1F3A2C]/97 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-white/10'
-          : 'bg-gradient-to-b from-black/50 to-transparent border-b border-transparent'
+          : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -186,20 +186,20 @@ export default function Navbar() {
 
             {/* Right controls */}
             <div className="flex items-center gap-2">
-              {/* Language switcher */}
-              <div className="relative">
-                <button onClick={() => setIsLangOpen(!isLangOpen)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 text-white/75 hover:text-white hover:bg-white/10">
-                  <FaGlobe className="text-base" />
-                  <span className="hidden sm:inline">Language Switcher</span>
+              {/* Language switcher pill */}
+              <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full p-1 border border-white/20 shadow-sm mr-2">
+                <button 
+                  onClick={() => setLanguage('id')} 
+                  className={`px-3 py-1.5 text-xs font-bold rounded-full transition-all duration-300 ${language === 'id' ? 'bg-primary text-white shadow-md' : 'text-white/70 hover:text-white hover:bg-white/5'}`}
+                >
+                  ID
                 </button>
-                <AnimatePresence>
-                  {isLangOpen && (
-                    <motion.div initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10, scale: 0.95 }} transition={{ duration: 0.2 }} className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50">
-                      <button onClick={() => { setLanguage('id'); setIsLangOpen(false); }} className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition-colors flex items-center gap-2 ${language === 'id' ? 'text-primary font-semibold bg-primary/5' : 'text-foreground-light'}`}>🇮🇩 Indonesian</button>
-                      <button onClick={() => { setLanguage('en'); setIsLangOpen(false); }} className={`w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition-colors flex items-center gap-2 ${language === 'en' ? 'text-primary font-semibold bg-primary/5' : 'text-foreground-light'}`}>🇬🇧 English</button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <button 
+                  onClick={() => setLanguage('en')} 
+                  className={`px-3 py-1.5 text-xs font-bold rounded-full transition-all duration-300 ${language === 'en' ? 'bg-primary text-white shadow-md' : 'text-white/70 hover:text-white hover:bg-white/5'}`}
+                >
+                  EN
+                </button>
               </div>
 
               {/* Dark / Light mode toggle */}
