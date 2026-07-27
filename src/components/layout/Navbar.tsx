@@ -5,14 +5,31 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { NAV_ITEMS } from '@/lib/constants';
-import { FaBars, FaTimes, FaGlobe, FaPhone } from 'react-icons/fa';
+import { FaBars, FaTimes, FaGlobe, FaSun, FaMoon } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const { language, setLanguage, t } = useLanguage();
+
+  useEffect(() => {
+    // Init from localStorage or system preference
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const dark = saved ? saved === 'dark' : prefersDark;
+    setIsDark(dark);
+    document.documentElement.classList.toggle('dark', dark);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,6 +107,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-2">
+              {/* Language switcher */}
               <div className="relative">
                 <button onClick={() => setIsLangOpen(!isLangOpen)} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 text-white/75 hover:text-white hover:bg-white/10">
                   <FaGlobe className="text-base" />
@@ -105,14 +123,38 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 bg-accent hover:bg-accent-dark text-white shadow-md hover:shadow-lg hover:shadow-accent/30 hover:scale-[1.03]"
+              {/* Dark / Light mode toggle */}
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle dark/light mode"
+                className="relative flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 text-white/75 hover:text-white hover:bg-white/10"
               >
-                <FaPhone className="text-xs" />
-                Hubungi Kami
-              </a>
+                <AnimatePresence mode="wait" initial={false}>
+                  {isDark ? (
+                    <motion.span
+                      key="sun"
+                      initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
+                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                      exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
+                      transition={{ duration: 0.25 }}
+                      className="absolute"
+                    >
+                      <FaSun className="text-lg text-amber-300" />
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="moon"
+                      initial={{ opacity: 0, rotate: 90, scale: 0.6 }}
+                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                      exit={{ opacity: 0, rotate: -90, scale: 0.6 }}
+                      transition={{ duration: 0.25 }}
+                      className="absolute"
+                    >
+                      <FaMoon className="text-lg text-blue-200" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
 
               <button onClick={() => setIsMobileOpen(!isMobileOpen)} className="xl:hidden p-2.5 rounded-xl transition-all duration-300 text-white hover:bg-white/10">
                 {isMobileOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
@@ -166,11 +208,15 @@ export default function Navbar() {
                 ))}
               </div>
 
+              {/* Dark/light toggle in mobile menu */}
               <div className="mt-8 pt-6 border-t border-white/10">
-                <a href="#contact" onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }} className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-accent hover:bg-accent-dark text-white rounded-xl text-sm font-semibold transition-colors shadow-lg shadow-accent/20">
-                  <FaPhone />
-                  Hubungi Kami
-                </a>
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center justify-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-colors text-white/80 hover:bg-white/10"
+                >
+                  {isDark ? <FaSun className="text-amber-300 text-base" /> : <FaMoon className="text-blue-200 text-base" />}
+                  {isDark ? 'Mode Siang' : 'Mode Malam'}
+                </button>
               </div>
             </div>
           </motion.div>

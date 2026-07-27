@@ -1,21 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
-import { HERO_SLIDES } from '@/lib/constants';
 import { FaMapMarkerAlt, FaInfoCircle, FaChevronDown } from 'react-icons/fa';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
 
 export default function HeroSection() {
   const { t } = useLanguage();
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const handleNavClick = (id: string) => {
     const el = document.getElementById(id);
@@ -24,67 +15,45 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative h-screen w-full overflow-hidden">
-      {/* Background Slider */}
-      <Swiper
-        modules={[Autoplay, Pagination, EffectFade]}
-        effect="fade"
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        pagination={{ clickable: true }}
-        loop
-        speed={1200}
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-        className="absolute inset-0 w-full h-full"
-      >
-        {HERO_SLIDES.map((slide, index) => (
-          <SwiperSlide key={index} className="relative w-full h-full">
-            <div className={`absolute inset-0 transition-transform duration-[8000ms] ease-out ${
-              activeIndex === index ? 'scale-110' : 'scale-100'
-            }`}>
-              <Image
-                src={slide.image}
-                alt={slide.alt}
-                fill
-                className="object-cover"
-                priority={index === 0}
-                sizes="100vw"
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {/* Drone Aerial Background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero/hero_drone_aerial.png"
+          alt="Pemandangan Drone Tana Toraja - Desa Tiromanda"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+      </div>
 
       {/* Dark Gradient Overlay — deep forest green */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#1F3A2C]/80 via-[#1F3A2C]/40 to-black/65 z-10" />
 
-      {/* Toraja Pattern Overlay */}
-      <div className="absolute inset-0 z-10 opacity-[0.04]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10L60 30L50 50L40 30Z' fill='white'/%3E%3Cpath d='M20 50L30 70L20 90L10 70Z' fill='white'/%3E%3Cpath d='M80 50L90 70L80 90L70 70Z' fill='white'/%3E%3C/svg%3E")`,
-        backgroundSize: '100px 100px'
-      }} />
+
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6">
-        {/* Logo KKN & Badge */}
+        {/* Welcome Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="mb-6 flex flex-col items-center gap-3"
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="mb-8"
         >
-          <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 relative drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform duration-300">
-            <Image
-              src="/logo-tana-toraja.png"
-              alt="Logo Tana Toraja Desa Tiromanda"
-              fill
-              className="object-contain"
-              style={{ mixBlendMode: 'multiply' }}
-              priority
-            />
+          <div className="inline-flex items-center gap-2 px-5 py-2 backdrop-blur-md border-2 rounded-sm"
+            style={{
+              background: 'rgba(255,255,255,0.08)',
+              borderColor: 'rgba(255,255,255,0.35)',
+              boxShadow: '0 0 0 1px rgba(255,255,255,0.1) inset, 0 4px 20px rgba(0,0,0,0.3)',
+            }}
+          >
+            <span className="block w-4 h-[1px]" style={{ background: 'rgba(255,255,255,0.5)' }} />
+            <span className="text-white/90 text-[11px] font-bold tracking-[0.22em] uppercase">
+              Selamat Datang di Portal Resmi
+            </span>
+            <span className="block w-4 h-[1px]" style={{ background: 'rgba(255,255,255,0.5)' }} />
           </div>
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/15 backdrop-blur-md border border-accent/40 text-white/95 text-sm font-semibold shadow-lg shadow-accent/10">
-            <FaMapMarkerAlt className="text-accent" />
-            KKN-T 116 Gelombang 116 • Makale Selatan, Tana Toraja
-          </span>
         </motion.div>
 
         {/* Title */}
@@ -144,26 +113,16 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
         onClick={() => handleNavClick('about')}
       >
-        <span className="text-white/50 text-xs tracking-widest uppercase">
-          Scroll
-        </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <FaChevronDown className="text-white/50 text-lg" />
+          <FaChevronDown className="text-white/40 text-xl" />
         </motion.div>
       </motion.div>
-
-      {/* Slide Counter */}
-      <div className="absolute bottom-8 right-8 z-20 hidden md:flex items-center gap-2 text-white/50 text-sm font-mono">
-        <span className="text-accent font-bold text-lg">{String(activeIndex + 1).padStart(2, '0')}</span>
-        <span>/</span>
-        <span>{String(HERO_SLIDES.length).padStart(2, '0')}</span>
-      </div>
     </section>
   );
 }

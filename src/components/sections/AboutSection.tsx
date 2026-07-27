@@ -17,6 +17,14 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="relative py-20 md:py-28 bg-background overflow-hidden">
+      {/* Gradient fade from Hero section at the top */}
+      <div
+        className="absolute top-0 left-0 right-0 h-32 z-10 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(15,23,18,0.85) 0%, transparent 100%)',
+        }}
+      />
+
       {/* Subtle pattern background */}
       <div className="absolute inset-0 section-pattern opacity-30" />
 
