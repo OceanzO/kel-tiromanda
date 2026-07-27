@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    qualities: [75, 100], // Tambahan agar Next.js mengizinkan render gambar HD
   },
 };
 

@@ -15,7 +15,7 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative h-screen w-full overflow-hidden">
-      {/* Drone Aerial Background */}
+      {/* Drone Aerial Background HD */}
       <div className="absolute inset-0">
         <Image
           src="/images/hero/hero_drone_aerial.png"
@@ -24,13 +24,12 @@ export default function HeroSection() {
           className="object-cover object-center"
           priority
           sizes="100vw"
+          quality={100} // <-- Ini tambahan untuk memaksa render HD 100%
         />
       </div>
 
       {/* Dark Gradient Overlay — deep forest green */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#1F3A2C]/80 via-[#1F3A2C]/40 to-black/65 z-10" />
-
-
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6">

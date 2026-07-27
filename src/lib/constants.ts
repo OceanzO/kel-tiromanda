@@ -11,31 +11,14 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { id: 'home',       label_id: 'Beranda',   label_en: 'Home',       href: '#home' },
-  { id: 'about',      label_id: 'Tentang',   label_en: 'About',      href: '#about' },
-  { id: 'government', label_id: 'Struktur',  label_en: 'Structure',  href: '#government' },
-  {
-    id: 'potentials',
-    label_id: 'Potensi',
-    label_en: 'Potentials',
-    href: '#potentials',
-    children: [
-      { id: 'potentials', label_id: 'Potensi Desa', label_en: 'Village Potentials', href: '#potentials' },
-      { id: 'umkm',       label_id: 'UMKM',          label_en: 'UMKM',               href: '#umkm' },
-    ],
-  },
-  { id: 'facilities', label_id: 'Fasilitas', label_en: 'Facilities', href: '#facilities' },
-  {
-    id: 'infografis',
-    label_id: 'Infografis',
-    label_en: 'Infographics',
-    href: '#gallery',
-    children: [
-      { id: 'location', label_id: 'Lokasi', label_en: 'Location', href: '#location' },
-      { id: 'gallery',  label_id: 'Galeri', label_en: 'Gallery',  href: '#gallery'  },
-      { id: 'news',     label_id: 'Berita', label_en: 'News',     href: '#news'     },
-    ],
-  },
+  { id: 'home',       label_id: 'Beranda',    label_en: 'Home',         href: '#home' },
+  { id: 'about',      label_id: 'Tentang',    label_en: 'About',        href: '#about' },
+  { id: 'government', label_id: 'Struktur',   label_en: 'Structure',    href: '#government' },
+  { id: 'potentials', label_id: 'Potensi',    label_en: 'Potentials',   href: '#potentials' },
+  { id: 'facilities', label_id: 'Fasilitas',  label_en: 'Facilities',   href: '#facilities' },
+  { id: 'infografis', label_id: 'Infografis', label_en: 'Infographics', href: '#infografis' },
+  { id: 'gallery',    label_id: 'Galeri',     label_en: 'Gallery',      href: '#gallery' },
+  { id: 'news',       label_id: 'Berita',     label_en: 'News',         href: '#news' },
 ];
 
 // ==========================================

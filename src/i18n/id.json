@@ -75,5 +75,13 @@
     "contact_info": "Informasi Kontak",
     "social_media": "Media Sosial",
     "copyright": "© 2026 Kelurahan Tiromanda. Hak Cipta Dilindungi."
+  },
+  "infographics": {
+    "title": "Infografis",
+    "subtitle": "Peta Infografis dan Lokasi Google Maps Kelurahan Tiromanda"
+  },
+  "news": {
+    "title": "Berita",
+    "subtitle": "Kumpulan berita dan informasi terbaru"
   }
 }

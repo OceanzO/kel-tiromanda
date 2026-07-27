@@ -75,5 +75,13 @@
     "contact_info": "Contact Info",
     "social_media": "Social Media",
     "copyright": "© 2026 Kelurahan Tiromanda. All Rights Reserved."
+  },
+  "infographics": {
+    "title": "Infographics",
+    "subtitle": "Infographic Map and Google Maps Location of Tiromanda Village"
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest news and information"
   }
 }

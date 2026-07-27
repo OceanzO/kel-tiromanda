@@ -5,10 +5,9 @@ import AboutSection from '@/components/sections/AboutSection';
 import GovernmentSection from '@/components/sections/GovernmentSection';
 import PotentialsSection from '@/components/sections/PotentialsSection';
 import FacilitiesSection from '@/components/sections/FacilitiesSection';
-import UMKMSection from '@/components/sections/UMKMSection';
+import InfographicsSection from '@/components/sections/InfographicsSection';
 import GallerySection from '@/components/sections/GallerySection';
-import LocationSection from '@/components/sections/LocationSection';
-import ContactSection from '@/components/sections/ContactSection';
+import NewsSection from '@/components/sections/NewsSection';
 
 export default function HomePage() {
   return (
@@ -20,10 +19,9 @@ export default function HomePage() {
         <GovernmentSection />
         <PotentialsSection />
         <FacilitiesSection />
-        <UMKMSection />
+        <InfographicsSection />
         <GallerySection />
-        <LocationSection />
-        <ContactSection />
+        <NewsSection />
       </main>
       <Footer />
     </>
