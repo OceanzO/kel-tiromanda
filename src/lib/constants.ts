@@ -1,17 +1,42 @@
 // ==========================================
 // Navigation Items
 // ==========================================
-export const NAV_ITEMS = [
-  { id: 'home', label_id: 'Beranda', label_en: 'Home', href: '#home' },
-  { id: 'about', label_id: 'Tentang', label_en: 'About', href: '#about' },
-  { id: 'government', label_id: 'Struktur Pemerintahan', label_en: 'Government Structure', href: '#government' },
-  { id: 'potentials', label_id: 'Potensi', label_en: 'Potentials', href: '#potentials' },
+export type NavChild = { id: string; label_id: string; label_en: string; href: string };
+export type NavItem = {
+  id: string;
+  label_id: string;
+  label_en: string;
+  href: string;
+  children?: NavChild[];
+};
+
+export const NAV_ITEMS: NavItem[] = [
+  { id: 'home',       label_id: 'Beranda',   label_en: 'Home',       href: '#home' },
+  { id: 'about',      label_id: 'Tentang',   label_en: 'About',      href: '#about' },
+  { id: 'government', label_id: 'Struktur',  label_en: 'Structure',  href: '#government' },
+  {
+    id: 'potentials',
+    label_id: 'Potensi',
+    label_en: 'Potentials',
+    href: '#potentials',
+    children: [
+      { id: 'potentials', label_id: 'Potensi Desa', label_en: 'Village Potentials', href: '#potentials' },
+      { id: 'umkm',       label_id: 'UMKM',          label_en: 'UMKM',               href: '#umkm' },
+    ],
+  },
   { id: 'facilities', label_id: 'Fasilitas', label_en: 'Facilities', href: '#facilities' },
-  { id: 'umkm', label_id: 'UMKM', label_en: 'UMKM', href: '#umkm' },
-  { id: 'gallery', label_id: 'Galeri', label_en: 'Gallery', href: '#gallery' },
-  { id: 'location', label_id: 'Lokasi', label_en: 'Location', href: '#location' },
-  { id: 'contact', label_id: 'Kontak', label_en: 'Contact', href: '#contact' },
-] as const;
+  {
+    id: 'infografis',
+    label_id: 'Infografis',
+    label_en: 'Infographics',
+    href: '#gallery',
+    children: [
+      { id: 'location', label_id: 'Lokasi', label_en: 'Location', href: '#location' },
+      { id: 'gallery',  label_id: 'Galeri', label_en: 'Gallery',  href: '#gallery'  },
+      { id: 'news',     label_id: 'Berita', label_en: 'News',     href: '#news'     },
+    ],
+  },
+];
 
 // ==========================================
 // Hero Slides
