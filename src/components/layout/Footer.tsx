@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { NAV_ITEMS, CONTACTS, LOCATION } from '@/lib/constants';
-import { FaWhatsapp, FaInstagram, FaTiktok, FaYoutube, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLock } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaTiktok, FaYoutube, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLock, FaStar } from 'react-icons/fa';
 
 const socialIcons: Record<string, React.ReactNode> = {
   whatsapp: <FaWhatsapp />,
@@ -32,7 +32,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-primary-dark text-white overflow-hidden">
       {/* Toraja Decorative Top Border */}
-      <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-secondary" />
+      <div className="h-1 bg-gradient-to-r from-accent via-secondary to-accent" />
 
       {/* Decorative Pattern Overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -40,26 +40,55 @@ export default function Footer() {
         backgroundSize: '80px 80px'
       }} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Column 1: Logo & Description */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="relative w-12 h-12 rounded-xl bg-white/10 p-1 border border-white/20 flex items-center justify-center overflow-hidden">
-                <Image
-                  src="/logo-kkn.png"
-                  alt="Logo KKN-T 116 Desa Tiromanda"
-                  width={44}
-                  height={44}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div>
-                <span className="font-heading font-bold text-xl block leading-tight">Tiromanda</span>
-                <span className="text-white/50 text-xs leading-tight">Tana Toraja</span>
-              </div>
+      {/* Decorative radial glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-accent/5 blur-[80px] pointer-events-none" />
+
+      {/* Footer Brand Header */}
+      <div className="relative border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            {/* Logo */}
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white flex items-center justify-center shadow-2xl p-2 flex-shrink-0 ring-4 ring-accent/20">
+              <Image
+                src="/logo-tana-toraja.png"
+                alt="Logo Kabupaten Tana Toraja"
+                width={88}
+                height={88}
+                className="w-full h-full object-contain"
+              />
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            {/* Brand Text */}
+            <div className="text-center sm:text-left">
+              <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
+                <FaStar className="text-accent text-xs" />
+                <span className="text-accent text-xs font-semibold uppercase tracking-widest">Portal Resmi</span>
+                <FaStar className="text-accent text-xs" />
+              </div>
+              <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white leading-tight">
+                Kelurahan Tiromanda
+              </h2>
+              <p className="text-white/60 text-sm mt-1 font-medium">
+                Kecamatan Makale Selatan &bull; Kabupaten Tana Toraja &bull; Sulawesi Selatan
+              </p>
+              <p className="text-white/40 text-xs mt-2 italic">
+                {language === 'id'
+                  ? 'Melayani dengan sepenuh hati untuk masyarakat Tiromanda'
+                  : 'Serving wholeheartedly for the people of Tiromanda'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+          {/* Column 1: About */}
+          <div className="lg:col-span-1">
+            <h4 className="font-heading font-bold text-lg mb-5 text-accent">
+              {language === 'id' ? 'Tentang Kami' : 'About Us'}
+            </h4>
+            <p className="text-white/60 text-sm leading-relaxed mb-5">
               {t('footer.description')}
             </p>
             <div className="flex items-start gap-2 text-sm text-white/50">
@@ -110,8 +139,8 @@ export default function Footer() {
               ))}
             </ul>
 
-            <div className="mt-6">
-              <p className="text-white/40 text-xs mb-1">
+            <div className="mt-6 p-3 rounded-lg bg-white/5 border border-white/10">
+              <p className="text-white/40 text-xs mb-0.5">
                 {language === 'id' ? 'Jam Operasional' : 'Office Hours'}
               </p>
               <p className="text-white/60 text-sm">
@@ -154,18 +183,18 @@ export default function Footer() {
         </div>
 
         {/* Copyright Bar */}
-        <div className="mt-14 pt-8 border-t border-white/10">
+        <div className="mt-12 pt-8 border-t border-white/10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-white/40 text-sm text-center sm:text-left">
               {t('footer.copyright')}
             </p>
-            <p className="text-white/20 text-xs">
+            <p className="text-white/25 text-xs">
               Dikembangkan oleh Tim KKN Tematik Gel. 116 UNHAS.
             </p>
           </div>
-          {/* Admin Login - subtle, bottom right */}
+          {/* Admin Login - subtle */}
           <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-white/30 text-xs">
+            <div className="flex items-center gap-2 text-white/25 text-xs">
               <span>Kelurahan Tiromanda</span>
               <span>•</span>
               <span>Makale Selatan</span>

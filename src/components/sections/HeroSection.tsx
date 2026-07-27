@@ -73,10 +73,11 @@ export default function HeroSection() {
         >
           <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 relative drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform duration-300">
             <Image
-              src="/logo-kkn.png"
-              alt="Logo KKN-T 116 Desa Tiromanda"
+              src="/logo-tana-toraja.png"
+              alt="Logo Tana Toraja Desa Tiromanda"
               fill
               className="object-contain"
+              style={{ mixBlendMode: 'multiply' }}
               priority
             />
           </div>

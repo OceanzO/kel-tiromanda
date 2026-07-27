@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -50,8 +50,8 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-[#1F3A2C]/95 backdrop-blur-xl shadow-xl shadow-black/25 border-b border-white/10'
-            : 'bg-transparent'
+            ? 'bg-[#1F3A2C]/97 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-white/10'
+            : 'bg-gradient-to-b from-black/40 to-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,12 +62,12 @@ export default function Navbar() {
               className="flex items-center gap-3 group"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white/10 backdrop-blur p-0.5 shadow-sm border border-white/20 transition-all duration-300 group-hover:shadow-md group-hover:border-accent/40">
-                <Image src="/logo-kkn.png" alt="Logo KKN-T 116" width={40} height={40} className="w-full h-full object-contain" priority />
+              <div className="relative w-11 h-11 flex items-center justify-center flex-shrink-0">
+                <Image src="/logo-tana-toraja.png" alt="Logo Tana Toraja" width={44} height={44} className="w-full h-full object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105" priority />
               </div>
               <div className="hidden sm:block">
-                <span className="font-heading font-bold text-lg leading-tight block text-white">Tiromanda</span>
-                <span className="text-xs leading-tight block text-white/60">Tana Toraja</span>
+                <span className="font-heading font-bold text-lg leading-tight block text-white drop-shadow-sm">Tiromanda</span>
+                <span className="text-xs leading-tight block text-white/80 font-medium">Kabupaten Tana Toraja</span>
               </div>
             </motion.a>
 
@@ -134,12 +134,12 @@ export default function Navbar() {
             <div className="p-6">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-9 h-9 rounded-lg overflow-hidden bg-white/10 p-0.5 border border-white/20">
-                    <Image src="/logo-kkn.png" alt="Logo KKN-T 116" width={36} height={36} className="w-full h-full object-contain" />
+                  <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0">
+                    <Image src="/logo-tana-toraja.png" alt="Logo Tana Toraja" width={40} height={40} className="w-full h-full object-contain drop-shadow-md" />
                   </div>
                   <div>
                     <span className="font-heading font-bold text-lg text-white block leading-tight">Tiromanda</span>
-                    <span className="text-xs text-white/50 block leading-tight">Tana Toraja</span>
+                    <span className="text-xs text-white/70 block leading-tight font-medium">Kabupaten Tana Toraja</span>
                   </div>
                 </div>
                 <button onClick={() => setIsMobileOpen(false)} className="p-2 rounded-xl hover:bg-white/10 transition-colors">
