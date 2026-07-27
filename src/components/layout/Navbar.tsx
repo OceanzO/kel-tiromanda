@@ -70,7 +70,7 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const handleNavClick = () => {
+  const handleNavClick = (_target?: any) => {
     setIsMobileOpen(false);
     setOpenDropdown(null);
   };
