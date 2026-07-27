@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { NAV_ITEMS } from '@/lib/constants';
-import { FaBars, FaTimes, FaGlobe, FaUserShield } from 'react-icons/fa';
+import { FaBars, FaTimes, FaGlobe } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -172,19 +172,6 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
 
-              {/* Admin Login */}
-              <a
-                href="/admin/login"
-                className={`hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
-                  isScrolled
-                    ? 'bg-primary text-white hover:bg-primary-dark shadow-md hover:shadow-lg'
-                    : 'bg-white/15 backdrop-blur text-white hover:bg-white/25 border border-white/20'
-                }`}
-              >
-                <FaUserShield className="text-sm" />
-                {t('nav.login')}
-              </a>
-
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -277,16 +264,6 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* Admin Login Button */}
-              <div className="mt-8 pt-6 border-t border-gray-100">
-                <a
-                  href="/admin/login"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary-dark transition-colors"
-                >
-                  <FaUserShield />
-                  {t('nav.login')}
-                </a>
-              </div>
             </div>
           </motion.div>
         )}

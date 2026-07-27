@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { NAV_ITEMS, CONTACTS, LOCATION } from '@/lib/constants';
-import { FaWhatsapp, FaInstagram, FaTiktok, FaYoutube, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaTiktok, FaYoutube, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLock } from 'react-icons/fa';
 
 const socialIcons: Record<string, React.ReactNode> = {
   whatsapp: <FaWhatsapp />,
@@ -154,16 +154,32 @@ export default function Footer() {
         </div>
 
         {/* Copyright Bar */}
-        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-sm text-center sm:text-left">
-            {t('footer.copyright')}
-          </p>
-          <div className="flex items-center gap-2 text-white/30 text-xs">
-            <span>Kelurahan Tiromanda</span>
-            <span>•</span>
-            <span>Makale Selatan</span>
-            <span>•</span>
-            <span>Tana Toraja</span>
+        <div className="mt-14 pt-8 border-t border-white/10">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-white/40 text-sm text-center sm:text-left">
+              {t('footer.copyright')}
+            </p>
+            <p className="text-white/20 text-xs">
+              Dikembangkan oleh Tim KKN Tematik Gel. 116 UNHAS.
+            </p>
+          </div>
+          {/* Admin Login - subtle, bottom right */}
+          <div className="mt-4 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-white/30 text-xs">
+              <span>Kelurahan Tiromanda</span>
+              <span>•</span>
+              <span>Makale Selatan</span>
+              <span>•</span>
+              <span>Tana Toraja</span>
+            </div>
+            <a
+              href="/admin/login"
+              className="flex items-center gap-1.5 text-white/20 hover:text-white/50 text-xs transition-colors duration-300 group"
+              title="Login Admin"
+            >
+              <FaLock className="text-[10px] group-hover:text-accent/60 transition-colors" />
+              <span>Login Admin</span>
+            </a>
           </div>
         </div>
       </div>
