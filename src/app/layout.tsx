@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kelurahan Tiromanda — Portal Pemerintahan & Wisata Desa | Tana Toraja",
+  title: "Kelurahan Tiromanda — Portal Resmi",
   description:
     "Portal resmi Kelurahan Tiromanda, Kecamatan Makale Selatan, Kabupaten Tana Toraja, Sulawesi Selatan. Temukan informasi pemerintahan, potensi wisata, UMKM, fasilitas, dan layanan masyarakat.",
   keywords: [
