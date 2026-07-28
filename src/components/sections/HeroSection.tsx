@@ -49,7 +49,7 @@ export default function HeroSection() {
           >
             <span className="block w-4 h-[1px]" style={{ background: 'rgba(255,255,255,0.5)' }} />
             <span className="text-white/90 text-[11px] font-bold tracking-[0.22em] uppercase">
-              Selamat Datang di Portal Resmi
+              {t('hero.welcome_badge')}
             </span>
             <span className="block w-4 h-[1px]" style={{ background: 'rgba(255,255,255,0.5)' }} />
           </div>

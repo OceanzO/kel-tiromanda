@@ -13,10 +13,22 @@
     "language": "Bahasa"
   },
   "hero": {
+    "welcome_badge": "Selamat Datang di Portal Resmi",
     "title": "Kelurahan Tiromanda",
-    "subtitle": "Jelajahi pesona alam, kekayaan budaya, dan kehangatan komunitas Tiromanda.",
+    "subtitle": "Berada di kawasan asri Tana Toraja. Website resmi untuk mengenal profil, potensi, dan pelayanan Kelurahan Tiromanda — sekaligus wadah keterbukaan informasi publik bagi warga.",
     "btn_location": "Lokasi Kami",
     "btn_about": "Tentang Kelurahan"
+  },
+  "general": {
+    "village_name": "Kelurahan Tiromanda",
+    "village": "Kelurahan",
+    "regency_short": "Kabupaten Tana Toraja",
+    "regency": "Kabupaten Tana Toraja",
+    "regency_name": "Tana Toraja",
+    "district": "Kecamatan Makale Selatan",
+    "district_short": "Makale Selatan",
+    "province": "Sulawesi Selatan",
+    "developed_by": "Dikembangkan oleh Tim KKN Tematik Gel. 116 UNHAS."
   },
   "about": {
     "title": "Tentang Kelurahan",

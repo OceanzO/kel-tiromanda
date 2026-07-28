@@ -61,10 +61,10 @@ export default function Footer() {
                 <FaStar className="text-accent text-xs" />
               </div>
               <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white leading-tight">
-                Kelurahan Tiromanda
+                {t('general.village_name')}
               </h2>
               <p className="text-white/60 text-sm mt-1 font-medium">
-                Kecamatan Makale Selatan &bull; Kabupaten Tana Toraja &bull; Sulawesi Selatan
+                {t('general.district')} &bull; {t('general.regency')} &bull; {t('general.province')}
               </p>
               <p className="text-white/40 text-xs mt-2 italic">
                 {language === 'id'
@@ -185,17 +185,17 @@ export default function Footer() {
               {t('footer.copyright')}
             </p>
             <p className="text-white/25 text-xs">
-              Dikembangkan oleh Tim KKN Tematik Gel. 116 UNHAS.
+              {t('general.developed_by')}
             </p>
           </div>
           {/* Admin Login - subtle */}
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-2 text-white/25 text-xs">
-              <span>Kelurahan Tiromanda</span>
+              <span>{t('general.village_name')}</span>
               <span>•</span>
-              <span>Makale Selatan</span>
+              <span>{t('general.district_short')}</span>
               <span>•</span>
-              <span>Tana Toraja</span>
+              <span>{t('general.regency_name')}</span>
             </div>
             <a
               href="/admin/login"

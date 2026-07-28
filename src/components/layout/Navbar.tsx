@@ -16,7 +16,7 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const saved = localStorage.getItem('theme');
@@ -105,8 +105,8 @@ export default function Navbar() {
                 <Image src="/logo-tana-toraja.png" alt="Logo Tana Toraja" width={44} height={44} className="w-full h-full object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105" priority />
               </div>
               <div className="hidden sm:block">
-                <span className="font-heading font-bold text-lg leading-tight block text-white drop-shadow-sm">Tiromanda</span>
-                <span className="text-xs leading-tight block text-white/80 font-medium">Kabupaten Tana Toraja</span>
+                <span className="font-heading font-bold text-lg leading-tight block text-white drop-shadow-sm">{t('general.village_name')}</span>
+                <span className="text-xs leading-tight block text-white/80 font-medium">{t('general.regency')}</span>
               </div>
             </motion.a>
 
@@ -255,8 +255,8 @@ export default function Navbar() {
                     <Image src="/logo-tana-toraja.png" alt="Logo Tana Toraja" width={40} height={40} className="w-full h-full object-contain drop-shadow-md" />
                   </div>
                   <div>
-                    <span className="font-heading font-bold text-lg text-white block leading-tight">Tiromanda</span>
-                    <span className="text-xs text-white/70 block leading-tight font-medium">Kabupaten Tana Toraja</span>
+                    <span className="font-heading font-bold text-lg text-white block leading-tight">{t('general.village_name')}</span>
+                    <span className="text-xs text-white/70 block leading-tight font-medium">{t('general.regency')}</span>
                   </div>
                 </div>
                 <button onClick={() => setIsMobileOpen(false)} className="p-2 rounded-xl hover:bg-white/10 transition-colors">

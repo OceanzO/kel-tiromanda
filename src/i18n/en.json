@@ -13,10 +13,22 @@
     "language": "Language"
   },
   "hero": {
-    "title": "Kelurahan Tiromanda",
-    "subtitle": "Explore the natural beauty, cultural heritage, and charm of Tiromanda.",
+    "welcome_badge": "Welcome to the Official Portal",
+    "title": "Tiromanda Village",
+    "subtitle": "Located in the beautiful landscape of Tana Toraja. The official website to discover the profile, potentials, and services of Tiromanda Village — as well as a platform for public information transparency for citizens.",
     "btn_location": "Our Location",
-    "btn_about": "About Kelurahan"
+    "btn_about": "About Village"
+  },
+  "general": {
+    "village_name": "Tiromanda Village",
+    "village": "Village",
+    "regency_short": "Tana Toraja Regency",
+    "regency": "Tana Toraja Regency",
+    "regency_name": "Tana Toraja",
+    "district": "South Makale District",
+    "district_short": "South Makale",
+    "province": "South Sulawesi",
+    "developed_by": "Developed by Thematic KKN Team Wave 116 Hasanuddin University."
   },
   "about": {
     "title": "About the Village",
