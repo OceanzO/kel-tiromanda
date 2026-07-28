@@ -37,7 +37,7 @@ export default function SectionTitle({
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <h2
-        className={`font-heading text-3xl md:text-4xl lg:text-5xl font-bold ${textColor} mb-4`}
+        className={`font-heading text-3xl md:text-4xl lg:text-5xl font-bold ${textColor} mb-2`}
       >
         {title}
       </h2>
@@ -48,7 +48,7 @@ export default function SectionTitle({
       </div>
 
       {subtitle && (
-        <p className={`${subtitleColor} text-base md:text-lg max-w-2xl mt-2 leading-relaxed`}>
+        <p className={`${subtitleColor} text-base md:text-lg max-w-2xl mt-1 leading-relaxed`}>
           {subtitle}
         </p>
       )}

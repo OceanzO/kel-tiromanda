@@ -29,7 +29,7 @@ export default function PotentialsSection() {
   const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   return (
-    <section id="potentials" className="relative py-20 md:py-28 bg-background overflow-hidden">
+    <section id="potentials" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background overflow-hidden">
       <div className="absolute inset-0 section-pattern opacity-20" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
