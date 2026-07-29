@@ -57,7 +57,9 @@ export default function Footer() {
             <div className="text-center sm:text-left">
               <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
                 <FaStar className="text-accent text-xs" />
-                <span className="text-accent text-xs font-semibold uppercase tracking-widest">Portal Resmi</span>
+                <span className="text-accent text-xs font-semibold uppercase tracking-widest">
+                  {language === 'id' ? 'Portal Resmi' : 'Official Portal'}
+                </span>
                 <FaStar className="text-accent text-xs" />
               </div>
               <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white leading-tight">
