@@ -30,13 +30,13 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 items-stretch">
           {/* Profile Text */}
           <ScrollAnimation variant="slideLeft">
-            <div className="premium-card p-6 h-full border-t-4 border-accent">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="space-y-4 h-full flex flex-col justify-center">
+              <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center flex-shrink-0">
                   <FaInfoCircle className="text-accent text-lg" />
                 </div>
                 <h3 className="font-heading font-bold text-xl text-foreground">
-                  {language === 'id' ? 'Profil Kelurahan' : 'Village Profile'}
+                  {language === 'id' ? 'Sekilas Tiromanda' : 'Tiromanda at a Glance'}
                 </h3>
               </div>
               <p className="text-foreground-light text-base md:text-lg leading-relaxed text-justify">
