@@ -5,13 +5,12 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { NAV_ITEMS, NavItem } from '@/lib/constants';
-import { FaBars, FaTimes, FaGlobe, FaSun, FaMoon, FaChevronDown } from 'react-icons/fa';
+import { FaBars, FaTimes, FaSun, FaMoon, FaChevronDown } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const [isLangOpen, setIsLangOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
@@ -26,6 +25,7 @@ export default function Navbar() {
     const saved = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const dark = saved ? saved === 'dark' : prefersDark;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsDark(dark);
     document.documentElement.classList.toggle('dark', dark);
   }, []);
@@ -74,7 +74,7 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const handleNavClick = (_target?: any) => {
+  const handleNavClick = () => {
     setIsMobileOpen(false);
     setOpenDropdown(null);
   };

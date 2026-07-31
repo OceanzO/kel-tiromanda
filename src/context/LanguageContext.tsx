@@ -41,6 +41,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const saved = localStorage.getItem('tiromanda-lang') as Language | null;
     if (saved && (saved === 'id' || saved === 'en')) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguageState(saved);
     }
   }, []);

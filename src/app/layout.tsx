@@ -48,6 +48,11 @@ export const metadata: Metadata = {
   other: {
     google: "notranslate",
   },
+  icons: {
+    icon: "/logo-tana-toraja-transparent.png",
+    shortcut: "/logo-tana-toraja-transparent.png",
+    apple: "/logo-tana-toraja-transparent.png",
+  },
 };
 
 import BackToTop from "@/components/ui/BackToTop";
