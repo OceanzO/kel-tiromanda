@@ -79,6 +79,14 @@ export default function Navbar() {
     setOpenDropdown(null);
   };
 
+  const scrollToSection = (href: string) => {
+    setIsMobileOpen(false);
+    setOpenDropdown(null);
+    const id = href.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   // Determine if a nav item or any of its children is "active"
   const isItemActive = (item: NavItem) => {
     if (activeSection === item.id) return true;
@@ -296,7 +304,7 @@ export default function Navbar() {
                                 {item.children.map((child) => (
                                   <button
                                     key={child.id}
-                                    onClick={() => handleNavClick(child.href)}
+                                    onClick={() => scrollToSection(child.href)}
                                     className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-all duration-150 ${
                                       activeSection === child.id ? 'text-accent font-semibold' : 'text-white/60 hover:text-white'
                                     }`}
