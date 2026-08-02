@@ -5,7 +5,32 @@ import { ABOUT_DATA } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';
 import ScrollAnimation from '@/components/ui/ScrollAnimation';
 import StatCounter from '@/components/ui/StatCounter';
-import { FaEye, FaBullseye, FaCheckCircle, FaRulerCombined, FaUsers, FaHome, FaMap, FaInfoCircle } from 'react-icons/fa';
+import { 
+  FaEye, FaBullseye, FaCheckCircle, FaRulerCombined, FaUsers, 
+  FaHome, FaMap, FaInfoCircle, FaUserFriends, FaLayerGroup, 
+  FaBriefcase, FaMale, FaFemale, FaUserTie
+} from 'react-icons/fa';
+
+const StatCard = ({ title, value, unit, icon: Icon, isPlaceholder = false }: any) => (
+  <div className="premium-card p-6 flex flex-col justify-between">
+    <div className="flex justify-between items-start mb-6">
+      <span className="text-xs font-bold text-foreground-muted uppercase tracking-wider">{title}</span>
+      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+        <Icon />
+      </div>
+    </div>
+    <div className="flex items-baseline gap-2">
+      {isPlaceholder ? (
+        <span className="text-sm font-semibold text-primary/80 italic">Edit di Dashboard Admin</span>
+      ) : (
+        <>
+          <span className="text-3xl md:text-4xl font-bold text-foreground">{value}</span>
+          {unit && <span className="text-sm font-medium text-foreground-muted">{unit}</span>}
+        </>
+      )}
+    </div>
+  </div>
+);
 
 export default function AboutSection() {
   const { language, t } = useLanguage();
@@ -125,27 +150,88 @@ export default function AboutSection() {
 
         {/* Statistics Row */}
         <ScrollAnimation variant="fadeUp" delay={0.2}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <StatCounter
-              value={language === 'id' ? '(Belum diketahui)' : '(Unknown)'}
-              label={language === 'id' ? 'Luas Wilayah' : 'Total Area'}
-              icon={<FaRulerCombined />}
+          <div className="mb-8">
+            <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-2">
+              {language === 'id' ? 'Statistik Kependudukan' : 'Population Statistics'}
+            </h3>
+            <p className="text-foreground-muted text-sm md:text-base">
+              {language === 'id' 
+                ? 'Gambaran jumlah penduduk, keluarga, dan wilayah administratif Kelurahan Tiromanda.' 
+                : 'Overview of population, families, and administrative areas of Tiromanda Village.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <StatCard 
+              title={language === 'id' ? 'Total Penduduk' : 'Total Population'} 
+              isPlaceholder={true} 
+              icon={FaUserFriends} 
             />
-            <StatCounter
-              value={language === 'id' ? '(Belum diketahui)' : '(Unknown)'}
-              label={language === 'id' ? 'Jumlah Penduduk' : 'Population'}
-              icon={<FaUsers />}
+            <StatCard 
+              title={language === 'id' ? 'Kepala Keluarga' : 'Households'} 
+              isPlaceholder={true} 
+              icon={FaUserTie} 
             />
-            <StatCounter
-              value="4"
-              label={language === 'id' ? 'Lingkungan' : 'Neighborhoods'}
-              icon={<FaMap />}
+            <StatCard 
+              title={language === 'id' ? 'Luas Wilayah' : 'Total Area'} 
+              isPlaceholder={true} 
+              icon={FaRulerCombined} 
             />
-            <StatCounter
-              value="8"
-              label="RT"
-              icon={<FaHome />}
+            <StatCard 
+              title={language === 'id' ? 'Lingkungan' : 'Neighborhoods'} 
+              value="4" 
+              icon={FaMap} 
             />
+            <StatCard 
+              title={language === 'id' ? 'Jumlah RT' : 'Number of RT'} 
+              value="8" 
+              icon={FaHome} 
+            />
+            <StatCard 
+              title={language === 'id' ? 'Mata Pencaharian Dominan' : 'Dominant Livelihood'} 
+              value={language === 'id' ? 'Petani' : 'Farmer'} 
+              icon={FaBriefcase} 
+            />
+          </div>
+
+          {/* Gender Composition */}
+          <div className="premium-card p-6 md:p-8 mt-6">
+            <h4 className="font-bold text-foreground mb-6">
+              {language === 'id' ? 'Komposisi Jenis Kelamin' : 'Gender Composition'}
+            </h4>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-4">
+              {/* Laki-laki */}
+              <div className="flex items-center gap-4 w-full">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
+                  <FaMale className="text-2xl" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-foreground-muted uppercase tracking-wider mb-1">
+                    {language === 'id' ? 'Laki-laki' : 'Male'}
+                  </p>
+                  <p className="text-sm font-semibold text-primary/80 italic">Edit di Dashboard Admin</p>
+                </div>
+              </div>
+              
+              {/* Perempuan */}
+              <div className="flex items-center gap-4 w-full md:justify-end">
+                <div className="md:text-right">
+                  <p className="text-xs font-bold text-foreground-muted uppercase tracking-wider mb-1">
+                    {language === 'id' ? 'Perempuan' : 'Female'}
+                  </p>
+                  <p className="text-sm font-semibold text-primary/80 italic">Edit di Dashboard Admin</p>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+                  <FaFemale className="text-2xl" />
+                </div>
+              </div>
+            </div>
+            
+            {/* Progress Bar Placeholder */}
+            <div className="h-3 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex">
+              <div className="h-full bg-blue-500 w-1/2" />
+              <div className="h-full bg-accent w-1/2" />
+            </div>
           </div>
         </ScrollAnimation>
       </div>
