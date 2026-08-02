@@ -70,47 +70,58 @@ export default function AboutSection() {
           </ScrollAnimation>
         </div>
 
-        {/* Vision & Mission Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 items-stretch">
-          {/* Vision */}
-          <ScrollAnimation variant="slideLeft" delay={0.1}>
-            <div className="premium-card p-6 border-l-4 border-accent h-full">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center">
-                  <FaEye className="text-accent text-lg" />
+        {/* Vision & Mission Single Frame */}
+        <ScrollAnimation variant="fadeUp" delay={0.1}>
+          <div className="premium-card p-8 md:p-12 mb-16 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-accent via-primary to-accent" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16 items-start">
+              {/* Vision Side */}
+              <div className="md:col-span-5 flex flex-col h-full justify-center">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center">
+                    <FaEye className="text-accent text-xl" />
+                  </div>
+                  <h3 className="font-heading font-bold text-2xl text-foreground">
+                    {t('about.vision')}
+                  </h3>
                 </div>
-                <h3 className="font-heading font-bold text-xl text-foreground">
-                  {t('about.vision')}
-                </h3>
+                <p className="text-foreground-light text-lg md:text-xl leading-relaxed font-medium italic border-l-4 border-accent pl-5 py-2">
+                  "{vision}"
+                </p>
               </div>
-              <p className="text-foreground-light text-sm leading-relaxed pl-[52px]">
-                {vision}
-              </p>
-            </div>
-          </ScrollAnimation>
+              
+              {/* Divider for md screens and up */}
+              <div className="hidden md:flex md:col-span-1 justify-center h-full">
+                <div className="w-px h-full min-h-[200px] bg-gray-200 dark:bg-gray-800" />
+              </div>
 
-          {/* Mission */}
-          <ScrollAnimation variant="slideRight" delay={0.1}>
-            <div className="premium-card p-6 border-l-4 border-primary h-full">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <FaBullseye className="text-primary text-lg" />
+              {/* Mission Side */}
+              <div className="md:col-span-6 flex flex-col h-full justify-center">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <FaBullseye className="text-primary text-xl" />
+                  </div>
+                  <h3 className="font-heading font-bold text-2xl text-foreground">
+                    {t('about.mission')}
+                  </h3>
                 </div>
-                <h3 className="font-heading font-bold text-xl text-foreground">
-                  {t('about.mission')}
-                </h3>
+                <ul className="space-y-5">
+                  {missions.map((mission, index) => (
+                    <li key={index} className="flex items-start gap-4">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 text-sm font-bold mt-0.5">
+                        {index + 1}
+                      </div>
+                      <span className="text-foreground-light text-sm md:text-base leading-relaxed pt-1">
+                        {mission}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-2.5 pl-[52px]">
-                {missions.map((mission, index) => (
-                  <li key={index} className="flex items-start gap-2.5 text-foreground-light text-sm leading-relaxed">
-                    <FaCheckCircle className="text-accent mt-0.5 flex-shrink-0 text-xs" />
-                    {mission}
-                  </li>
-                ))}
-              </ul>
             </div>
-          </ScrollAnimation>
-        </div>
+          </div>
+        </ScrollAnimation>
 
         {/* Statistics Row */}
         <ScrollAnimation variant="fadeUp" delay={0.2}>
