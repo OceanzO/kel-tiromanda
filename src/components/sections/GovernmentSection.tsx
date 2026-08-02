@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { OFFICIALS } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';
-import { FaPhone, FaUserTie } from 'react-icons/fa';
+import { FaPhone, FaUserTie, FaWhatsapp } from 'react-icons/fa';
 
 interface OfficialCardProps {
   name: string;
@@ -51,10 +51,12 @@ function OfficialCard({ name, position, phone, featured = false, delay = 0 }: Of
       <div className={`h-0.5 w-10 rounded-full bg-accent mb-2 mx-auto ${featured ? 'w-16' : 'w-8'}`} />
       <p className="text-foreground-muted text-xs mb-3">{position}</p>
       <a
-        href={`tel:${phone.replace(/\s/g, '')}`}
+        href={phone !== '-' ? `https://wa.me/${phone.replace(/[^0-9]/g, '')}` : '#'}
+        target={phone !== '-' ? '_blank' : undefined}
+        rel={phone !== '-' ? 'noopener noreferrer' : undefined}
         className="flex items-center gap-1.5 text-xs text-primary hover:text-accent transition-colors"
       >
-        <FaPhone className="text-[10px]" />
+        <FaWhatsapp className="text-[10px]" />
         {phone}
       </a>
     </motion.div>
@@ -75,50 +77,48 @@ export default function GovernmentSection() {
         />
 
         {/* === LEVEL 1: Village Head === */}
-        <div className="flex justify-center mb-4">
-          <div className="w-full max-w-xs">
-            <OfficialCard
-              name={OFFICIALS.lurah.name}
-              position={language === 'id' ? OFFICIALS.lurah.position_id : OFFICIALS.lurah.position_en}
-              phone={OFFICIALS.lurah.phone}
-              photo={OFFICIALS.lurah.photo}
-              featured
-              delay={0}
-            />
+        <div className="mb-4">
+          <h3 className="font-heading font-bold text-xl md:text-2xl text-foreground text-center mb-8">
+            {t('government.village_head')}
+          </h3>
+          <div className="flex justify-center mb-4">
+            <div className="w-full max-w-xs">
+              <OfficialCard
+                name={OFFICIALS.lurah.name}
+                position={language === 'id' ? OFFICIALS.lurah.position_id : OFFICIALS.lurah.position_en}
+                phone={OFFICIALS.lurah.phone}
+                photo={OFFICIALS.lurah.photo}
+                delay={0}
+              />
+            </div>
           </div>
         </div>
 
-        {/* Connector Line Down */}
-        <div className="flex justify-center mb-4">
-          <div className="w-0.5 h-12 bg-gradient-to-b from-accent to-primary rounded-full" />
-        </div>
-
-        {/* Horizontal connector */}
-        <div className="hidden md:block relative mb-4">
-          <div className="absolute top-0 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full" />
-        </div>
+        {/* Spacer before Staff */}
+        <div className="h-4" />
 
         {/* === LEVEL 2: Staff === */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
-          {OFFICIALS.staff.map((official, index) => (
-            <div key={index} className="relative">
-              {/* Vertical connector from horizontal line (desktop) */}
-              <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full w-0.5 h-4 bg-gradient-to-b from-primary to-accent" />
-              <OfficialCard
-                name={official.name}
-                position={language === 'id' ? official.position_id : official.position_en}
-                phone={official.phone}
-                photo={official.photo}
-                delay={0.1 * (index + 1)}
-              />
-            </div>
-          ))}
+        <div className="mb-4">
+          <h3 className="font-heading font-bold text-xl md:text-2xl text-foreground text-center mb-8">
+            {t('government.staff')}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
+            {OFFICIALS.staff.map((official, index) => (
+              <div key={index} className="relative">
+                <OfficialCard
+                  name={official.name}
+                  position={language === 'id' ? official.position_id : official.position_en}
+                  phone={official.phone}
+                  photo={official.photo}
+                  delay={0.1 * (index + 1)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Connector Line Down to Neighborhoods */}
-        <div className="flex justify-center my-8">
-          <div className="w-0.5 h-12 bg-gradient-to-b from-primary to-accent rounded-full" />
-        </div>
+        {/* Spacer before Neighborhoods */}
+        <div className="h-8" />
 
         {/* === LEVEL 3: Neighborhoods === */}
         <div className="mb-4">
@@ -146,7 +146,7 @@ export default function GovernmentSection() {
                       {language === 'id' ? neighborhood.name_id : neighborhood.name_en}
                     </h4>
                     <p className="text-xs text-foreground-muted">
-                      {neighborhood.head.name} • <a href={`tel:${neighborhood.head.phone.replace(/\s/g, '')}`} className="text-primary hover:underline">{neighborhood.head.phone}</a>
+                      {neighborhood.head.name} - <a href={neighborhood.head.phone !== '-' ? `https://wa.me/${neighborhood.head.phone.replace(/[^0-9]/g, '')}` : '#'} target={neighborhood.head.phone !== '-' ? '_blank' : undefined} rel={neighborhood.head.phone !== '-' ? 'noopener noreferrer' : undefined} className="text-primary hover:underline">{neighborhood.head.phone}</a>
                     </p>
                   </div>
                 </div>
@@ -158,18 +158,17 @@ export default function GovernmentSection() {
                       key={rtIndex}
                       className="group bg-background/60 rounded-xl p-4 text-center hover:bg-primary/5 transition-colors duration-300 border border-transparent hover:border-primary/10"
                     >
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover:bg-accent/10 transition-colors">
-                        <FaUserTie className="text-primary/60 text-sm group-hover:text-accent/70 transition-colors" />
-                      </div>
                       <span className="inline-block px-2 py-0.5 rounded-full bg-accent/15 text-accent-dark text-[10px] font-bold mb-1.5 border border-accent/20">
                         {rt.position}
                       </span>
                       <p className="text-xs font-medium text-foreground">{rt.name}</p>
                       <a
-                        href={`tel:${rt.phone.replace(/\s/g, '')}`}
+                        href={rt.phone !== '-' ? `https://wa.me/${rt.phone.replace(/[^0-9]/g, '')}` : '#'}
+                        target={rt.phone !== '-' ? '_blank' : undefined}
+                        rel={rt.phone !== '-' ? 'noopener noreferrer' : undefined}
                         className="flex items-center justify-center gap-1 text-[10px] text-primary mt-1 hover:underline"
                       >
-                        <FaPhone className="text-[8px]" />
+                        <FaWhatsapp className="text-[8px]" />
                         {rt.phone}
                       </a>
                     </div>
