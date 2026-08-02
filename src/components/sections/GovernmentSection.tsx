@@ -148,7 +148,6 @@ export default function GovernmentSection() {
                     <div className="flex flex-wrap items-center gap-1.5 text-xs text-foreground-muted">
                       <span>{neighborhood.head.name}</span>
                       <span>-</span>
-                      <span>No. WhatsApp</span>
                       <a
                         href={neighborhood.head.phone !== '-' ? `https://wa.me/${neighborhood.head.phone.replace(/[^0-9]/g, '')}` : '#'}
                         target={neighborhood.head.phone !== '-' ? '_blank' : undefined}
