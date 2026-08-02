@@ -145,15 +145,20 @@ export default function GovernmentSection() {
                     <h4 className="font-heading font-bold text-base text-foreground">
                       {language === 'id' ? neighborhood.name_id : neighborhood.name_en}
                     </h4>
-                    <p className="text-xs text-foreground-muted">
-                      {neighborhood.head.name === '-' && neighborhood.head.phone === '-' ? (
-                        '-'
-                      ) : (
-                        <>
-                          {neighborhood.head.name} - No. WhatsApp - <a href={neighborhood.head.phone !== '-' ? `https://wa.me/${neighborhood.head.phone.replace(/[^0-9]/g, '')}` : '#'} target={neighborhood.head.phone !== '-' ? '_blank' : undefined} rel={neighborhood.head.phone !== '-' ? 'noopener noreferrer' : undefined} className="text-primary hover:underline">{neighborhood.head.phone}</a>
-                        </>
-                      )}
-                    </p>
+                    <div className="flex flex-wrap items-center gap-1.5 text-xs text-foreground-muted">
+                      <span>{neighborhood.head.name}</span>
+                      <span>-</span>
+                      <span>No. WhatsApp</span>
+                      <a
+                        href={neighborhood.head.phone !== '-' ? `https://wa.me/${neighborhood.head.phone.replace(/[^0-9]/g, '')}` : '#'}
+                        target={neighborhood.head.phone !== '-' ? '_blank' : undefined}
+                        rel={neighborhood.head.phone !== '-' ? 'noopener noreferrer' : undefined}
+                        className="flex items-center gap-1 text-primary hover:underline"
+                      >
+                        <FaWhatsapp className="text-[12px]" />
+                        {neighborhood.head.phone}
+                      </a>
+                    </div>
                   </div>
                 </div>
 
