@@ -154,7 +154,7 @@ export default function GovernmentSection() {
                         rel={neighborhood.head.phone !== '-' ? 'noopener noreferrer' : undefined}
                         className="flex items-center gap-1 text-primary hover:underline"
                       >
-                        <FaWhatsapp className="text-[12px]" />
+                        <FaWhatsapp className="text-[8px]" />
                         {neighborhood.head.phone}
                       </a>
                     </div>
