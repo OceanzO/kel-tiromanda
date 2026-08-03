@@ -151,7 +151,7 @@ export default function AboutSection() {
         {/* Statistics Row */}
         <ScrollAnimation variant="fadeUp" delay={0.2}>
           <div className="mb-8">
-            <h3 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-2">
+            <h3 className="font-heading font-bold text-xl text-foreground mb-2">
               {language === 'id' ? 'Statistik Kependudukan' : 'Population Statistics'}
             </h3>
             <p className="text-foreground-muted text-sm md:text-base">
