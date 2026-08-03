@@ -199,7 +199,7 @@ export const FACILITIES = [
     description_id: 'Kantor pelayanan administrasi kelurahan Tiromanda.',
     description_en: 'Administrative services office of Tiromanda village.',
     location: 'Jl. Poros Makale-Sangalla',
-    image: '/images/facilities/office.png',
+    image: '/images/hero/hero_tongkonan.png',
   },
   {
     name_id: 'Kantor Kecamatan',
@@ -207,7 +207,7 @@ export const FACILITIES = [
     description_id: 'Kantor Kecamatan Makale Selatan.',
     description_en: 'South Makale District Office.',
     location: 'Jl. Poros Makale',
-    image: '/images/facilities/district.png',
+    image: '/images/hero/hero_panorama.png',
   },
   {
     name_id: 'Sekolah Dasar',
@@ -215,7 +215,7 @@ export const FACILITIES = [
     description_id: 'SDN Tiromanda — sekolah dasar negeri yang melayani pendidikan anak-anak di kelurahan.',
     description_en: 'SDN Tiromanda — public elementary school serving children in the village.',
     location: 'Lingkungan Bulaan',
-    image: '/images/facilities/school.png',
+    image: '/images/hero/hero_community.png',
   },
   {
     name_id: 'Gereja',
@@ -223,7 +223,7 @@ export const FACILITIES = [
     description_id: 'Gereja yang menjadi tempat ibadah utama masyarakat Tiromanda.',
     description_en: 'The main place of worship for the Tiromanda community.',
     location: 'Lingkungan Pasa\' Buntu',
-    image: '/images/facilities/church.png',
+    image: '/images/hero/hero_mountains.png',
   },
   {
     name_id: 'Masjid',
@@ -231,7 +231,7 @@ export const FACILITIES = [
     description_id: 'Masjid yang melayani umat Muslim di kelurahan Tiromanda.',
     description_en: 'Mosque serving the Muslim community in Tiromanda village.',
     location: 'Lingkungan Rante Po\'pong',
-    image: '/images/facilities/mosque.png',
+    image: '/images/hero/hero_aerial.png',
   },
   {
     name_id: 'Puskesmas',
@@ -239,7 +239,7 @@ export const FACILITIES = [
     description_id: 'Puskesmas pembantu yang memberikan pelayanan kesehatan dasar.',
     description_en: 'Auxiliary health center providing basic health services.',
     location: 'Jl. Poros Makale-Sangalla',
-    image: '/images/facilities/health.png',
+    image: '/images/hero/hero_ricefields.png',
   },
   {
     name_id: 'Lapangan Olahraga',
@@ -247,7 +247,7 @@ export const FACILITIES = [
     description_id: 'Lapangan olahraga serbaguna untuk kegiatan masyarakat.',
     description_en: 'Multi-purpose sports field for community activities.',
     location: 'Lingkungan Bulaan',
-    image: '/images/facilities/sports.png',
+    image: '/images/hero/hero_community.png',
   },
   {
     name_id: 'Balai Pertemuan',
@@ -255,7 +255,7 @@ export const FACILITIES = [
     description_id: 'Balai pertemuan untuk kegiatan musyawarah dan acara kemasyarakatan.',
     description_en: 'Meeting hall for deliberations and community events.',
     location: 'Lingkungan Pasa\' Buntu',
-    image: '/images/facilities/hall.png',
+    image: '/images/hero/hero_tongkonan.png',
   },
   {
     name_id: 'Pemakaman Umum',
@@ -263,7 +263,7 @@ export const FACILITIES = [
     description_id: 'Area pemakaman umum yang dikelola oleh kelurahan.',
     description_en: 'Public cemetery area managed by the village.',
     location: 'Lingkungan Bau',
-    image: '/images/facilities/cemetery.png',
+    image: '/images/hero/hero_mountains.png',
   },
   {
     name_id: 'Pasar',
@@ -271,7 +271,7 @@ export const FACILITIES = [
     description_id: 'Pasar tradisional tempat masyarakat bertransaksi hasil bumi dan kebutuhan sehari-hari.',
     description_en: 'Traditional market where the community trades agricultural products and daily necessities.',
     location: 'Lingkungan Pasa\' Buntu',
-    image: '/images/facilities/market.png',
+    image: '/images/hero/hero_panorama.png',
   },
 ];
 
