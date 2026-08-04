@@ -43,6 +43,7 @@ export default function FacilitiesSection() {
                   alt={language === 'id' ? facility.name_id : facility.name_en}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
                 />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center">

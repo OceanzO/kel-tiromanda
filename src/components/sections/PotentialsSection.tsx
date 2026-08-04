@@ -84,6 +84,7 @@ export default function PotentialsSection() {
                     alt={language === 'id' ? potential.title_id : potential.title_en}
                     fill
                     className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 )}
               </div>
@@ -143,6 +144,7 @@ export default function PotentialsSection() {
                     alt={language === 'id' ? selectedPotential.title_id : selectedPotential.title_en}
                     fill
                     className="object-cover opacity-90"
+                    sizes="(max-width: 768px) 100vw, 800px"
                   />
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50" />

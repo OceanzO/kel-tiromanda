@@ -125,8 +125,8 @@ export const OFFICIALS = {
       name_en: 'Bulaan Neighborhood',
       head: { name: '-', phone: '-' },
       rts: [
-        { name: '-', position: 'RT 1', phone: '-' },
-        { name: '-', position: 'RT 2', phone: '-' },
+        { name: '-', position: 'RT. Bullean', phone: '-' },
+        { name: '-', position: 'RT. Lonno\'', phone: '-' },
       ],
     },
     {
@@ -134,17 +134,17 @@ export const OFFICIALS = {
       name_en: 'Pasa\' Buntu Neighborhood',
       head: { name: '-', phone: '-' },
       rts: [
-        { name: '-', position: 'RT 1', phone: '-' },
-        { name: '-', position: 'RT 2', phone: '-' },
+        { name: '-', position: 'RT. Pasa\'', phone: '-' },
+        { name: '-', position: 'RT. Buntu Borong', phone: '-' },
       ],
     },
     {
-      name_id: 'Lingkungan Rante Po\'pong',
-      name_en: 'Rante Po\'pong Neighborhood',
+      name_id: 'Lingkungan Po\'pong',
+      name_en: 'Po\'pong Neighborhood',
       head: { name: '-', phone: '-' },
       rts: [
-        { name: '-', position: 'RT 1', phone: '-' },
-        { name: '-', position: 'RT 2', phone: '-' },
+        { name: '-', position: 'RT. Po\'pong', phone: '-' },
+        { name: '-', position: 'RT. To\'long', phone: '-' },
       ],
     },
     {
@@ -152,8 +152,8 @@ export const OFFICIALS = {
       name_en: 'Bau Neighborhood',
       head: { name: '-', phone: '-' },
       rts: [
-        { name: '-', position: 'RT 1', phone: '-' },
-        { name: '-', position: 'RT 2', phone: '-' },
+        { name: '-', position: 'RT. Bau', phone: '-' },
+        { name: '-', position: 'RT. Kalimbuang', phone: '-' },
       ],
     },
   ],
