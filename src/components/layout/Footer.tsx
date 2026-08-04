@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { NAV_ITEMS, CONTACTS, LOCATION } from '@/lib/constants';
+import { usePathname, useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaWhatsapp, FaInstagram, FaTiktok, FaYoutube, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLock, FaStar } from 'react-icons/fa';
 
 const socialIcons: Record<string, React.ReactNode> = {
@@ -17,11 +19,24 @@ const socialIcons: Record<string, React.ReactNode> = {
 export default function Footer() {
   const { language, t } = useLanguage();
 
+  const pathname = usePathname();
+  const router = useRouter();
+
   const handleNavClick = (href: string) => {
     const id = href.replace('#', '');
+    if (pathname !== '/') {
+      router.push(`/#${id}`);
+      return;
+    }
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const navbarHeight = 88;
+      const y = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 

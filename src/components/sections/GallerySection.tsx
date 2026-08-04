@@ -74,7 +74,7 @@ export default function GallerySection() {
                 <img
                   src={image.src}
                   alt={language === 'id' ? image.caption_id : image.caption_en}
-                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
 
