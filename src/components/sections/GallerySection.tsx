@@ -55,48 +55,33 @@ export default function GallerySection() {
         </div>
 
         {/* Masonry Grid */}
-        <div ref={ref} className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+        <div ref={ref} className="columns-2 sm:columns-3 lg:columns-4 gap-3 space-y-3">
           <AnimatePresence mode="popLayout">
             {filteredImages.map((image, index) => (
               <motion.div
                 key={`${image.src}-${index}`}
                 layout
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                exit={{ opacity: 0, scale: 0.8 }}
+                exit={{ opacity: 0, scale: 0.9 }}
                 transition={{
-                  duration: 0.4,
-                  delay: index * 0.05,
-                  layout: { duration: 0.3 },
+                  duration: 0.3,
+                  delay: index * 0.03,
                 }}
-                className="group relative break-inside-avoid overflow-hidden rounded-xl cursor-pointer"
+                className="group relative break-inside-avoid rounded-xl overflow-hidden cursor-pointer bg-muted/50 border border-transparent shadow-sm hover:shadow-md transition-shadow"
                 onClick={() => setLightboxIndex(index)}
               >
-                <div className={`relative w-full overflow-hidden bg-gradient-to-br from-primary/15 to-accent/15 ${
-                  index % 3 === 0 ? 'aspect-[4/5]' : index % 3 === 1 ? 'aspect-square' : 'aspect-[4/3]'
-                }`}>
-                  <Image
-                    src={image.src}
-                    alt={language === 'id' ? image.caption_id : image.caption_en}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    loading="lazy"
-                  />
+                {/* Natural Aspect Ratio Image */}
+                <img
+                  src={image.src}
+                  alt={language === 'id' ? image.caption_id : image.caption_en}
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-4">
-                    <FaExpand className="text-white text-2xl mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" />
-                    <p className="text-white text-sm font-medium text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                      {language === 'id' ? image.caption_id : image.caption_en}
-                    </p>
-                    <span className="text-white/60 text-xs mt-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                      {language === 'id'
-                        ? GALLERY_CATEGORIES.find((c) => c.id === image.category)?.label_id
-                        : GALLERY_CATEGORIES.find((c) => c.id === image.category)?.label_en
-                      }
-                    </span>
-                  </div>
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <FaExpand className="text-white text-2xl md:text-3xl transform scale-50 group-hover:scale-100 transition-transform duration-300" />
                 </div>
               </motion.div>
             ))}
