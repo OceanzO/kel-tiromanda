@@ -129,7 +129,9 @@ export default function GovernmentSection() {
                       {language === 'id' ? neighborhood.name_id : neighborhood.name_en}
                     </h4>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-primary/80 uppercase tracking-wide">Kepala Lingkungan:</span>
+                      <span className="text-sm font-semibold text-primary/80 uppercase tracking-wide">
+                        {language === 'id' ? 'Kepala Lingkungan:' : 'Head of Neighborhood:'}
+                      </span>
                       <span className="text-base font-bold text-foreground-muted">{neighborhood.head.name}</span>
                     </div>
                   </div>
