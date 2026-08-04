@@ -41,7 +41,7 @@ export default function Footer() {
   };
 
   const socialContacts = CONTACTS.filter((c) =>
-    ['whatsapp', 'instagram', 'tiktok', 'youtube'].includes(c.type)
+    ['instagram', 'tiktok', 'youtube'].includes(c.type)
   );
 
   return (
@@ -217,10 +217,10 @@ export default function Footer() {
             <a
               href="/admin/login"
               className="flex items-center gap-1.5 text-white/20 hover:text-white/50 text-xs transition-colors duration-300 group"
-              title="Login Admin"
+              title={language === 'id' ? 'Login Admin' : 'Admin Login'}
             >
               <FaLock className="text-[10px] group-hover:text-accent/60 transition-colors" />
-              <span>Login Admin</span>
+              <span>{language === 'id' ? 'Login Admin' : 'Admin Login'}</span>
             </a>
           </div>
         </div>
