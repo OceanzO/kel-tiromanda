@@ -411,7 +411,7 @@ export const LOCATION = {
   address_en: 'Kelurahan Tiromanda, Makale Selatan District, Tana Toraja Regency, South Sulawesi, Indonesia',
   office_hours_id: 'Senin - Jumat: 08:00 - 16:00 WITA',
   office_hours_en: 'Monday - Friday: 08:00 AM - 04:00 PM WITA',
-  maps_embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15926.256!2d119.8453!3d-3.1234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMDcnMjQuMyJTIDExOcKwNTAnNDMuMSJF!5e0!3m2!1sid!2sid!4v1234567890',
+  maps_embed: 'https://maps.google.com/maps?q=Kelurahan%20Tiromanda,%20Makale%20Selatan,%20Tana%20Toraja&t=&z=14&ie=UTF8&iwloc=&output=embed',
   maps_url: 'https://www.google.com/maps/place/Tiromanda,+Makale+Selatan,+Tana+Toraja',
   directions_url: 'https://www.google.com/maps/dir//Tiromanda,+Makale+Selatan,+Tana+Toraja',
   lat: -3.1234,
