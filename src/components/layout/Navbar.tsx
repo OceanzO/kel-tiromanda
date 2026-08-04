@@ -2,12 +2,17 @@
 
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { NAV_ITEMS, NavItem } from '@/lib/constants';
 import { FaBars, FaTimes, FaSun, FaMoon, FaChevronDown } from 'react-icons/fa';
 
-export default function Navbar() {
+interface NavbarProps {
+  forceBackground?: boolean;
+}
+
+export default function Navbar({ forceBackground = false }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -16,11 +21,16 @@ export default function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { language, setLanguage, t } = useLanguage();
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.history.scrollRestoration = 'manual';
-      window.scrollTo(0, 0);
+      // Only scroll to top if we are not navigating back to a specific section via hash
+      if (!window.location.hash) {
+        window.scrollTo(0, 0);
+      }
     }
     const saved = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -38,25 +48,47 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    if (pathname.startsWith('/berita/')) {
+      setActiveSection('news');
+      return;
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      // Collect all section IDs (including children)
       const sectionIds: string[] = [];
       NAV_ITEMS.forEach((item) => {
         sectionIds.push(item.id);
         item.children?.forEach((child) => sectionIds.push(child.id));
       });
+      
+      // If we've reached the very bottom of the page, forcefully highlight the last section (News)
+      if (Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
+        const lastValidId = sectionIds[sectionIds.length - 1];
+        if (lastValidId) {
+          setActiveSection(lastValidId);
+          return;
+        }
+      }
+
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i]);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) { setActiveSection(sectionIds[i]); break; }
+          // Use a generous threshold (60% of viewport height) so bottom sections 
+          // that can't scroll to the top are still correctly highlighted.
+          if (rect.top <= window.innerHeight * 0.6) { 
+            setActiveSection(sectionIds[i]); 
+            break; 
+          }
         }
       }
     };
+    // Run once on mount to set initial section
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? 'hidden' : '';
@@ -83,8 +115,21 @@ export default function Navbar() {
     setIsMobileOpen(false);
     setOpenDropdown(null);
     const id = href.replace('#', '');
+    if (pathname !== '/') {
+      // Navigate to homepage and pass the hash so we can scroll after load
+      router.push(`/#${id}`);
+      return;
+    }
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const navbarHeight = 88;
+      const y = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   // Determine if a nav item or any of its children is "active"
@@ -99,7 +144,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${(isScrolled || forceBackground)
           ? 'bg-[#1F3A2C]/97 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-white/10'
           : 'bg-transparent'
         }`}
@@ -108,8 +153,13 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-[88px]">
             {/* Logo */}
             <motion.a
-              href="#home"
-              onClick={handleNavClick}
+              href="/"
+              onClick={(e) => {
+                if (pathname === '/') {
+                  e.preventDefault();
+                  scrollToSection('#home');
+                }
+              }}
               className="flex items-center gap-3 group"
               whileHover={{ scale: 1.02 }}
             >
@@ -147,7 +197,10 @@ export default function Navbar() {
                     // ── Regular link ──
                     <a
                       href={item.href}
-                      onClick={handleNavClick}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection(item.href);
+                      }}
                       className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 block ${
                         isItemActive(item) ? 'text-accent' : 'text-white/75 hover:text-white'
                       }`}
@@ -233,13 +286,12 @@ export default function Navbar() {
                 </AnimatePresence>
               </button>
 
-              <a
-                href="#footer"
-                onClick={handleNavClick}
+              <button
+                onClick={() => scrollToSection('#footer')}
                 className="hidden xl:flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent-light text-white rounded-xl text-sm font-semibold transition-all shadow-md"
               >
                 {language === 'id' ? 'Tentang Kami' : 'About Us'}
-              </a>
+              </button>
 
               <button onClick={() => setIsMobileOpen(!isMobileOpen)} className="xl:hidden p-2.5 rounded-xl transition-all duration-300 text-white hover:bg-white/10">
                 {isMobileOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
@@ -320,7 +372,10 @@ export default function Navbar() {
                     ) : (
                       <motion.a
                         href={item.href}
-                        onClick={handleNavClick}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToSection(item.href);
+                        }}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}

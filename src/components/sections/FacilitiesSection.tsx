@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { FACILITIES } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';
-import { FaMapMarkerAlt, FaBuilding } from 'react-icons/fa';
+import { FaBuilding } from 'react-icons/fa';
 
 export default function FacilitiesSection() {
   const { language, t } = useLanguage();

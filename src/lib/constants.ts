@@ -417,3 +417,50 @@ export const LOCATION = {
   lat: -3.1234,
   lng: 119.8453,
 };
+
+// ==========================================
+// News Data
+// ==========================================
+export interface NewsItem {
+  id: string;
+  title_id: string;
+  title_en: string;
+  description_id: string;
+  description_en: string;
+  date_id: string;
+  date_en: string;
+  image: string;
+}
+
+export const NEWS_ITEMS: NewsItem[] = [
+  {
+    id: '1',
+    title_id: 'Kerja Bakti Rutin di Lingkungan Bulaan',
+    title_en: 'Routine Community Cleanup in Bulaan Neighborhood',
+    description_id: 'Masyarakat Lingkungan Bulaan mengadakan kerja bakti rutin untuk membersihkan lingkungan sekitar. Kegiatan ini diikuti oleh seluruh warga dari berbagai usia untuk menjaga kebersihan dan kesehatan lingkungan. Selain itu, kegiatan ini juga bertujuan untuk mempererat tali silaturahmi antar warga.',
+    description_en: 'The people of Bulaan Neighborhood held a routine community cleanup to clean the surrounding area. This activity was attended by all residents of various ages to maintain a clean and healthy environment. In addition, this activity also aims to strengthen the ties of brotherhood among residents.',
+    date_id: '24 Juli 2026',
+    date_en: 'July 24, 2026',
+    image: '/images/hero/hero_community.png'
+  },
+  {
+    id: '2',
+    title_id: 'Rapat Koordinasi Persiapan HUT RI ke-81',
+    title_en: 'Coordination Meeting for the 81st Independence Day',
+    description_id: 'Pemerintah Kelurahan Tiromanda bersama tokoh masyarakat menggelar rapat koordinasi persiapan menyambut Hari Kemerdekaan Republik Indonesia yang ke-81. Rapat ini membahas berbagai persiapan lomba dan acara syukuran.',
+    description_en: 'The government of Tiromanda Village together with community figures held a coordination meeting in preparation for the 81st Independence Day of the Republic of Indonesia. This meeting discussed various preparations for competitions and thanksgiving events.',
+    date_id: '20 Juli 2026',
+    date_en: 'July 20, 2026',
+    image: '/images/hero/hero_panorama.png'
+  },
+  {
+    id: '3',
+    title_id: 'Kunjungan Wisatawan Mancanegara ke Tongkonan',
+    title_en: 'Foreign Tourists Visit Tongkonan',
+    description_id: 'Beberapa wisatawan mancanegara mengunjungi rumah adat Tongkonan di Tiromanda. Mereka sangat antusias mempelajari budaya dan arsitektur unik rumah adat khas Tana Toraja ini.',
+    description_en: 'Several foreign tourists visited the traditional Tongkonan house in Tiromanda. They were very enthusiastic to learn about the culture and unique architecture of this traditional Tana Toraja house.',
+    date_id: '15 Juli 2026',
+    date_en: 'July 15, 2026',
+    image: '/images/hero/hero_tongkonan.png'
+  }
+];

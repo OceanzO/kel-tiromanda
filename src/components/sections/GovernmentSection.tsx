@@ -2,7 +2,6 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { OFFICIALS } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';

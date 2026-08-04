@@ -8,10 +8,12 @@ import FacilitiesSection from '@/components/sections/FacilitiesSection';
 import InfographicsSection from '@/components/sections/InfographicsSection';
 import GallerySection from '@/components/sections/GallerySection';
 import NewsSection from '@/components/sections/NewsSection';
+import HashScrollHandler from '@/components/ui/HashScrollHandler';
 
 export default function HomePage() {
   return (
     <>
+      <HashScrollHandler />
       <Navbar />
       <main>
         <HeroSection />

@@ -1,15 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef } from 'react';
-import Image from 'next/image';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { GALLERY_IMAGES, GALLERY_CATEGORIES } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';
-import { FaSearch, FaExpand } from 'react-icons/fa';
+import { FaExpand } from 'react-icons/fa';
 
 export default function GallerySection() {
   const { language, t } = useLanguage();
@@ -28,7 +26,7 @@ export default function GallerySection() {
   }));
 
   return (
-    <section id="gallery" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background-alt overflow-hidden">
+    <section id="gallery" className="relative min-h-screen pt-12 pb-20 md:pt-16 md:pb-28 bg-background-alt overflow-hidden">
       <div className="absolute inset-0 section-pattern opacity-20" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,6 +70,7 @@ export default function GallerySection() {
                 onClick={() => setLightboxIndex(index)}
               >
                 {/* Natural Aspect Ratio Image */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={image.src}
                   alt={language === 'id' ? image.caption_id : image.caption_en}

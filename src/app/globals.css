@@ -117,7 +117,6 @@
    BASE STYLES
    ======================================== */
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: var(--navbar-height);
 }
 

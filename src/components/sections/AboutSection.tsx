@@ -4,14 +4,21 @@ import { useLanguage } from '@/context/LanguageContext';
 import { ABOUT_DATA } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';
 import ScrollAnimation from '@/components/ui/ScrollAnimation';
-import StatCounter from '@/components/ui/StatCounter';
 import { 
-  FaEye, FaBullseye, FaCheckCircle, FaRulerCombined, FaUsers, 
-  FaHome, FaMap, FaInfoCircle, FaUserFriends, FaLayerGroup, 
+  FaEye, FaBullseye, FaRulerCombined, 
+  FaHome, FaMap, FaInfoCircle, FaUserFriends, 
   FaBriefcase, FaMale, FaFemale, FaUserTie
 } from 'react-icons/fa';
 
-const StatCard = ({ title, value, unit, icon: Icon, isPlaceholder = false }: any) => (
+interface StatCardProps {
+  title: string;
+  value?: string | number;
+  unit?: string;
+  icon: React.ElementType;
+  isPlaceholder?: boolean;
+}
+
+const StatCard = ({ title, value, unit, icon: Icon, isPlaceholder = false }: StatCardProps) => (
   <div className="premium-card p-6 flex flex-col justify-between">
     <div className="flex justify-between items-start mb-6">
       <span className="text-xs font-bold text-foreground-muted uppercase tracking-wider">{title}</span>
@@ -38,7 +45,6 @@ export default function AboutSection() {
   const profile = language === 'id' ? ABOUT_DATA.profile_id : ABOUT_DATA.profile_en;
   const vision = language === 'id' ? ABOUT_DATA.vision_id : ABOUT_DATA.vision_en;
   const missions = language === 'id' ? ABOUT_DATA.mission_id : ABOUT_DATA.mission_en;
-  const geography = language === 'id' ? ABOUT_DATA.geography_id : ABOUT_DATA.geography_en;
 
   return (
     <section id="about" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background overflow-hidden">
@@ -112,7 +118,7 @@ export default function AboutSection() {
                   </h3>
                 </div>
                 <p className="text-foreground-light text-lg md:text-xl leading-relaxed font-medium italic border-l-4 border-accent pl-5 py-2">
-                  "{vision}"
+                  &quot;{vision}&quot;
                 </p>
               </div>
               

@@ -4,43 +4,15 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import SectionTitle from '@/components/ui/SectionTitle';
 import ScrollAnimation from '@/components/ui/ScrollAnimation';
+import Link from 'next/link';
 
-// Dummy data for news
-const NEWS_ITEMS = [
-  {
-    id: 1,
-    title_id: 'Kerja Bakti Rutin di Lingkungan Bulaan',
-    title_en: 'Routine Community Cleanup in Bulaan Neighborhood',
-    description_id: 'Masyarakat Lingkungan Bulaan mengadakan kerja bakti rutin untuk membersihkan lingkungan sekitar.',
-    description_en: 'The people of Bulaan Neighborhood held a routine community cleanup to clean the surrounding area.',
-    date: '24 Juli 2026',
-    image: '/images/hero/hero_community.png'
-  },
-  {
-    id: 2,
-    title_id: 'Rapat Koordinasi Persiapan HUT RI ke-81',
-    title_en: 'Coordination Meeting for the 81st Independence Day',
-    description_id: 'Pemerintah Kelurahan Tiromanda bersama tokoh masyarakat menggelar rapat koordinasi.',
-    description_en: 'The government of Tiromanda Village together with community figures held a coordination meeting.',
-    date: '20 Juli 2026',
-    image: '/images/hero/hero_panorama.png'
-  },
-  {
-    id: 3,
-    title_id: 'Kunjungan Wisatawan Mancanegara ke Tongkonan',
-    title_en: 'Foreign Tourists Visit Tongkonan',
-    description_id: 'Beberapa wisatawan mancanegara mengunjungi rumah adat Tongkonan di Tiromanda.',
-    description_en: 'Several foreign tourists visited the traditional Tongkonan house in Tiromanda.',
-    date: '15 Juli 2026',
-    image: '/images/hero/hero_tongkonan.png'
-  }
-];
+import { NEWS_ITEMS, NewsItem } from '@/lib/constants';
 
 export default function NewsSection() {
   const { language, t } = useLanguage();
 
   return (
-    <section id="news" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background overflow-hidden">
+    <section id="news" className="relative min-h-[85vh] flex flex-col pt-12 pb-20 md:pt-16 md:pb-28 bg-background overflow-hidden scroll-mt-24">
       {/* Decorative Background */}
       <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
 
@@ -51,7 +23,7 @@ export default function NewsSection() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {NEWS_ITEMS.map((item, index) => (
+          {NEWS_ITEMS.map((item: NewsItem, index: number) => (
             <ScrollAnimation key={item.id} variant="fadeUp" delay={index * 0.1}>
               <div className="premium-card group h-full flex flex-col bg-background overflow-hidden hover:-translate-y-2 transition-transform duration-300">
                 {/* Image Container */}
@@ -64,7 +36,7 @@ export default function NewsSection() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md">
-                    {item.date}
+                    {language === 'id' ? item.date_id : item.date_en}
                   </div>
                 </div>
                 
@@ -78,9 +50,9 @@ export default function NewsSection() {
                   </p>
                   
                   <div className="mt-4 pt-4 border-t border-gray-100 dark:border-white/5">
-                    <button className="text-primary font-semibold text-sm hover:text-accent transition-colors">
+                    <Link href={`/berita/${item.id}`} className="text-primary font-semibold text-sm hover:text-accent transition-colors">
                       {language === 'id' ? 'Baca Selengkapnya →' : 'Read More →'}
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
