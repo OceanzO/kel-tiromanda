@@ -5,6 +5,8 @@ import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { POTENTIALS } from '@/lib/constants';
+import { createClient } from '@/lib/supabase/client';
+import type { Potential } from '@/lib/supabase/types';
 import SectionTitle from '@/components/ui/SectionTitle';
 import {
   FaMapMarkedAlt, FaSeedling, FaCoffee, FaTheaterMasks,
@@ -27,7 +29,26 @@ export default function PotentialsSection() {
   const { language, t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
-  const [selectedPotential, setSelectedPotential] = useState<typeof POTENTIALS[0] | null>(null);
+  const [selectedPotential, setSelectedPotential] = useState<Potential | typeof POTENTIALS[0] | null>(null);
+  const [potentials, setPotentials] = useState<Potential[]>([]);
+
+  useEffect(() => {
+    const fetchPotentials = async () => {
+      const supabase = createClient();
+      const { data } = await supabase
+        .from('potentials')
+        .select('*')
+        .order('display_order', { ascending: true });
+      
+      if (data && data.length > 0) {
+        setPotentials(data);
+      }
+    };
+
+    fetchPotentials();
+  }, []);
+
+  const displayData = potentials.length > 0 ? potentials : POTENTIALS;
 
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -52,7 +73,7 @@ export default function PotentialsSection() {
         />
 
         <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {POTENTIALS.map((potential, index) => (
+          {displayData.map((potential, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40, scale: 0.95 }}
@@ -78,9 +99,9 @@ export default function PotentialsSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/10 to-accent/20 group-hover:scale-110 transition-transform duration-700" />
                 
                 {/* Use potential image if available */}
-                {potential.image && (
+                {((potential as any).image_url || ('image' in potential && potential.image)) && (
                   <Image 
-                    src={potential.image} 
+                    src={(potential as any).image_url || ('image' in potential ? potential.image : '') || ''} 
                     alt={language === 'id' ? potential.title_id : potential.title_en}
                     fill
                     className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110"
@@ -138,9 +159,9 @@ export default function PotentialsSection() {
               {/* Image Area */}
               <div className="relative h-64 sm:h-80 w-full bg-black">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
-                {selectedPotential.image ? (
+                {selectedPotential && ((selectedPotential as any).image_url || ('image' in selectedPotential && selectedPotential.image)) ? (
                   <Image
-                    src={selectedPotential.image}
+                    src={(selectedPotential as any).image_url || ('image' in selectedPotential ? selectedPotential.image : '') || ''}
                     alt={language === 'id' ? selectedPotential.title_id : selectedPotential.title_en}
                     fill
                     className="object-cover opacity-90"

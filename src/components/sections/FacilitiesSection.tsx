@@ -1,10 +1,12 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { FACILITIES } from '@/lib/constants';
+import { createClient } from '@/lib/supabase/client';
+import type { Facility } from '@/lib/supabase/types';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { FaBuilding } from 'react-icons/fa';
 
@@ -12,6 +14,25 @@ export default function FacilitiesSection() {
   const { language, t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const [facilities, setFacilities] = useState<Facility[]>([]);
+
+  useEffect(() => {
+    const fetchFacilities = async () => {
+      const supabase = createClient();
+      const { data } = await supabase
+        .from('facilities')
+        .select('*')
+        .order('display_order', { ascending: true });
+      
+      if (data && data.length > 0) {
+        setFacilities(data);
+      }
+    };
+
+    fetchFacilities();
+  }, []);
+
+  const displayData = facilities.length > 0 ? facilities : FACILITIES;
 
   return (
     <section id="facilities" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background-alt overflow-hidden">
@@ -24,7 +45,7 @@ export default function FacilitiesSection() {
         />
 
         <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-          {FACILITIES.map((facility, index) => (
+          {displayData.map((facility, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -38,9 +59,9 @@ export default function FacilitiesSection() {
             >
               {/* Image Area */}
               <div className="relative h-48 sm:h-52 w-full shrink-0 overflow-hidden">
-                {facility.image ? (
+                {((facility as any).image_url || ('image' in facility && facility.image)) ? (
                   <Image
-                    src={facility.image}
+                    src={(facility as any).image_url || ('image' in facility ? facility.image : '') || ''}
                     alt={language === 'id' ? facility.name_id : facility.name_en}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"

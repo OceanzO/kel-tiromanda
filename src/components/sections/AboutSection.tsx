@@ -2,6 +2,8 @@
 
 import { useLanguage } from '@/context/LanguageContext';
 import { ABOUT_DATA } from '@/lib/constants';
+import { useEffect, useState } from 'react';
+import { createClient } from '@/lib/supabase/client';
 import SectionTitle from '@/components/ui/SectionTitle';
 import ScrollAnimation from '@/components/ui/ScrollAnimation';
 import { 
@@ -45,6 +47,42 @@ export default function AboutSection() {
   const profile = language === 'id' ? ABOUT_DATA.profile_id : ABOUT_DATA.profile_en;
   const vision = language === 'id' ? ABOUT_DATA.vision_id : ABOUT_DATA.vision_en;
   const missions = language === 'id' ? ABOUT_DATA.mission_id : ABOUT_DATA.mission_en;
+
+  const [stats, setStats] = useState<{ total: string; households: string; area: string } | null>(null);
+  const [gender, setGender] = useState<{ male: number; female: number; malePercentage: number; femalePercentage: number } | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    
+    const fetchData = async () => {
+      const [statsRes, genderRes] = await Promise.all([
+        supabase.from('population_stats').select('*').single(),
+        supabase.from('gender_composition').select('*').single()
+      ]);
+
+      if (statsRes.data) {
+        setStats({
+          total: statsRes.data.total_population,
+          households: statsRes.data.total_households,
+          area: statsRes.data.total_area
+        });
+      }
+      
+      if (genderRes.data) {
+        const m = parseInt(genderRes.data.male_count) || 0;
+        const f = parseInt(genderRes.data.female_count) || 0;
+        const total = m + f;
+        setGender({
+          male: m,
+          female: f,
+          malePercentage: total > 0 ? (m / total) * 100 : 50,
+          femalePercentage: total > 0 ? (f / total) * 100 : 50
+        });
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <section id="about" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background overflow-hidden">
@@ -170,18 +208,24 @@ export default function AboutSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             <StatCard 
               title={language === 'id' ? 'Total Penduduk' : 'Total Population'} 
-              isPlaceholder={true} 
+              value={stats?.total || '0'} 
+              unit="Jiwa"
               icon={FaUserFriends} 
+              isPlaceholder={!stats}
             />
             <StatCard 
               title={language === 'id' ? 'Kepala Keluarga' : 'Households'} 
-              isPlaceholder={true} 
+              value={stats?.households || '0'} 
+              unit="KK"
               icon={FaUserTie} 
+              isPlaceholder={!stats}
             />
             <StatCard 
               title={language === 'id' ? 'Luas Wilayah' : 'Total Area'} 
-              isPlaceholder={true} 
+              value={stats?.area || '0'} 
+              unit="km²"
               icon={FaRulerCombined} 
+              isPlaceholder={!stats}
             />
             <StatCard 
               title={language === 'id' ? 'Lingkungan' : 'Neighborhoods'} 
@@ -215,7 +259,14 @@ export default function AboutSection() {
                   <p className="text-xs font-bold text-foreground-muted uppercase tracking-wider mb-1">
                     {language === 'id' ? 'Laki-laki' : 'Male'}
                   </p>
-                  <p className="text-sm font-semibold text-primary/80 italic">Edit di Dashboard Admin</p>
+                  {gender ? (
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl font-bold text-foreground">{gender.male}</span>
+                      <span className="text-sm text-foreground-muted">({Math.round(gender.malePercentage)}%)</span>
+                    </div>
+                  ) : (
+                    <p className="text-sm font-semibold text-primary/80 italic">Memuat data...</p>
+                  )}
                 </div>
               </div>
               
@@ -225,7 +276,14 @@ export default function AboutSection() {
                   <p className="text-xs font-bold text-foreground-muted uppercase tracking-wider mb-1">
                     {language === 'id' ? 'Perempuan' : 'Female'}
                   </p>
-                  <p className="text-sm font-semibold text-primary/80 italic">Edit di Dashboard Admin</p>
+                  {gender ? (
+                    <div className="flex items-baseline gap-2 md:justify-end">
+                      <span className="text-2xl font-bold text-foreground">{gender.female}</span>
+                      <span className="text-sm text-foreground-muted">({Math.round(gender.femalePercentage)}%)</span>
+                    </div>
+                  ) : (
+                    <p className="text-sm font-semibold text-primary/80 italic">Memuat data...</p>
+                  )}
                 </div>
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
                   <FaFemale className="text-2xl" />
@@ -233,10 +291,16 @@ export default function AboutSection() {
               </div>
             </div>
             
-            {/* Progress Bar Placeholder */}
+            {/* Progress Bar */}
             <div className="h-3 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex">
-              <div className="h-full bg-blue-500 w-1/2" />
-              <div className="h-full bg-accent w-1/2" />
+              <div 
+                className="h-full bg-blue-500 transition-all duration-1000 ease-out" 
+                style={{ width: `${gender?.malePercentage || 50}%` }} 
+              />
+              <div 
+                className="h-full bg-accent transition-all duration-1000 ease-out" 
+                style={{ width: `${gender?.femalePercentage || 50}%` }} 
+              />
             </div>
           </div>
         </ScrollAnimation>

@@ -1,9 +1,11 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { OFFICIALS } from '@/lib/constants';
+import { createClient } from '@/lib/supabase/client';
+import type { Official } from '@/lib/supabase/types';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { FaUserTie } from 'react-icons/fa';
 
@@ -48,6 +50,42 @@ function OfficialCard({ name, position, featured = false, delay = 0 }: OfficialC
 
 export default function GovernmentSection() {
   const { language, t } = useLanguage();
+  const [officials, setOfficials] = useState<Official[]>([]);
+
+  useEffect(() => {
+    const fetchOfficials = async () => {
+      const supabase = createClient();
+      const { data } = await supabase
+        .from('officials')
+        .select('*')
+        .order('display_order', { ascending: true });
+      
+      if (data) setOfficials(data);
+    };
+
+    fetchOfficials();
+  }, []);
+
+  const lurah = officials.find(o => o.type === 'lurah') || {
+    name: OFFICIALS.lurah.name,
+    position_id: OFFICIALS.lurah.position_id,
+    position_en: OFFICIALS.lurah.position_en,
+    photo_url: OFFICIALS.lurah.photo
+  };
+
+  const staff = officials.filter(o => o.type === 'staff').length > 0 
+    ? officials.filter(o => o.type === 'staff')
+    : OFFICIALS.staff.map(s => ({
+        id: s.name,
+        name: s.name,
+        position_id: s.position_id,
+        position_en: s.position_en,
+        photo_url: s.photo,
+        type: 'staff' as const,
+        phone: '',
+        display_order: 0,
+        created_at: ''
+      }));
 
   return (
     <section id="government" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background-alt overflow-hidden">
@@ -67,9 +105,9 @@ export default function GovernmentSection() {
           <div className="flex justify-center mb-6">
             <div className="w-full max-w-sm">
               <OfficialCard
-                name={OFFICIALS.lurah.name}
-                position={language === 'id' ? OFFICIALS.lurah.position_id : OFFICIALS.lurah.position_en}
-                photo={OFFICIALS.lurah.photo}
+                name={lurah.name}
+                position={language === 'id' ? lurah.position_id : (lurah.position_en || lurah.position_id)}
+                photo={lurah.photo_url || ''}
                 featured={true}
                 delay={0}
               />
@@ -86,12 +124,12 @@ export default function GovernmentSection() {
             {t('government.staff')}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-4">
-            {OFFICIALS.staff.map((official, index) => (
+            {staff.map((official, index) => (
               <div key={index} className="relative h-full">
                 <OfficialCard
                   name={official.name}
-                  position={language === 'id' ? official.position_id : official.position_en}
-                  photo={official.photo}
+                  position={language === 'id' ? official.position_id : (official.position_en || official.position_id)}
+                  photo={official.photo_url || ''}
                   delay={0.1 * (index + 1)}
                 />
               </div>
