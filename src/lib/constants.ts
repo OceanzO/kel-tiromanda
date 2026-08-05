@@ -407,10 +407,10 @@ export const CONTACTS = [
 // Location Data
 // ==========================================
 export const LOCATION = {
-  address_id: 'Kelurahan Tiromanda, Kecamatan Makale Selatan, Kabupaten Tana Toraja, Sulawesi Selatan, Indonesia',
-  address_en: 'Kelurahan Tiromanda, Makale Selatan District, Tana Toraja Regency, South Sulawesi, Indonesia',
-  office_hours_id: 'Senin - Jumat: 07:30 - 16:00 WITA',
-  office_hours_en: 'Monday - Friday: 07:30 AM - 04:00 PM WITA',
+  address_id: 'Jalan Poros Makale - Bera KM. 03, Kelurahan Tiromanda, Kec. Makale Selatan, Kab. Tana Toraja',
+  address_en: 'Jalan Poros Makale - Bera KM. 03, Tiromanda Village, South Makale District, Tana Toraja Regency',
+  office_hours_id: 'Senin - Jumat: 07:30 - 16:00 WITA\n(istirahat 12.00–13.00)',
+  office_hours_en: 'Monday - Friday: 07:30 AM - 04:00 PM WITA\n(break 12:00 PM - 01:00 PM)',
   maps_embed: 'https://maps.google.com/maps?q=Kelurahan%20Tiromanda,%20Makale%20Selatan,%20Tana%20Toraja&t=&z=14&ie=UTF8&iwloc=&output=embed',
   maps_url: 'https://www.google.com/maps/place/Tiromanda,+Makale+Selatan,+Tana+Toraja',
   directions_url: 'https://www.google.com/maps/dir//Tiromanda,+Makale+Selatan,+Tana+Toraja',

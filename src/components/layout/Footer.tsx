@@ -156,7 +156,7 @@ export default function Footer() {
               <p className="text-white/40 text-xs mb-0.5">
                 {language === 'id' ? 'Jam Operasional' : 'Office Hours'}
               </p>
-              <p className="text-white/60 text-sm">
+              <p className="text-white/60 text-sm whitespace-pre-line">
                 {language === 'id' ? LOCATION.office_hours_id : LOCATION.office_hours_en}
               </p>
             </div>
