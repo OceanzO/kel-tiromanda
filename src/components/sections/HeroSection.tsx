@@ -91,7 +91,7 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row gap-4"
         >
           <button
-            onClick={() => handleNavClick('infografis')}
+            onClick={() => handleNavClick('lokasi-maps')}
             className="group flex items-center justify-center gap-2 px-8 py-4 bg-accent hover:bg-accent-light text-white rounded-xl font-semibold text-base shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 hover:scale-105"
           >
             <FaMapMarkerAlt className="group-hover:animate-bounce" />
