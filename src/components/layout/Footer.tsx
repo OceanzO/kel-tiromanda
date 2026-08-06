@@ -206,17 +206,17 @@ export default function Footer() {
             </p>
           </div>
           {/* Admin Login - subtle */}
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-white/25 text-xs">
+          <div className="mt-6 sm:mt-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-2">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2 text-white/25 text-xs text-center">
               <span>{t('general.village_name')}</span>
-              <span>•</span>
+              <span className="opacity-50">&bull;</span>
               <span>{t('general.district_short')}</span>
-              <span>•</span>
+              <span className="opacity-50">&bull;</span>
               <span>{t('general.regency_name')}</span>
             </div>
             <a
               href="/admin/login"
-              className="flex items-center gap-1.5 text-white/20 hover:text-white/50 text-xs transition-colors duration-300 group"
+              className="flex items-center gap-1.5 text-white/20 hover:text-white/50 text-xs transition-colors duration-300 group bg-white/5 sm:bg-transparent px-4 py-2 sm:p-0 rounded-lg sm:rounded-none"
               title={language === 'id' ? 'Login Admin' : 'Admin Login'}
             >
               <FaLock className="text-[10px] group-hover:text-accent/60 transition-colors" />

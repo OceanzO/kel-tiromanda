@@ -166,9 +166,9 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
               <div className="relative w-11 h-11 flex items-center justify-center flex-shrink-0">
                 <Image src="/logo-custom.png" alt="Logo Tana Toraja" width={44} height={44} className="w-full h-full object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105" priority />
               </div>
-              <div className="hidden sm:block">
-                <span className="font-heading font-bold text-lg leading-tight block text-white drop-shadow-sm">{t('general.village_name')}</span>
-                <span className="text-xs leading-tight block text-white/80 font-medium">{t('general.regency')}</span>
+              <div className="flex flex-col justify-center">
+                <span className="font-heading font-bold text-base sm:text-lg leading-tight block text-white drop-shadow-sm">{t('general.village_name')}</span>
+                <span className="text-[10px] sm:text-xs leading-tight block text-white/80 font-medium">{t('general.regency')}</span>
               </div>
             </motion.a>
 
@@ -252,7 +252,7 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
             {/* Right controls */}
             <div className="flex items-center gap-2">
               {/* Language switcher pill */}
-              <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-full p-1 border border-white/20 shadow-sm mr-2">
+              <div className="hidden xl:flex items-center bg-white/10 backdrop-blur-sm rounded-full p-1 border border-white/20 shadow-sm mr-2">
                 <button 
                   onClick={() => setLanguage('id')} 
                   className={`px-3 py-1.5 text-xs font-bold rounded-full transition-all duration-300 ${language === 'id' ? 'bg-primary text-white shadow-md' : 'text-white/70 hover:text-white hover:bg-white/5'}`}
@@ -271,7 +271,7 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle dark/light mode"
-                className="relative flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 text-white/75 hover:text-white hover:bg-white/10"
+                className="hidden xl:flex relative items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 text-white/75 hover:text-white hover:bg-white/10"
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {isDark ? (
@@ -391,14 +391,39 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
                 ))}
               </div>
 
-              {/* Dark/light toggle in mobile menu */}
-              <div className="mt-8 pt-6 border-t border-white/10">
+              {/* Mobile Footer Controls */}
+              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-3">
+                {/* Language Switcher */}
+                <div className="flex items-center justify-center gap-2 bg-white/5 rounded-xl p-1">
+                  <button 
+                    onClick={() => setLanguage('id')} 
+                    className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${language === 'id' ? 'bg-primary text-white' : 'text-white/70 hover:text-white'}`}
+                  >
+                    Indonesia
+                  </button>
+                  <button 
+                    onClick={() => setLanguage('en')} 
+                    className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all ${language === 'en' ? 'bg-primary text-white' : 'text-white/70 hover:text-white'}`}
+                  >
+                    English
+                  </button>
+                </div>
+
+                {/* Dark/Light toggle */}
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center justify-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-semibold transition-colors text-white/80 hover:bg-white/10"
+                  className="flex items-center justify-center gap-3 w-full px-4 py-3 bg-white/5 rounded-xl text-sm font-semibold transition-colors text-white/80 hover:bg-white/10"
                 >
                   {isDark ? <FaSun className="text-amber-300 text-base" /> : <FaMoon className="text-blue-200 text-base" />}
-                  {isDark ? 'Mode Siang' : 'Mode Malam'}
+                  {isDark ? (language === 'id' ? 'Mode Terang' : 'Light Mode') : (language === 'id' ? 'Mode Gelap' : 'Dark Mode')}
+                </button>
+
+                {/* Tentang Kami button */}
+                <button
+                  onClick={() => scrollToSection('#footer')}
+                  className="flex items-center justify-center w-full px-4 py-3 bg-accent hover:bg-accent-light text-white rounded-xl text-sm font-semibold transition-all shadow-md mt-2"
+                >
+                  {language === 'id' ? 'Tentang Kami' : 'About Us'}
                 </button>
               </div>
             </div>
