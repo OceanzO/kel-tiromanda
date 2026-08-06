@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
 };
 
-import BackToTop from "@/components/ui/BackToTop";
+
 
 export default function RootLayout({
   children,
@@ -72,7 +72,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground font-body">
         <LanguageProvider>
           {children}
-          <BackToTop />
+
         </LanguageProvider>
       </body>
     </html>

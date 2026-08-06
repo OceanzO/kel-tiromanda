@@ -146,7 +146,7 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${(isScrolled || forceBackground)
           ? 'bg-[#1F3A2C]/97 backdrop-blur-xl shadow-2xl shadow-black/30 border-b border-white/10'
-          : 'bg-transparent'
+          : 'bg-transparent border-b border-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

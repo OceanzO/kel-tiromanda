@@ -99,7 +99,7 @@ export default function HeroSection() {
           </button>
           <button
             onClick={() => handleNavClick('about')}
-            className="group flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border border-white/25 rounded-xl font-semibold text-base hover:scale-105"
+            className="group flex items-center justify-center gap-2 px-8 py-4 bg-black/30 hover:bg-black/40 text-white border border-white/25 rounded-xl font-semibold text-base hover:scale-105"
             style={{ transition: 'background-color 0.3s, transform 0.3s, border-color 0.3s' }}
           >
             <FaInfoCircle />
