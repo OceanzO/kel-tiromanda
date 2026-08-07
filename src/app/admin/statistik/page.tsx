@@ -24,6 +24,7 @@ export default function StatistikPage() {
       const { data: row } = await supabase
         .from('population_stats')
         .select('*')
+        .order('updated_at', { ascending: false })
         .limit(1)
         .single();
       if (row) setData(row);
@@ -47,9 +48,19 @@ export default function StatistikPage() {
     };
 
     if (data.id) {
-      await supabase.from('population_stats').update(payload).eq('id', data.id);
+      const { error } = await supabase.from('population_stats').update(payload).eq('id', data.id);
+      if (error) {
+        alert('Gagal menyimpan: ' + error.message);
+        setSaving(false);
+        return;
+      }
     } else {
-      const { data: inserted } = await supabase.from('population_stats').insert(payload).select().single();
+      const { data: inserted, error } = await supabase.from('population_stats').insert(payload).select().single();
+      if (error) {
+        alert('Gagal menyimpan: ' + error.message);
+        setSaving(false);
+        return;
+      }
       if (inserted) setData(inserted);
     }
 
@@ -82,7 +93,7 @@ export default function StatistikPage() {
               type="number"
               value={data.total_penduduk ?? ''}
               onChange={(e) => setData({ ...data, total_penduduk: e.target.value ? Number(e.target.value) : null })}
-              placeholder="Contoh: 3450"
+              placeholder="Ketik total jiwa (Misal: 1250)"
               className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
             />
           </div>
@@ -94,7 +105,7 @@ export default function StatistikPage() {
               type="number"
               value={data.kepala_keluarga ?? ''}
               onChange={(e) => setData({ ...data, kepala_keluarga: e.target.value ? Number(e.target.value) : null })}
-              placeholder="Contoh: 870"
+              placeholder="Ketik jumlah KK (Misal: 450)"
               className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
             />
           </div>
@@ -102,48 +113,21 @@ export default function StatistikPage() {
           {/* Luas Wilayah */}
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Luas Wilayah</label>
-            <input
-              type="text"
-              value={data.luas_wilayah ?? ''}
-              onChange={(e) => setData({ ...data, luas_wilayah: e.target.value })}
-              placeholder="Contoh: 5.2 km²"
-              className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
-            />
+            <div className="relative">
+              <input
+                type="number"
+                step="any"
+                value={data.luas_wilayah?.replace(/[^0-9.]/g, '') ?? ''}
+                onChange={(e) => setData({ ...data, luas_wilayah: e.target.value })}
+                placeholder="Ketik angka saja (Misal: 12.5)"
+                className="w-full pl-4 pr-16 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
+              />
+              <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                <span className="text-foreground-muted font-medium">km²</span>
+              </div>
+            </div>
           </div>
 
-          {/* Lingkungan */}
-          <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Jumlah Lingkungan</label>
-            <input
-              type="number"
-              value={data.lingkungan ?? ''}
-              onChange={(e) => setData({ ...data, lingkungan: Number(e.target.value) })}
-              className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
-            />
-          </div>
-
-          {/* Jumlah RT */}
-          <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Jumlah RT</label>
-            <input
-              type="number"
-              value={data.jumlah_rt ?? ''}
-              onChange={(e) => setData({ ...data, jumlah_rt: Number(e.target.value) })}
-              className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
-            />
-          </div>
-
-          {/* Mata Pencaharian */}
-          <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Mata Pencaharian Dominan</label>
-            <input
-              type="text"
-              value={data.mata_pencaharian ?? ''}
-              onChange={(e) => setData({ ...data, mata_pencaharian: e.target.value })}
-              placeholder="Contoh: Petani"
-              className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
-            />
-          </div>
         </div>
 
         {/* Save Button */}

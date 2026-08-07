@@ -54,32 +54,32 @@ export default function AboutSection() {
   useEffect(() => {
     const supabase = createClient();
     
-    const fetchData = async () => {
-      const [statsRes, genderRes] = await Promise.all([
-        supabase.from('population_stats').select('*').single(),
-        supabase.from('gender_composition').select('*').single()
-      ]);
-
-      if (statsRes.data) {
-        setStats({
-          total: statsRes.data.total_population,
-          households: statsRes.data.total_households,
-          area: statsRes.data.total_area
-        });
-      }
-      
-      if (genderRes.data) {
-        const m = parseInt(genderRes.data.male_count) || 0;
-        const f = parseInt(genderRes.data.female_count) || 0;
-        const total = m + f;
-        setGender({
-          male: m,
-          female: f,
-          malePercentage: total > 0 ? (m / total) * 100 : 50,
-          femalePercentage: total > 0 ? (f / total) * 100 : 50
-        });
-      }
-    };
+      const fetchData = async () => {
+        const [statsRes, genderRes] = await Promise.all([
+          supabase.from('population_stats').select('*').order('updated_at', { ascending: false }).limit(1).single(),
+          supabase.from('gender_composition').select('*').order('updated_at', { ascending: false }).limit(1).single()
+        ]);
+  
+        if (statsRes.data) {
+          setStats({
+            total: statsRes.data.total_penduduk,
+            households: statsRes.data.kepala_keluarga,
+            area: statsRes.data.luas_wilayah
+          });
+        }
+        
+        if (genderRes.data) {
+          const m = parseInt(genderRes.data.laki_laki) || 0;
+          const f = parseInt(genderRes.data.perempuan) || 0;
+          const total = m + f;
+          setGender({
+            male: m,
+            female: f,
+            malePercentage: total > 0 ? (m / total) * 100 : 50,
+            femalePercentage: total > 0 ? (f / total) * 100 : 50
+          });
+        }
+      };
 
     fetchData();
   }, []);

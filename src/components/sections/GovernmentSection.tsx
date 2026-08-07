@@ -17,7 +17,7 @@ interface OfficialCardProps {
   delay?: number;
 }
 
-function OfficialCard({ name, position, featured = false, delay = 0 }: OfficialCardProps) {
+function OfficialCard({ name, position, photo, featured = false, delay = 0 }: OfficialCardProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
 
@@ -31,10 +31,14 @@ function OfficialCard({ name, position, featured = false, delay = 0 }: OfficialC
         featured ? 'border-2 border-accent/30 shadow-xl' : 'hover:shadow-lg'
       } transition-shadow duration-300`}
     >
-      {/* Photo Placeholder */}
+      {/* Photo */}
       <div className={`relative ${featured ? 'w-32 h-32' : 'w-24 h-24'} rounded-full overflow-hidden mb-5 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-500 shadow-inner`}>
-        <FaUserTie className={`${featured ? 'text-5xl' : 'text-4xl'} text-primary/40`} />
-        <div className="absolute inset-0 rounded-full border border-primary/20 group-hover:border-accent/50 transition-colors duration-300" />
+        {photo ? (
+          <img src={photo} alt={name} className="w-full h-full object-cover" />
+        ) : (
+          <FaUserTie className={`${featured ? 'text-5xl' : 'text-4xl'} text-primary/40`} />
+        )}
+        <div className="absolute inset-0 rounded-full border border-primary/20 group-hover:border-accent/50 transition-colors duration-300 pointer-events-none" />
       </div>
 
 
@@ -51,19 +55,41 @@ function OfficialCard({ name, position, featured = false, delay = 0 }: OfficialC
 export default function GovernmentSection() {
   const { language, t } = useLanguage();
   const [officials, setOfficials] = useState<Official[]>([]);
+  const [neighborhoods, setNeighborhoods] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchOfficials = async () => {
+    const fetchData = async () => {
       const supabase = createClient();
-      const { data } = await supabase
+      
+      // Fetch Officials
+      const { data: oData } = await supabase
         .from('officials')
         .select('*')
         .order('display_order', { ascending: true });
-      
-      if (data) setOfficials(data);
+      if (oData) setOfficials(oData);
+
+      // Fetch Neighborhoods
+      const { data: nData } = await supabase.from('neighborhoods').select('*').order('display_order');
+      const { data: rtData } = await supabase.from('neighborhood_rts').select('*');
+
+      if (nData && nData.length > 0) {
+        const mapped = nData.map(n => ({
+          name_id: n.name_id,
+          name_en: n.name_en,
+          head: { name: n.head_name || '-', phone: n.head_phone || '-' },
+          rts: rtData 
+            ? rtData.filter(rt => rt.neighborhood_id === n.id).map(rt => ({
+                name: rt.name || '-',
+                position: rt.position || '-',
+                phone: rt.phone || '-'
+              }))
+            : []
+        }));
+        setNeighborhoods(mapped);
+      }
     };
 
-    fetchOfficials();
+    fetchData();
   }, []);
 
   const lurah = officials.find(o => o.type === 'lurah') || {
@@ -147,7 +173,7 @@ export default function GovernmentSection() {
           </h3>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {OFFICIALS.neighborhoods.map((neighborhood, nIndex) => (
+            {(neighborhoods.length > 0 ? neighborhoods : OFFICIALS.neighborhoods).map((neighborhood, nIndex) => (
               <motion.div
                 key={nIndex}
                 initial={{ opacity: 0, y: 20 }}
@@ -176,7 +202,7 @@ export default function GovernmentSection() {
 
                 {/* RT Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {neighborhood.rts.map((rt, rtIndex) => (
+                  {neighborhood.rts.map((rt: any, rtIndex: number) => (
                     <div
                       key={rtIndex}
                       className="group bg-background/50 hover:bg-background rounded-xl p-5 text-center transition-all duration-300 border border-transparent hover:border-accent/40 shadow-sm hover:shadow-md flex flex-col justify-center items-center min-h-[100px]"

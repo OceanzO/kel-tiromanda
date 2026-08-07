@@ -215,7 +215,7 @@ export default function Footer() {
               <span>{t('general.regency_name')}</span>
             </div>
             <a
-              href="/admin/login"
+              href="/login"
               className="flex items-center gap-1.5 text-white/20 hover:text-white/50 text-xs transition-colors duration-300 group bg-white/5 sm:bg-transparent px-4 py-2 sm:p-0 rounded-lg sm:rounded-none"
               title={language === 'id' ? 'Login Admin' : 'Admin Login'}
             >

@@ -140,8 +140,8 @@ export default function AdminDashboard() {
           supabase.from('facilities').select('*', { count: 'exact', head: true }),
           supabase.from('gallery').select('*', { count: 'exact', head: true }),
           supabase.from('news').select('*', { count: 'exact', head: true }),
-          supabase.from('population_stats').select('total_penduduk').limit(1).single(),
-          supabase.from('gender_composition').select('laki_laki, perempuan').limit(1).single(),
+          supabase.from('population_stats').select('total_penduduk').order('updated_at', { ascending: false }).limit(1).single(),
+          supabase.from('gender_composition').select('laki_laki, perempuan').order('updated_at', { ascending: false }).limit(1).single(),
         ]);
 
         setStats({
@@ -165,14 +165,7 @@ export default function AdminDashboard() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const firstName = userEmail ? userEmail.split('@')[0] : 'Admin';
-  const timeGreeting = () => {
-    const h = new Date().getHours();
-    if (h < 12) return 'Selamat Pagi';
-    if (h < 15) return 'Selamat Siang';
-    if (h < 18) return 'Selamat Sore';
-    return 'Selamat Malam';
-  };
+
 
   return (
     <div className="space-y-8 max-w-6xl">
@@ -187,24 +180,13 @@ export default function AdminDashboard() {
         <div className="absolute -bottom-10 right-1/3 w-40 h-40 bg-emerald-300/10 rounded-full blur-2xl" />
         <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <p className="text-amber-400/70 text-sm font-medium mb-1">
-              {timeGreeting()}, {firstName} 👋
-            </p>
+
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-2">
               Dashboard Admin
             </h2>
             <p className="text-white/50 text-sm max-w-md">
               Kelola seluruh konten website Kelurahan Tiromanda dari sini.
             </p>
-          </div>
-          <div className="flex items-center gap-2.5">
-            <Link
-              href="/"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/15 border border-white/15 rounded-xl text-white text-sm font-medium transition-all"
-            >
-              <FaHome className="text-xs" /> Lihat Website
-            </Link>
           </div>
         </div>
       </div>
@@ -289,13 +271,6 @@ export default function AdminDashboard() {
             label="Galeri Foto"
             desc="Upload dan atur foto dokumentasi kegiatan."
             color="bg-rose-500/10 text-rose-500"
-          />
-          <QuickAction
-            href="/admin/infografis"
-            icon={FaLayerGroup}
-            label="Infografis"
-            desc="Unggah gambar infografis untuk publik."
-            color="bg-indigo-500/10 text-indigo-500"
           />
         </div>
       </div>

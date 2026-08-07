@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
     ],
     qualities: [75, 100], // Tambahan agar Next.js mengizinkan render gambar HD
   },
+  async redirects() {
+    return [
+      {
+        source: '/admin/login',
+        destination: '/login',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

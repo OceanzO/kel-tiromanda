@@ -45,7 +45,6 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/admin/perangkat', label: 'Perangkat Kelurahan', icon: FaUserTie },
       { href: '/admin/potensi', label: 'Potensi Kelurahan', icon: FaMountain },
       { href: '/admin/fasilitas', label: 'Fasilitas Umum', icon: FaBuilding },
-      { href: '/admin/infografis', label: 'Infografis', icon: FaLayerGroup },
     ],
   },
   {
@@ -90,22 +89,11 @@ function Sidebar({
     >
       {/* Sidebar Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
-        <Link href="/admin" onClick={onClose} className="flex items-center gap-3 min-w-0">
-          <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0 ring-2 ring-amber-400/30">
-            <Image
-              src="/logo-custom.png"
-              alt="Logo"
-              width={36}
-              height={36}
-              className="w-full h-full object-contain bg-white/10 p-0.5"
-            />
-          </div>
-          <div className="min-w-0">
-            <span className="font-heading font-bold text-sm text-white block leading-tight truncate">
-              Admin Panel
-            </span>
-            <span className="text-[11px] text-white/40 block leading-tight">Kel. Tiromanda</span>
-          </div>
+        <Link href="/admin" onClick={onClose} className="flex flex-col min-w-0">
+          <span className="font-heading font-bold text-lg text-white block leading-tight truncate">
+            Admin Panel
+          </span>
+          <span className="text-xs text-white/40 block leading-tight mt-0.5">Kel. Tiromanda</span>
         </Link>
         <button
           onClick={onClose}
@@ -116,10 +104,10 @@ function Sidebar({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-5">
+      <nav className="flex-1 overflow-y-auto py-3 px-3 space-y-4">
         {NAV_SECTIONS.map((section) => (
           <div key={section.label}>
-            <p className="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-widest text-white/25">
+            <p className="px-3 mb-1 text-[10px] font-bold uppercase tracking-widest text-white/25">
               {section.label}
             </p>
             <div className="space-y-0.5">
@@ -131,7 +119,7 @@ function Sidebar({
                     key={item.href}
                     href={item.href}
                     onClick={onClose}
-                    className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    className={`group flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                       active
                         ? 'bg-amber-400/15 text-amber-300 border border-amber-400/20'
                         : 'text-white/50 hover:text-white/90 hover:bg-white/6'
@@ -155,12 +143,18 @@ function Sidebar({
       </nav>
 
       {/* User & Logout */}
-      <div className="px-3 py-4 border-t border-white/8 space-y-2">
+      <div className="px-3 py-3 border-t border-white/8 space-y-2">
         {/* User Info */}
         {userEmail && (
           <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5">
-            <div className="w-8 h-8 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-400 font-bold text-sm shrink-0">
-              {initial}
+            <div className="w-9 h-9 rounded-full bg-amber-400/20 overflow-hidden flex items-center justify-center shrink-0 ring-2 ring-amber-400/30">
+              <Image
+                src="/logo-custom.png"
+                alt="Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain bg-white/10 p-0.5"
+              />
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-xs font-semibold text-white/80 truncate">Administrator</p>
@@ -169,20 +163,10 @@ function Sidebar({
           </div>
         )}
 
-        {/* View Website */}
-        <Link
-          href="/"
-          target="_blank"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-emerald-400/70 hover:text-emerald-300 hover:bg-emerald-500/8 transition-all duration-200"
-        >
-          <FaExternalLinkAlt className="text-sm shrink-0" />
-          <span>Lihat Website</span>
-        </Link>
-
         {/* Logout */}
         <button
           onClick={onLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400/70 hover:text-red-300 hover:bg-red-500/8 transition-all duration-200"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-red-400/70 hover:text-red-300 hover:bg-red-500/8 transition-all duration-200"
         >
           <FaSignOutAlt className="text-base shrink-0" />
           <span>Keluar</span>
@@ -202,7 +186,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) setUserEmail(user.email ?? null);
+      if (user) {
+        setUserEmail(user.email ?? null);
+      } else {
+        router.push('/login');
+      }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -277,7 +265,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 target="_blank"
                 className="hidden sm:flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-primary border border-primary/25 rounded-xl hover:bg-primary/5 transition-all"
               >
-                <FaUsers className="text-sm" />
+                <FaExternalLinkAlt className="text-sm" />
                 Lihat Website
               </Link>
             </div>

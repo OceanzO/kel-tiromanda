@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import {
   FaEnvelope, FaLock, FaSignInAlt, FaSpinner,
@@ -233,9 +234,18 @@ function LoginInner() {
             </form>
 
             {/* Footer */}
-            <div className="mt-6 flex items-center justify-center gap-2 text-xs text-white/20">
-              <FaShieldAlt />
-              <span>{language === 'id' ? 'Akses aman terenkripsi' : 'Secure encrypted access'}</span>
+            <div className="mt-6 flex flex-col items-center justify-center gap-4">
+              <Link
+                href="/"
+                className="flex items-center gap-2 text-sm font-medium text-white/35 hover:text-white/70 transition-colors"
+              >
+                <FaArrowLeft className="text-xs" />
+                {language === 'id' ? 'Kembali ke Beranda' : 'Back to Home'}
+              </Link>
+              <div className="flex items-center justify-center gap-2 text-xs text-white/20">
+                <FaShieldAlt />
+                <span>{language === 'id' ? 'Akses aman terenkripsi' : 'Secure encrypted access'}</span>
+              </div>
             </div>
           </div>
         )}
