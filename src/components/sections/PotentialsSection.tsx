@@ -8,22 +8,7 @@ import { POTENTIALS } from '@/lib/constants';
 import { createClient } from '@/lib/supabase/client';
 import type { Potential } from '@/lib/supabase/types';
 import SectionTitle from '@/components/ui/SectionTitle';
-import {
-  FaMapMarkedAlt, FaSeedling, FaCoffee, FaTheaterMasks,
-  FaPalette, FaUtensils, FaMountain, FaTimes
-} from 'react-icons/fa';
-import { GiBuffaloHead } from 'react-icons/gi';
-
-const iconMap: Record<string, React.ReactNode> = {
-  FaMapMarkedAlt: <FaMapMarkedAlt />,
-  FaSeedling: <FaSeedling />,
-  FaCoffee: <FaCoffee />,
-  GiBuffaloHead: <GiBuffaloHead />,
-  FaTheaterMasks: <FaTheaterMasks />,
-  FaPalette: <FaPalette />,
-  FaUtensils: <FaUtensils />,
-  FaMountain: <FaMountain />,
-};
+import { FaTimes } from 'react-icons/fa';
 
 export default function PotentialsSection() {
   const { language, t } = useLanguage();
@@ -90,11 +75,6 @@ export default function PotentialsSection() {
               <div className="relative h-48 shrink-0 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/15">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1F3A2C]/70 via-transparent to-transparent z-10" />
 
-                {/* Icon Overlay */}
-                <div className="absolute top-4 right-4 z-20 w-12 h-12 rounded-xl bg-accent/20 backdrop-blur flex items-center justify-center text-accent text-xl group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                  {iconMap[potential.icon] || <FaMapMarkedAlt />}
-                </div>
-
                 {/* Gradient background as placeholder */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/10 to-accent/20 group-hover:scale-110 transition-transform duration-700" />
                 
@@ -104,7 +84,7 @@ export default function PotentialsSection() {
                     src={(potential as any).image_url || ('image' in potential ? potential.image : '') || ''} 
                     alt={language === 'id' ? potential.title_id : potential.title_en}
                     fill
-                    className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 )}
@@ -171,9 +151,6 @@ export default function PotentialsSection() {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50" />
                 )}
                 <div className="absolute bottom-6 left-6 sm:left-8 z-20 flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-accent text-white flex items-center justify-center text-2xl shadow-lg">
-                    {iconMap[selectedPotential.icon] || <FaMapMarkedAlt />}
-                  </div>
                   <h3 className="font-heading font-bold text-2xl sm:text-3xl text-white drop-shadow-md">
                     {language === 'id' ? selectedPotential.title_id : selectedPotential.title_en}
                   </h3>
@@ -188,11 +165,6 @@ export default function PotentialsSection() {
                 <p className="text-foreground-muted leading-relaxed whitespace-pre-line text-base">
                   {language === 'id' ? selectedPotential.description_id : selectedPotential.description_en}
                 </p>
-                <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/10">
-                  <p className="text-foreground-muted text-sm italic">
-                    {language === 'id' ? 'Konten lengkap untuk potensi ini dapat disesuaikan dan ditambahkan informasinya lebih lanjut melalui dashboard admin nantinya.' : 'Full content for this potential can be customized and updated further via the admin dashboard later.'}
-                  </p>
-                </div>
               </div>
             </motion.div>
           </motion.div>
