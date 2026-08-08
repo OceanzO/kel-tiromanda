@@ -254,7 +254,7 @@ export default function PerangkatPage() {
                   <label className="block text-[11px] font-bold text-foreground-muted uppercase tracking-wider mb-1">Kepala Lingkungan</label>
                   <input
                     type="text"
-                    value={n.head_name}
+                    value={n.head_name || ''}
                     onChange={(e) => handleNeighborhoodChange(nIndex, e.target.value)}
                     placeholder="Nama Kepala Lingkungan"
                     className="w-full px-3 py-2 bg-background border border-foreground/10 rounded-lg text-foreground placeholder-foreground-muted/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all text-sm"
@@ -268,7 +268,7 @@ export default function PerangkatPage() {
                       <label className="block text-[11px] font-bold text-foreground-muted uppercase tracking-wider mb-1">{rt.position}</label>
                       <input
                         type="text"
-                        value={rt.name}
+                        value={rt.name || ''}
                         onChange={(e) => handleRTChange(nIndex, rtIndex, e.target.value)}
                         placeholder="Nama Ketua RT"
                         className="w-full px-3 py-2 bg-background border border-foreground/10 rounded-lg text-foreground placeholder-foreground-muted/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all text-sm"

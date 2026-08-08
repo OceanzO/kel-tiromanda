@@ -4,14 +4,14 @@ import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import type { Potential } from '@/lib/supabase/types';
-import { FaPlus, FaEdit, FaTrash, FaSpinner, FaSave, FaTimes, FaMountain, FaSync } from 'react-icons/fa';
+import { FaPlus, FaEdit, FaTrash, FaSpinner, FaSave, FaTimes, FaMountain, FaSync, FaCheckCircle } from 'react-icons/fa';
 
 const translateText = async (text: string): Promise<string> => {
   if (!text) return '';
   try {
-    const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=id&tl=en&dt=t&q=${encodeURIComponent(text)}`);
+    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=id|en`);
     const data = await res.json();
-    return data[0].map((item: any) => item[0]).join('');
+    return data.responseData?.translatedText || text;
   } catch (error) {
     console.error('Translation error:', error);
     return text;
@@ -24,6 +24,7 @@ export default function PotensiPage() {
   const [editItem, setEditItem] = useState<Partial<Potential> | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const supabase = createClient();
 
   const fetchData = useCallback(async () => {
@@ -51,7 +52,7 @@ export default function PotensiPage() {
   useEffect(() => { fetchData(); }, [fetchData]);
 
   const handleAdd = () => {
-    setEditItem({ title_id: '', title_en: '', description_id: '', description_en: '', icon: '', image_url: '', display_order: items.length + 1 });
+    setEditItem({ title_id: '', description_id: '', image_url: '', display_order: items.length + 1 });
     setIsNew(true);
   };
 
@@ -89,11 +90,19 @@ export default function PotensiPage() {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !editItem) return;
-    const fileName = `potentials/${Date.now()}.${file.name.split('.').pop()}`;
-    const { error } = await supabase.storage.from('images').upload(fileName, file);
-    if (error) { alert('Gagal upload: ' + error.message); return; }
-    const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(fileName);
-    setEditItem({ ...editItem, image_url: publicUrl });
+    setUploading(true);
+    try {
+      const fileName = `potentials/${Date.now()}.${file.name.split('.').pop()}`;
+      const { error } = await supabase.storage.from('images').upload(fileName, file);
+      if (error) { alert('Gagal upload: ' + error.message); setUploading(false); return; }
+      const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(fileName);
+      setEditItem({ ...editItem, image_url: publicUrl });
+    } catch (err) {
+      console.error(err);
+      alert('Terjadi kesalahan saat upload gambar');
+    } finally {
+      setUploading(false);
+    }
   };
 
   if (loading) return <div className="flex items-center justify-center h-64"><FaSpinner className="animate-spin text-2xl text-accent" /></div>;
@@ -116,28 +125,31 @@ export default function PotensiPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-semibold text-foreground mb-1.5">Judul</label>
-              <input type="text" value={editItem.title_id ?? ''} onChange={(e) => setEditItem({ ...editItem, title_id: e.target.value })} placeholder="Masukkan Judul..."
+              <input type="text" value={editItem.title_id || ''} onChange={(e) => setEditItem({ ...editItem, title_id: e.target.value })} placeholder="Masukkan Judul..."
                 className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-1.5">Urutan Tampil</label>
-              <input type="number" value={editItem.display_order ?? 0} onChange={(e) => setEditItem({ ...editItem, display_order: parseInt(e.target.value) || 0 })}
-                className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold text-foreground mb-1.5">Deskripsi</label>
-              <textarea value={editItem.description_id ?? ''} onChange={(e) => setEditItem({ ...editItem, description_id: e.target.value })} rows={3} placeholder="Masukkan Deskripsi..."
+              <textarea value={editItem.description_id || ''} onChange={(e) => setEditItem({ ...editItem, description_id: e.target.value })} rows={3} placeholder="Masukkan Deskripsi..."
                 className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm resize-none" />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-foreground mb-1.5">Urutan Tampil</label>
+              <input type="number" value={editItem.display_order || ''} onChange={(e) => setEditItem({ ...editItem, display_order: parseInt(e.target.value) || 0 })}
+                className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold text-foreground mb-1.5">Gambar</label>
-              <input type="file" accept="image/*" onChange={handleImageUpload}
-                className="w-full text-sm text-foreground-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent/10 file:text-accent hover:file:bg-accent/20 cursor-pointer" />
-              {editItem.image_url && <p className="mt-2 text-xs text-foreground-muted truncate">URL: {editItem.image_url}</p>}
+              <div className="relative">
+                <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploading}
+                  className="w-full text-sm text-foreground-muted file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent/10 file:text-accent hover:file:bg-accent/20 cursor-pointer disabled:opacity-50" />
+                {uploading && <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2 text-accent text-sm"><FaSpinner className="animate-spin" /> Mengupload...</div>}
+              </div>
+              {editItem.image_url && !uploading && <p className="mt-2 text-xs text-green-600 font-medium flex items-center gap-1"><FaCheckCircle /> Gambar berhasil diupload</p>}
             </div>
           </div>
           <div className="mt-6 flex items-center gap-3">
-            <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 bg-accent hover:bg-accent-light text-white font-bold rounded-xl shadow-md transition-all flex items-center gap-2 text-sm disabled:opacity-60">
+            <button onClick={handleSave} disabled={saving || uploading} className="px-5 py-2.5 bg-accent hover:bg-accent-light text-white font-bold rounded-xl shadow-md transition-all flex items-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed">
               {saving ? <FaSpinner className="animate-spin" /> : <FaSave />} {saving ? 'Menyimpan...' : 'Simpan'}
             </button>
             <button onClick={() => setEditItem(null)} className="px-5 py-2.5 border border-foreground/10 text-foreground-muted font-semibold rounded-xl hover:bg-foreground/5 transition-all text-sm">Batal</button>
@@ -168,7 +180,7 @@ export default function PotensiPage() {
               {/* Image Header */}
               <div className="relative h-56 shrink-0 bg-background-alt overflow-hidden">
                 {item.image_url ? (
-                  <Image src={item.image_url} alt={item.title_id} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <Image src={item.image_url} alt={item.title_id} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center bg-foreground/5">
                     <FaMountain className="text-5xl text-foreground/20" />
