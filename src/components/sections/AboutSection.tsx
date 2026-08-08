@@ -85,7 +85,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section id="about" className="relative pt-12 pb-20 md:pt-16 md:pb-28 bg-background overflow-hidden">
+    <section id="about" className="relative pt-6 pb-20 md:pt-10 md:pb-28 bg-background overflow-hidden">
       {/* Subtle pattern background */}
       <div className="absolute inset-0 section-pattern opacity-30" />
 

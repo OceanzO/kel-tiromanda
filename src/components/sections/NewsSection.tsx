@@ -12,7 +12,7 @@ export default function NewsSection() {
   const { language, t } = useLanguage();
 
   return (
-    <section id="news" className="relative min-h-[85vh] flex flex-col pt-12 pb-20 md:pt-16 md:pb-28 bg-background overflow-hidden">
+    <section id="news" className="relative min-h-[85vh] flex flex-col pt-6 pb-20 md:pt-10 md:pb-28 bg-background overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
 

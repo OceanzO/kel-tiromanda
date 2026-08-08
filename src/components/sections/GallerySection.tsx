@@ -26,7 +26,7 @@ export default function GallerySection() {
   }));
 
   return (
-    <section id="gallery" className="relative min-h-screen pt-12 pb-20 md:pt-16 md:pb-28 bg-background-alt overflow-hidden">
+    <section id="gallery" className="relative min-h-screen pt-6 pb-20 md:pt-10 md:pb-28 bg-background-alt overflow-hidden">
       <div className="absolute inset-0 section-pattern opacity-20" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -126,7 +126,7 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
     }
     const el = document.getElementById(id);
     if (el) {
-      const navbarHeight = 88;
+      const navbarHeight = 72;
       const y = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -150,7 +150,7 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[88px]">
+          <div className="flex items-center justify-between h-[72px]">
             {/* Logo */}
             <motion.a
               href="/"
