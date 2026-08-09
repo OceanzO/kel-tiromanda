@@ -18,7 +18,7 @@ export default function HeroSection() {
       {/* Drone Aerial Background HD */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero/hero_drone_aerial.png"
+          src="/images/hero/Background_Landing Page Website.jpg"
           alt="Pemandangan Drone Tana Toraja - Desa Tiromanda"
           fill
           className="object-cover object-center"
@@ -28,8 +28,8 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Dark Gradient Overlay — deep forest green */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1F3A2C]/80 via-[#1F3A2C]/40 to-black/65 z-10" />
+      {/* Dark Gradient Overlay — adjusted for better text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 z-10" />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6">
@@ -60,7 +60,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
-          className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight"
+          className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight drop-shadow-[0_5px_5px_rgba(0,0,0,0.6)]"
         >
           {t('hero.title')}
         </motion.h1>
@@ -78,7 +78,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
-          className="text-white/80 text-base sm:text-lg md:text-xl max-w-3xl leading-relaxed mb-10 font-light"
+          className="text-white/95 text-base sm:text-lg md:text-xl max-w-3xl leading-relaxed mb-10 font-medium drop-shadow-md"
         >
           {t('hero.subtitle')}
         </motion.p>
