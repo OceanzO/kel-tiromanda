@@ -103,6 +103,12 @@ export default function PerangkatPage() {
     handleOfficialChange(index, 'photo_url', publicUrl);
   };
 
+  const handleRemovePhoto = (index: number) => {
+    if (confirm('Yakin ingin menghapus foto profil ini?')) {
+      handleOfficialChange(index, 'photo_url', '');
+    }
+  };
+
   const handleNeighborhoodChange = (nIndex: number, value: string) => {
     const newN = [...neighborhoods];
     newN[nIndex] = { ...newN[nIndex], head_name: value };
@@ -197,7 +203,7 @@ export default function PerangkatPage() {
                     <FaUserTie className="text-3xl text-foreground-muted/30" />
                   )}
                 </div>
-                <div>
+                <div className="flex flex-col gap-1.5 w-full max-w-[120px]">
                   <input 
                     type="file" 
                     id={`photo-${index}`}
@@ -207,10 +213,18 @@ export default function PerangkatPage() {
                   />
                   <label 
                     htmlFor={`photo-${index}`}
-                    className="text-[10px] font-bold px-3 py-1.5 bg-accent/10 text-accent rounded-lg cursor-pointer hover:bg-accent hover:text-white transition-all shadow-sm"
+                    className="text-[10px] font-bold px-3 py-1.5 bg-accent/10 text-accent rounded-lg cursor-pointer hover:bg-accent hover:text-white transition-all shadow-sm block text-center"
                   >
-                    Unggah Foto
+                    {item.photo_url ? 'Ganti Foto' : 'Unggah Foto'}
                   </label>
+                  {item.photo_url && (
+                    <button
+                      onClick={() => handleRemovePhoto(index)}
+                      className="text-[10px] font-bold px-3 py-1.5 bg-red-500/10 text-red-500 rounded-lg cursor-pointer hover:bg-red-500 hover:text-white transition-all shadow-sm w-full text-center"
+                    >
+                      Hapus Foto
+                    </button>
+                  )}
                 </div>
               </div>
 

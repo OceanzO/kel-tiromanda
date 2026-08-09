@@ -59,14 +59,15 @@ export default function FasilitasPage() {
   const handleSave = async () => {
     if (!editItem) return;
     setSaving(true);
-    
+
     // Auto-translate to English
     const name_en = await translateText(editItem.name_id || '');
+    const description_en = await translateText(editItem.description_id || '');
 
     const payload = {
       name_id: editItem.name_id || '', name_en,
-      description_id: '', description_en: '',
-      location: '', image_url: editItem.image_url || '',
+      description_id: editItem.description_id || '', description_en,
+      location: editItem.location || '', image_url: editItem.image_url || '',
       display_order: editItem.display_order || 0,
     };
     if (isNew) { await supabase.from('facilities').insert(payload); }
@@ -175,7 +176,7 @@ export default function FasilitasPage() {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1F3A2C]/80 via-transparent to-transparent z-10" />
-                
+
                 <div className="absolute bottom-5 left-5 z-20 flex items-center gap-3 w-[calc(100%-2.5rem)]">
                   <h4 className="font-heading font-bold text-white text-xl drop-shadow-md truncate">{item.name_id}</h4>
                 </div>

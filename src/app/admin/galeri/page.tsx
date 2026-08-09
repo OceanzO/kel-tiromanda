@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import type { GalleryImage } from '@/lib/supabase/types';
 import { FaPlus, FaTrash, FaSpinner, FaSave, FaTimes, FaImages } from 'react-icons/fa';
-
+import { translateText } from '@/lib/translate';
 const CATEGORIES = [
   { id: 'kkn', label: 'Kegiatan KKN' },
   { id: 'community', label: 'Kegiatan Masyarakat' },
@@ -40,9 +40,10 @@ export default function GaleriPage() {
   const handleSave = async () => {
     if (!editItem) return;
     setSaving(true);
+    const caption_en = await translateText(editItem.caption_id || '');
     const payload = {
       image_url: editItem.image_url || '', category: editItem.category || 'community',
-      caption_id: editItem.caption_id || '', caption_en: editItem.caption_en || '',
+      caption_id: editItem.caption_id || '', caption_en: caption_en,
       display_order: editItem.display_order || 0,
     };
     if (isNew) { await supabase.from('gallery').insert(payload); }
@@ -87,13 +88,8 @@ export default function GaleriPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-1.5">Caption (ID)</label>
+              <label className="block text-sm font-semibold text-foreground mb-1.5">Caption</label>
               <input type="text" value={editItem.caption_id || ''} onChange={(e) => setEditItem({ ...editItem, caption_id: e.target.value })} placeholder="Keterangan foto"
-                className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-1.5">Caption (EN)</label>
-              <input type="text" value={editItem.caption_en || ''} onChange={(e) => setEditItem({ ...editItem, caption_en: e.target.value })} placeholder="Photo caption"
                 className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
             </div>
             <div>

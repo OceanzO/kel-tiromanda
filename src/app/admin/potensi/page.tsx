@@ -59,17 +59,17 @@ export default function PotensiPage() {
   const handleSave = async () => {
     if (!editItem) return;
     setSaving(true);
-    
+
     // Auto-translate to English
     const title_en = await translateText(editItem.title_id || '');
     const description_en = await translateText(editItem.description_id || '');
 
     const payload = {
-      title_id: editItem.title_id || '', 
+      title_id: editItem.title_id || '',
       title_en,
-      description_id: editItem.description_id || '', 
+      description_id: editItem.description_id || '',
       description_en,
-      icon: '', 
+      icon: '',
       image_url: editItem.image_url || '',
       display_order: editItem.display_order || 0,
     };
@@ -133,11 +133,6 @@ export default function PotensiPage() {
               <textarea value={editItem.description_id || ''} onChange={(e) => setEditItem({ ...editItem, description_id: e.target.value })} rows={3} placeholder="Masukkan Deskripsi..."
                 className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm resize-none" />
             </div>
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-1.5">Urutan Tampil</label>
-              <input type="number" value={editItem.display_order || ''} onChange={(e) => setEditItem({ ...editItem, display_order: parseInt(e.target.value) || 0 })}
-                className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
-            </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold text-foreground mb-1.5">Gambar</label>
               <div className="relative">
@@ -187,7 +182,7 @@ export default function PotensiPage() {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1F3A2C]/80 via-transparent to-transparent z-10" />
-                
+
                 <div className="absolute bottom-5 left-5 z-20 flex items-center gap-3 w-[calc(100%-2.5rem)]">
                   <h4 className="font-heading font-bold text-white text-xl drop-shadow-md truncate">{item.title_id}</h4>
                 </div>
@@ -209,7 +204,7 @@ export default function PotensiPage() {
                   <span className="text-xs font-bold text-foreground-muted uppercase tracking-wider mb-1 block">Deskripsi Singkat</span>
                   <p className="text-sm text-foreground leading-relaxed line-clamp-3">{item.description_id}</p>
                 </div>
-                
+
                 <div className="mt-auto pt-4 border-t border-foreground/10 flex items-center justify-end text-xs text-foreground-muted">
                   <div className="flex items-center gap-1.5">
                     <span className="font-semibold">Urutan:</span>

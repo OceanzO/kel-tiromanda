@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import type { NewsArticle } from '@/lib/supabase/types';
 import { FaPlus, FaEdit, FaTrash, FaSpinner, FaSave, FaTimes, FaNewspaper } from 'react-icons/fa';
-
+import { translateText } from '@/lib/translate';
 export default function BeritaPage() {
   const [items, setItems] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
@@ -34,9 +34,13 @@ export default function BeritaPage() {
   const handleSave = async () => {
     if (!editItem) return;
     setSaving(true);
+    const title_en = await translateText(editItem.title_id || '');
+    const description_en = await translateText(editItem.description_id || '');
     const payload = {
-      title_id: editItem.title_id || '', title_en: editItem.title_en || '',
-      description_id: editItem.description_id || '', description_en: editItem.description_en || '',
+      title_id: editItem.title_id || '', 
+      title_en: title_en,
+      description_id: editItem.description_id || '', 
+      description_en: description_en,
       date: editItem.date || new Date().toISOString().split('T')[0],
       image_url: editItem.image_url || '',
     };
@@ -87,17 +91,10 @@ export default function BeritaPage() {
             <button onClick={() => setEditItem(null)} className="p-2 rounded-lg hover:bg-foreground/5 text-foreground-muted"><FaTimes /></button>
           </div>
           <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-1.5">Judul (ID)</label>
-                <input type="text" value={editItem.title_id || ''} onChange={(e) => setEditItem({ ...editItem, title_id: e.target.value })} placeholder="Judul berita dalam Bahasa Indonesia"
-                  className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-foreground mb-1.5">Judul (EN)</label>
-                <input type="text" value={editItem.title_en || ''} onChange={(e) => setEditItem({ ...editItem, title_en: e.target.value })} placeholder="News title in English"
-                  className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
-              </div>
+            <div>
+              <label className="block text-sm font-semibold text-foreground mb-1.5">Judul</label>
+              <input type="text" value={editItem.title_id || ''} onChange={(e) => setEditItem({ ...editItem, title_id: e.target.value })} placeholder="Judul berita"
+                className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
             </div>
             <div>
               <label className="block text-sm font-semibold text-foreground mb-1.5">Tanggal</label>
@@ -105,13 +102,8 @@ export default function BeritaPage() {
                 className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-1.5">Konten Berita (ID)</label>
-              <textarea value={editItem.description_id || ''} onChange={(e) => setEditItem({ ...editItem, description_id: e.target.value })} rows={6} placeholder="Tulis isi berita dalam Bahasa Indonesia... (gunakan Enter untuk paragraf baru)"
-                className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm resize-none" />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-1.5">Konten Berita (EN)</label>
-              <textarea value={editItem.description_en || ''} onChange={(e) => setEditItem({ ...editItem, description_en: e.target.value })} rows={6} placeholder="Write news content in English... (use Enter for new paragraphs)"
+              <label className="block text-sm font-semibold text-foreground mb-1.5">Konten Berita</label>
+              <textarea value={editItem.description_id || ''} onChange={(e) => setEditItem({ ...editItem, description_id: e.target.value })} rows={6} placeholder="Tulis isi berita... (gunakan Enter untuk paragraf baru)"
                 className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm resize-none" />
             </div>
             <div>
