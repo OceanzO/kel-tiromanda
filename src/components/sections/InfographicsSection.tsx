@@ -4,6 +4,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { LOCATION } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';
 import ScrollAnimation from '@/components/ui/ScrollAnimation';
+import ZoomableImage from '@/components/ui/ZoomableImage';
 
 export default function InfographicsSection() {
   const { language, t } = useLanguage();
@@ -19,55 +20,75 @@ export default function InfographicsSection() {
         />
 
         <div className="flex flex-col gap-8">
-          {/* Infographic Map - Full Width */}
-          <ScrollAnimation variant="fadeUp">
-            <div className="premium-card overflow-hidden w-full min-h-[400px] lg:min-h-[500px] bg-white flex flex-col">
-               <div className="p-4 bg-primary/10 border-b border-primary/20">
-                 <h3 className="font-heading font-bold text-lg text-yellow-500 text-center">
-                   {language === 'id' ? 'Peta Infografis' : 'Infographic Map'}
-                 </h3>
-               </div>
-               <div className="flex-1 relative flex items-center justify-center p-4 min-h-[400px] lg:min-h-[500px]">
-                 {/* Replace this with actual infographic map image when available */}
-                 <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-                   <p className="text-gray-400 font-medium text-center px-6">
-                     {language === 'id' ? 'Gambar Peta Infografis Akan Ditampilkan Di Sini' : 'Infographic Map Image Will Be Displayed Here'}
-                   </p>
+          {/* Infographics Row: 2 Columns */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Infographic Map */}
+            <ScrollAnimation variant="fadeUp">
+              <div className="premium-card overflow-hidden w-full h-full bg-white flex flex-col">
+                <div className="p-4 bg-primary/10 border-b border-primary/20">
+                  <h3 className="font-heading font-bold text-lg text-yellow-500 text-center">
+                    {language === 'id' ? 'Peta Infografis' : 'Infographic Map'}
+                  </h3>
+                </div>
+                 <div className="flex-1 relative p-4 bg-gray-50 flex items-center justify-center min-h-[350px]">
+                    <div className="absolute inset-4 bg-gray-100 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-xl">
+                      <p className="text-gray-400 font-medium text-center px-6">
+                        {language === 'id' ? 'Gambar Peta Infografis Akan Ditampilkan Di Sini' : 'Infographic Map Image Will Be Displayed Here'}
+                      </p>
+                    </div>
                  </div>
-               </div>
-            </div>
-          </ScrollAnimation>
+              </div>
+            </ScrollAnimation>
+
+            {/* Road Network Map */}
+            <ScrollAnimation variant="fadeUp" delay={0.2}>
+              <div className="premium-card overflow-hidden w-full h-full bg-white flex flex-col">
+                <div className="p-4 bg-accent/10 border-b border-accent/20">
+                  <h3 className="font-heading font-bold text-lg text-accent text-center">
+                    {language === 'id' ? 'Peta Jaringan Jalan' : 'Road Network Map'}
+                  </h3>
+                </div>
+                <div className="flex-1 relative p-4 flex items-center justify-center min-h-[350px]">
+                  <ZoomableImage
+                    src="/images/infografis/peta_jaringan_jalan.jpg"
+                    alt="Peta Jaringan Jalan"
+                    fallbackText={language === 'id' ? 'Gambar Peta Jaringan Jalan Akan Ditampilkan Di Sini' : 'Road Network Map Image Will Be Displayed Here'}
+                  />
+                </div>
+              </div>
+            </ScrollAnimation>
+          </div>
 
           {/* Second Row: Google Maps & Geographic Conditions */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Google Maps Embed */}
             <ScrollAnimation variant="slideLeft">
               <div id="lokasi-maps" className="premium-card overflow-hidden h-full min-h-[400px] flex flex-col">
-                 <div className="p-4 bg-accent/10 border-b border-accent/20">
-                   <h3 className="font-heading font-bold text-lg text-accent text-center">
-                     {language === 'id' ? 'Lokasi Google Maps' : 'Google Maps Location'}
-                   </h3>
-                 </div>
-                 <div className="flex-1">
-                   <iframe
-                     src={LOCATION.maps_embed}
-                     width="100%"
-                     height="100%"
-                     style={{ border: 0, minHeight: '400px' }}
-                     allowFullScreen
-                     loading="lazy"
-                     referrerPolicy="no-referrer-when-downgrade"
-                     title="Google Maps — Kelurahan Tiromanda"
-                     className="w-full h-full"
-                   />
-                 </div>
+                <div className="p-4 bg-accent/10 border-b border-accent/20">
+                  <h3 className="font-heading font-bold text-lg text-accent text-center">
+                    {language === 'id' ? 'Lokasi Google Maps' : 'Google Maps Location'}
+                  </h3>
+                </div>
+                <div className="flex-1">
+                  <iframe
+                    src={LOCATION.maps_embed}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: '400px' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Google Maps — Kelurahan Tiromanda"
+                    className="w-full h-full"
+                  />
+                </div>
               </div>
             </ScrollAnimation>
 
             {/* Geographical Conditions & Boundaries */}
             <ScrollAnimation variant="slideRight" className="h-full">
               <div className="flex flex-col gap-6 h-full">
-                
+
                 {/* Geographic Conditions Frame */}
                 <div className="premium-card flex flex-col p-6 lg:p-8">
                   <div className="flex items-center gap-3 mb-6 border-b border-border pb-4">
@@ -79,7 +100,7 @@ export default function InfographicsSection() {
                     </h4>
                   </div>
                   <p className="text-foreground-muted leading-relaxed mb-4 text-sm sm:text-base">
-                    {language === 'id' 
+                    {language === 'id'
                       ? 'Kelurahan Tiromanda merupakan wilayah dengan karakteristik geografis sebagai berikut:'
                       : 'Tiromanda Village is an area with the following geographical characteristics:'}
                   </p>
