@@ -30,12 +30,12 @@ export default function InfographicsSection() {
                     {language === 'id' ? 'Peta Infografis' : 'Infographic Map'}
                   </h3>
                 </div>
-                 <div className="flex-1 relative p-4 bg-gray-50 flex items-center justify-center min-h-[350px]">
-                    <div className="absolute inset-4 bg-gray-100 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-xl">
-                      <p className="text-gray-400 font-medium text-center px-6">
-                        {language === 'id' ? 'Gambar Peta Infografis Akan Ditampilkan Di Sini' : 'Infographic Map Image Will Be Displayed Here'}
-                      </p>
-                    </div>
+                 <div className="flex-1 relative p-4 flex items-center justify-center min-h-[350px]">
+                  <ZoomableImage
+                    src="/images/infografis/Peta_Infografis.jpg"
+                    alt="Peta Infografis"
+                    fallbackText={language === 'id' ? 'Gambar Peta Infografis Akan Ditampilkan Di Sini' : 'Infographic Map Image Will Be Displayed Here'}
+                  />
                  </div>
               </div>
             </ScrollAnimation>
