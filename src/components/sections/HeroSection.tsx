@@ -10,7 +10,11 @@ export default function HeroSection() {
 
   const handleNavClick = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const navbarHeight = 72;
+      const y = el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (

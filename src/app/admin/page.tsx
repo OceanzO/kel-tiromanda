@@ -21,38 +21,6 @@ interface StatsData {
   newsCount: number;
 }
 
-// ─── Quick Action Card ────────────────────────────────────────────────────────
-function QuickAction({
-  href,
-  icon: Icon,
-  label,
-  desc,
-  color,
-}: {
-  href: string;
-  icon: React.ElementType;
-  label: string;
-  desc: string;
-  color: string;
-}) {
-  return (
-    <Link
-      href={href}
-      className="group flex items-start gap-4 p-5 rounded-2xl bg-card-bg border border-foreground/6 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300"
-    >
-      <div
-        className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${color}`}
-      >
-        <Icon className="text-lg" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <p className="font-semibold text-sm text-foreground mb-0.5">{label}</p>
-        <p className="text-xs text-foreground-muted leading-relaxed">{desc}</p>
-      </div>
-      <FaArrowRight className="text-xs text-foreground-muted/30 group-hover:text-accent group-hover:translate-x-0.5 transition-all duration-200 mt-1 shrink-0" />
-    </Link>
-  );
-}
 
 // ─── Stat Card ────────────────────────────────────────────────────────────────
 function StatCard({
@@ -233,47 +201,6 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* ── Quick Actions ───────────────────────────────────────────────────── */}
-      <div>
-        <h3 className="font-heading font-bold text-base text-foreground mb-4">Aksi Cepat</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <QuickAction
-            href="/admin/statistik"
-            icon={FaChartBar}
-            label="Update Statistik Penduduk"
-            desc="Perbarui data jumlah penduduk, KK, dan wilayah."
-            color="bg-blue-500/10 text-blue-500"
-          />
-          <QuickAction
-            href="/admin/gender"
-            icon={FaVenusMars}
-            label="Komposisi Gender"
-            desc="Atur data laki-laki dan perempuan."
-            color="bg-pink-500/10 text-pink-500"
-          />
-          <QuickAction
-            href="/admin/perangkat"
-            icon={FaUserTie}
-            label="Perangkat Kelurahan"
-            desc="Tambah atau ubah data pejabat kelurahan."
-            color="bg-emerald-500/10 text-emerald-500"
-          />
-          <QuickAction
-            href="/admin/berita"
-            icon={FaNewspaper}
-            label="Kelola Berita"
-            desc="Tulis dan publikasikan berita terbaru."
-            color="bg-teal-500/10 text-teal-500"
-          />
-          <QuickAction
-            href="/admin/galeri"
-            icon={FaImages}
-            label="Galeri Foto"
-            desc="Upload dan atur foto dokumentasi kegiatan."
-            color="bg-rose-500/10 text-rose-500"
-          />
-        </div>
-      </div>
 
       {/* ── Tips ────────────────────────────────────────────────────────────── */}
       <div className="premium-card p-6">
@@ -299,9 +226,8 @@ export default function AdminDashboard() {
               num: '2',
               text: (
                 <>
-                  Tambahkan <strong className="text-foreground">Berita</strong> dan{' '}
-                  <strong className="text-foreground">Galeri Foto</strong> untuk membuat
-                  website lebih hidup dan informatif.
+                  Isi data <strong className="text-foreground">Perangkat Kelurahan</strong>{' '}
+                  dengan nama dan foto pejabat kelurahan yang terkini.
                 </>
               ),
             },
@@ -309,8 +235,9 @@ export default function AdminDashboard() {
               num: '3',
               text: (
                 <>
-                  Isi data <strong className="text-foreground">Perangkat Kelurahan</strong>{' '}
-                  dengan nama dan foto pejabat kelurahan yang terkini.
+                  Tambahkan <strong className="text-foreground">Berita</strong> dan{' '}
+                  <strong className="text-foreground">Galeri Foto</strong> untuk membuat
+                  website lebih hidup dan informatif.
                 </>
               ),
             },
