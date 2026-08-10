@@ -233,8 +233,7 @@ export default function GaleriPage() {
                   {isVideo(editItem.image_url) ? (
                     <video src={editItem.image_url} className="w-full h-full object-cover" controls muted />
                   ) : (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={editItem.image_url} alt="Preview" className="w-full h-full object-cover" />
+                    <Image src={editItem.image_url} alt="Preview" fill sizes="200px" className="object-cover" />
                   )}
                 </div>
               )}
@@ -263,8 +262,7 @@ export default function GaleriPage() {
                   {item.image_url && isVideo(item.image_url) ? (
                     <video src={item.image_url} className="w-full h-full object-cover" muted loop playsInline autoPlay={false} />
                   ) : item.image_url ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={item.image_url} alt={item.caption_id || ''} className="w-full h-full object-cover" loading="lazy" />
+                    <Image src={item.image_url} alt={item.caption_id || ''} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover" />
                   ) : null}
                   
                   {/* Badge Nomor Urut */}

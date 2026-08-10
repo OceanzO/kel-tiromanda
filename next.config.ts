@@ -1,4 +1,6 @@
 import type { NextConfig } from "next";
+import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
 
 const nextConfig: NextConfig = {
   images: {
@@ -8,7 +10,7 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
-    qualities: [75, 100], // Tambahan agar Next.js mengizinkan render gambar HD
+    qualities: [75, 100],
   },
   async redirects() {
     return [

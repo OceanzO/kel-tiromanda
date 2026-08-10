@@ -5,6 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Lightbox from 'yet-another-react-lightbox';
 import Video from 'yet-another-react-lightbox/plugins/video';
 import 'yet-another-react-lightbox/styles.css';
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { GALLERY_CATEGORIES } from '@/lib/constants';
 import SectionTitle from '@/components/ui/SectionTitle';
@@ -157,14 +158,16 @@ export default function GallerySection() {
                         </div>
                       </div>
                     ) : (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        src={image.src}
-                        alt={language === 'id' ? image.caption_id : image.caption_en}
-                        className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      <div className="relative w-full aspect-video bg-black/10">
+                        <Image
+                          src={image.src}
+                          alt={language === 'id' ? image.caption_id : image.caption_en}
+                          fill
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500 transform-gpu will-change-transform"
+                          priority={index < 2}
+                        />
+                      </div>
                     )}
 
                     {/* Hover Overlay */}

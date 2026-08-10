@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { OFFICIALS } from '@/lib/constants';
 import { createClient } from '@/lib/supabase/client';
@@ -34,7 +35,7 @@ function OfficialCard({ name, position, photo, featured = false, delay = 0 }: Of
       {/* Photo */}
       <div className={`relative ${featured ? 'w-32 h-32' : 'w-24 h-24'} rounded-full overflow-hidden mb-5 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-500 shadow-inner`}>
         {photo ? (
-          <img src={photo} alt={name} className="w-full h-full object-cover" />
+          <Image src={photo} alt={name} fill sizes="128px" className="object-cover" />
         ) : (
           <FaUserTie className={`${featured ? 'text-5xl' : 'text-4xl'} text-primary/40`} />
         )}

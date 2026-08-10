@@ -30,13 +30,26 @@ export default function InfographicsSection() {
                     {language === 'id' ? 'Peta Infografis' : 'Infographic Map'}
                   </h3>
                 </div>
-                 <div className="flex-1 relative p-4 flex items-center justify-center min-h-[350px]">
+                <div className="flex-1 relative p-4 flex items-center justify-center min-h-[350px]">
                   <ZoomableImage
-                    src="/images/infografis/Peta_Infografis.jpg"
+                    src="/images/infografis/Peta Infografis.png"
                     alt="Peta Infografis"
                     fallbackText={language === 'id' ? 'Gambar Peta Infografis Akan Ditampilkan Di Sini' : 'Infographic Map Image Will Be Displayed Here'}
                   />
-                 </div>
+                </div>
+                <div className="p-4 bg-background-alt border-t border-border flex justify-between items-center">
+                  <span className="text-xs text-foreground-muted italic">
+                    {language === 'id' ? '* Resolusi Tinggi (Ultra HD)' : '* High Resolution (Ultra HD)'}
+                  </span>
+                  <a
+                    href="/images/infografis/Peta Infografis.png"
+                    download="Peta_Infografis_Tiromanda.png"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary text-primary hover:text-white rounded-lg transition-colors duration-300 font-semibold text-sm shadow-sm"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    {language === 'id' ? 'Unduh Peta' : 'Download Map'}
+                  </a>
+                </div>
               </div>
             </ScrollAnimation>
 
@@ -50,10 +63,23 @@ export default function InfographicsSection() {
                 </div>
                 <div className="flex-1 relative p-4 flex items-center justify-center min-h-[350px]">
                   <ZoomableImage
-                    src="/images/infografis/peta_jaringan_jalan.jpg"
+                    src="/images/infografis/Peta Jaringan Jalan.png"
                     alt="Peta Jaringan Jalan"
                     fallbackText={language === 'id' ? 'Gambar Peta Jaringan Jalan Akan Ditampilkan Di Sini' : 'Road Network Map Image Will Be Displayed Here'}
                   />
+                </div>
+                <div className="p-4 bg-background-alt border-t border-border flex justify-between items-center">
+                  <span className="text-xs text-foreground-muted italic">
+                    {language === 'id' ? '* Resolusi Tinggi (Ultra HD)' : '* High Resolution (Ultra HD)'}
+                  </span>
+                  <a
+                    href="/images/infografis/Peta Jaringan Jalan.png"
+                    download="Peta_Jaringan_Jalan_Tiromanda.png"
+                    className="flex items-center gap-2 px-4 py-2 bg-accent/10 hover:bg-accent text-accent hover:text-white rounded-lg transition-colors duration-300 font-semibold text-sm shadow-sm"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    {language === 'id' ? 'Unduh Peta' : 'Download Map'}
+                  </a>
                 </div>
               </div>
             </ScrollAnimation>

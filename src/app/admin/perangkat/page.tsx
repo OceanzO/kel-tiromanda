@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { Official } from '@/lib/supabase/types';
 import { FaSpinner, FaSave, FaUserTie } from 'react-icons/fa';
+import Image from 'next/image';
 
 const PREDEFINED_POSITIONS = [
   { type: 'lurah', position_id: 'Lurah Tiromanda', position_en: 'Village Head of Tiromanda', display_order: 0 },
@@ -195,10 +196,9 @@ export default function PerangkatPage() {
               
               {/* Photo Preview */}
               <div className="shrink-0 flex flex-col items-center gap-2">
-                <div className="w-20 h-20 rounded-full bg-foreground/5 flex items-center justify-center overflow-hidden border-2 border-accent/20 shadow-inner">
+                <div className="relative w-20 h-20 rounded-full bg-foreground/5 flex items-center justify-center overflow-hidden border-2 border-accent/20 shadow-inner">
                   {item.photo_url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.photo_url} alt={item.name} className="w-full h-full object-cover" />
+                    <Image src={item.photo_url} alt={item.name || ''} fill sizes="80px" className="object-cover" />
                   ) : (
                     <FaUserTie className="text-3xl text-foreground-muted/30" />
                   )}
