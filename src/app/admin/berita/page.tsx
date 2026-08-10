@@ -4,8 +4,10 @@ import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import type { NewsArticle } from '@/lib/supabase/types';
-import { FaPlus, FaEdit, FaTrash, FaSpinner, FaSave, FaTimes, FaNewspaper } from 'react-icons/fa';
+import { FaPlus, FaEdit, FaTrash, FaSpinner, FaSave, FaTimes, FaNewspaper, FaFileImport } from 'react-icons/fa';
 import { translateText } from '@/lib/translate';
+import { NEWS_ITEMS } from '@/lib/constants';
+
 export default function BeritaPage() {
   const [items, setItems] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
@@ -13,10 +15,11 @@ export default function BeritaPage() {
   const [isNew, setIsNew] = useState(false);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [importing, setImporting] = useState(false);
   const supabase = createClient();
 
   const fetchData = useCallback(async () => {
-    const { data } = await supabase.from('news').select('*').order('created_at', { ascending: false });
+    const { data } = await supabase.from('news').select('*').order('date', { ascending: true });
     if (data) setItems(data);
     setLoading(false);
   }, [supabase]);
@@ -37,9 +40,9 @@ export default function BeritaPage() {
     const title_en = await translateText(editItem.title_id || '');
     const description_en = await translateText(editItem.description_id || '');
     const payload = {
-      title_id: editItem.title_id || '', 
+      title_id: editItem.title_id || '',
       title_en: title_en,
-      description_id: editItem.description_id || '', 
+      description_id: editItem.description_id || '',
       description_en: description_en,
       date: editItem.date || new Date().toISOString().split('T')[0],
       image_url: editItem.image_url || '',
@@ -67,6 +70,26 @@ export default function BeritaPage() {
     setUploading(false);
   };
 
+  const handleImport = async () => {
+    if (!confirm('Yakin ingin mengimpor berita bawaan?')) return;
+    setImporting(true);
+    try {
+      const payload = NEWS_ITEMS.map((item) => ({
+        title_id: item.title_id,
+        title_en: item.title_en,
+        description_id: item.description_id,
+        description_en: item.description_en,
+        date: new Date(item.date_en).toISOString().split('T')[0], // Use original date
+        image_url: item.image,
+      }));
+      await supabase.from('news').insert(payload);
+      fetchData();
+    } catch (e) {
+      alert('Gagal impor data');
+    }
+    setImporting(false);
+  };
+
   const formatDate = (dateStr: string) => {
     try {
       return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -77,11 +100,18 @@ export default function BeritaPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-4">
         <p className="text-foreground-muted text-sm">Kelola artikel berita kelurahan.</p>
-        <button onClick={handleAdd} className="px-4 py-2.5 bg-accent hover:bg-accent-light text-white font-bold rounded-xl shadow-md transition-all flex items-center gap-2 text-sm">
-          <FaPlus /> Tambah Berita
-        </button>
+        <div className="flex gap-2">
+          {items.length === 0 && (
+            <button onClick={handleImport} disabled={importing} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center gap-2 text-sm disabled:opacity-60">
+              {importing ? <FaSpinner className="animate-spin" /> : <FaFileImport />} {importing ? 'Mengimpor...' : 'Import Berita Bawaan'}
+            </button>
+          )}
+          <button onClick={handleAdd} className="px-4 py-2.5 bg-accent hover:bg-accent-light text-white font-bold rounded-xl shadow-md transition-all flex items-center gap-2 text-sm">
+            <FaPlus /> Tambah Berita
+          </button>
+        </div>
       </div>
 
       {editItem && (
@@ -134,25 +164,52 @@ export default function BeritaPage() {
           <p className="text-foreground-muted">Belum ada berita. Klik &quot;Tambah Berita&quot; untuk memulai.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {items.map((item) => (
-            <div key={item.id} className="premium-card p-4 flex items-center gap-4 hover:shadow-md transition-shadow">
-              {item.image_url && (
-                <div className="relative w-24 h-16 rounded-lg overflow-hidden shrink-0 bg-background-alt">
-                  <Image src={item.image_url} alt={item.title_id} fill className="object-cover" sizes="96px" />
+            <div key={item.id} className="premium-card group h-full flex flex-col bg-background overflow-hidden hover:-translate-y-2 transition-transform duration-300">
+              {/* Image Container */}
+              <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+                {item.image_url ? (
+                  <Image src={item.image_url} alt={item.title_id || 'Berita'} fill className="object-cover transition-transform duration-500 group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-foreground/5">
+                    <FaNewspaper className="text-5xl text-foreground/20" />
+                  </div>
+                )}
+                
+                {/* Date Badge */}
+                <div className="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-md z-10">
+                  {formatDate(item.date)}
                 </div>
-              )}
-              <div className="flex-1 min-w-0">
-                <h4 className="font-semibold text-foreground text-sm truncate">{item.title_id}</h4>
-                <p className="text-xs text-foreground-muted mt-0.5">{formatDate(item.date)}</p>
+
+                {/* Action buttons overlaid on top right */}
+                <div className="absolute top-4 right-4 z-30 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button onClick={() => { setEditItem({ ...item }); setIsNew(false); }} className="w-9 h-9 rounded-full bg-white/95 text-accent flex items-center justify-center hover:bg-white hover:scale-110 shadow-md transition-all" title="Edit">
+                    <FaEdit size={14} />
+                  </button>
+                  <button onClick={() => handleDelete(item.id)} className="w-9 h-9 rounded-full bg-red-500/95 text-white flex items-center justify-center hover:bg-red-500 hover:scale-110 shadow-md transition-all" title="Hapus">
+                    <FaTrash size={14} />
+                  </button>
+                </div>
+                
+                {/* Subtle overlay on hover */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors pointer-events-none z-20" />
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button onClick={() => { setEditItem({ ...item }); setIsNew(false); }} className="p-2 rounded-lg hover:bg-accent/10 text-accent transition-colors">
-                  <FaEdit />
-                </button>
-                <button onClick={() => handleDelete(item.id)} className="p-2 rounded-lg hover:bg-red-500/10 text-red-400 transition-colors">
-                  <FaTrash />
-                </button>
+              
+              {/* Content */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="font-heading font-bold text-lg text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                  {item.title_id}
+                </h3>
+                <p className="text-foreground-light text-sm flex-1 line-clamp-3">
+                  {item.description_id}
+                </p>
+
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-white/5 opacity-50 cursor-not-allowed">
+                  <span className="text-primary font-semibold text-sm">
+                    Baca Selengkapnya →
+                  </span>
+                </div>
               </div>
             </div>
           ))}

@@ -270,12 +270,12 @@ export default function GaleriPage() {
                     #{item.display_order || 0}
                   </div>
 
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center gap-3">
-                    <button onClick={() => handleEdit(item)} className="opacity-0 group-hover:opacity-100 transition-opacity p-2.5 rounded-full bg-blue-500/90 text-white hover:bg-blue-500 hover:scale-110 transform">
-                      <FaEdit className="text-sm" />
+                  <div className="absolute top-2 right-2 z-30 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button onClick={() => handleEdit(item)} className="w-8 h-8 rounded-full bg-white/95 text-accent flex items-center justify-center hover:bg-white hover:scale-110 shadow-lg transition-all" title="Edit">
+                      <FaEdit size={12} />
                     </button>
-                    <button onClick={() => handleDelete(item.id)} className="opacity-0 group-hover:opacity-100 transition-opacity p-2.5 rounded-full bg-red-500/90 text-white hover:bg-red-500 hover:scale-110 transform">
-                      <FaTrash className="text-sm" />
+                    <button onClick={() => handleDelete(item.id)} className="w-8 h-8 rounded-full bg-red-500/95 text-white flex items-center justify-center hover:bg-red-500 hover:scale-110 shadow-lg transition-all" title="Hapus">
+                      <FaTrash size={12} />
                     </button>
                   </div>
                 </div>

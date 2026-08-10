@@ -27,12 +27,12 @@ export default function GallerySection() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [lightboxIndex, setLightboxIndex] = useState(-1);
   const [showAll, setShowAll] = useState(false);
-  const [images, setImages] = useState<{src: string, category: string, caption_id: string, caption_en: string}[]>([]);
+  const [images, setImages] = useState<{ src: string, category: string, caption_id: string, caption_en: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const supabase = createClient();
-    
+
     const fetchImages = async () => {
       const { data } = await supabase.from('gallery').select('*').order('display_order');
       if (data) {
@@ -45,7 +45,7 @@ export default function GallerySection() {
       }
       setLoading(false);
     };
-    
+
     fetchImages();
 
     // Berlangganan (subscribe) ke pembaruan real-time dari Supabase
@@ -69,7 +69,7 @@ export default function GallerySection() {
   const filteredImages = activeCategory === 'all'
     ? images
     : images.filter((img) => img.category === activeCategory);
-    
+
   const displayedImages = showAll ? filteredImages : filteredImages.slice(0, 12);
 
   const lightboxSlides = displayedImages.map((img) => {
@@ -116,11 +116,10 @@ export default function GallerySection() {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                activeCategory === category.id
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === category.id
                   ? 'bg-accent text-white shadow-md shadow-accent/30 scale-105'
                   : 'bg-transparent text-primary border-2 border-primary hover:border-accent hover:text-accent'
-              }`}
+                }`}
             >
               {language === 'id' ? category.label_id : category.label_en}
             </button>
@@ -178,7 +177,7 @@ export default function GallerySection() {
                 ))}
               </AnimatePresence>
             </div>
-            
+
             {/* See More / Show Less Button */}
             {filteredImages.length > 12 && (
               <div className="mt-12 flex justify-center">
@@ -186,13 +185,13 @@ export default function GallerySection() {
                   onClick={() => setShowAll(!showAll)}
                   className="px-8 py-3 bg-accent hover:bg-accent-light text-white font-bold rounded-full shadow-md transition-all hover:scale-105 hover:shadow-lg"
                 >
-                  {showAll 
+                  {showAll
                     ? (language === 'id' ? 'Tampilkan Lebih Sedikit' : 'Show Less')
                     : (language === 'id' ? 'Lihat Selengkapnya' : 'See More')}
                 </button>
               </div>
             )}
-            
+
             {displayedImages.length === 0 && (
               <div className="mt-12 text-center text-foreground-muted">
                 Tidak ada data di kategori ini.

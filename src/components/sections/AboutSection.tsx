@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import SectionTitle from '@/components/ui/SectionTitle';
 import ScrollAnimation from '@/components/ui/ScrollAnimation';
-import { 
-  FaEye, FaBullseye, FaRulerCombined, 
-  FaHome, FaMap, FaInfoCircle, FaUserFriends, 
+import {
+  FaEye, FaBullseye, FaRulerCombined,
+  FaHome, FaMap, FaInfoCircle, FaUserFriends,
   FaBriefcase, FaMale, FaFemale, FaUserTie
 } from 'react-icons/fa';
 
@@ -53,33 +53,33 @@ export default function AboutSection() {
 
   useEffect(() => {
     const supabase = createClient();
-    
-      const fetchData = async () => {
-        const [statsRes, genderRes] = await Promise.all([
-          supabase.from('population_stats').select('*').order('updated_at', { ascending: false }).limit(1).single(),
-          supabase.from('gender_composition').select('*').order('updated_at', { ascending: false }).limit(1).single()
-        ]);
-  
-        if (statsRes.data) {
-          setStats({
-            total: statsRes.data.total_penduduk ? Number(statsRes.data.total_penduduk).toLocaleString('id-ID') : '0',
-            households: statsRes.data.kepala_keluarga ? Number(statsRes.data.kepala_keluarga).toLocaleString('id-ID') : '0',
-            area: statsRes.data.luas_wilayah || '0'
-          });
-        }
-        
-        if (genderRes.data) {
-          const m = parseInt(genderRes.data.laki_laki) || 0;
-          const f = parseInt(genderRes.data.perempuan) || 0;
-          const total = m + f;
-          setGender({
-            male: m,
-            female: f,
-            malePercentage: total > 0 ? (m / total) * 100 : 50,
-            femalePercentage: total > 0 ? (f / total) * 100 : 50
-          });
-        }
-      };
+
+    const fetchData = async () => {
+      const [statsRes, genderRes] = await Promise.all([
+        supabase.from('population_stats').select('*').order('updated_at', { ascending: false }).limit(1).single(),
+        supabase.from('gender_composition').select('*').order('updated_at', { ascending: false }).limit(1).single()
+      ]);
+
+      if (statsRes.data) {
+        setStats({
+          total: statsRes.data.total_penduduk ? Number(statsRes.data.total_penduduk).toLocaleString('id-ID') : '0',
+          households: statsRes.data.kepala_keluarga ? Number(statsRes.data.kepala_keluarga).toLocaleString('id-ID') : '0',
+          area: statsRes.data.luas_wilayah || '0'
+        });
+      }
+
+      if (genderRes.data) {
+        const m = parseInt(genderRes.data.laki_laki) || 0;
+        const f = parseInt(genderRes.data.perempuan) || 0;
+        const total = m + f;
+        setGender({
+          male: m,
+          female: f,
+          malePercentage: total > 0 ? (m / total) * 100 : 50,
+          femalePercentage: total > 0 ? (f / total) * 100 : 50
+        });
+      }
+    };
 
     fetchData();
   }, []);
@@ -143,7 +143,7 @@ export default function AboutSection() {
         <ScrollAnimation variant="fadeUp" delay={0.1}>
           <div className="premium-card p-8 md:p-12 mb-16 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-accent via-primary to-accent" />
-            
+
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16 items-start">
               {/* Vision Side */}
               <div className="md:col-span-5 flex flex-col h-full justify-center">
@@ -159,7 +159,7 @@ export default function AboutSection() {
                   &quot;{vision}&quot;
                 </p>
               </div>
-              
+
               {/* Divider for md screens and up */}
               <div className="hidden md:flex md:col-span-1 justify-center h-full">
                 <div className="w-px h-full min-h-[200px] bg-gray-200 dark:bg-gray-800" />
@@ -199,48 +199,48 @@ export default function AboutSection() {
               {language === 'id' ? 'Statistik Kependudukan' : 'Population Statistics'}
             </h3>
             <p className="text-foreground-muted text-sm md:text-base">
-              {language === 'id' 
-                ? 'Gambaran jumlah penduduk, keluarga, dan wilayah administratif Kelurahan Tiromanda.' 
+              {language === 'id'
+                ? 'Gambaran jumlah penduduk, keluarga, dan wilayah administratif Kelurahan Tiromanda.'
                 : 'Overview of population, families, and administrative areas of Tiromanda Village.'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            <StatCard 
-              title={language === 'id' ? 'Total Penduduk' : 'Total Population'} 
-              value={stats?.total || '0'} 
+            <StatCard
+              title={language === 'id' ? 'Total Penduduk' : 'Total Population'}
+              value={stats?.total || '0'}
               unit="Jiwa"
-              icon={FaUserFriends} 
+              icon={FaUserFriends}
               isPlaceholder={!stats}
             />
-            <StatCard 
-              title={language === 'id' ? 'Kepala Keluarga' : 'Households'} 
-              value={stats?.households || '0'} 
+            <StatCard
+              title={language === 'id' ? 'Kepala Keluarga' : 'Households'}
+              value={stats?.households || '0'}
               unit="KK"
-              icon={FaUserTie} 
+              icon={FaUserTie}
               isPlaceholder={!stats}
             />
-            <StatCard 
-              title={language === 'id' ? 'Luas Wilayah' : 'Total Area'} 
-              value={stats?.area || '0'} 
+            <StatCard
+              title={language === 'id' ? 'Luas Wilayah' : 'Total Area'}
+              value={stats?.area || '0'}
               unit="km²"
-              icon={FaRulerCombined} 
+              icon={FaRulerCombined}
               isPlaceholder={!stats}
             />
-            <StatCard 
-              title={language === 'id' ? 'Lingkungan' : 'Neighborhoods'} 
-              value="4" 
-              icon={FaMap} 
+            <StatCard
+              title={language === 'id' ? 'Lingkungan' : 'Neighborhoods'}
+              value="4"
+              icon={FaMap}
             />
-            <StatCard 
-              title={language === 'id' ? 'Jumlah RT' : 'Number of RT'} 
-              value="8" 
-              icon={FaHome} 
+            <StatCard
+              title={language === 'id' ? 'Jumlah RT' : 'Number of RT'}
+              value="8"
+              icon={FaHome}
             />
-            <StatCard 
-              title={language === 'id' ? 'Mata Pencaharian Dominan' : 'Dominant Livelihood'} 
-              value={language === 'id' ? 'Petani' : 'Farmer'} 
-              icon={FaBriefcase} 
+            <StatCard
+              title={language === 'id' ? 'Mata Pencaharian Dominan' : 'Dominant Livelihood'}
+              value={language === 'id' ? 'Petani' : 'Farmer'}
+              icon={FaBriefcase}
             />
           </div>
 
@@ -269,7 +269,7 @@ export default function AboutSection() {
                   )}
                 </div>
               </div>
-              
+
               {/* Perempuan */}
               <div className="flex items-center gap-4 w-full md:justify-end">
                 <div className="md:text-right">
@@ -290,16 +290,16 @@ export default function AboutSection() {
                 </div>
               </div>
             </div>
-            
+
             {/* Progress Bar */}
             <div className="h-3 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex">
-              <div 
-                className="h-full bg-blue-500 transition-all duration-1000 ease-out" 
-                style={{ width: `${gender?.malePercentage || 50}%` }} 
+              <div
+                className="h-full bg-blue-500 transition-all duration-1000 ease-out"
+                style={{ width: `${gender?.malePercentage || 50}%` }}
               />
-              <div 
-                className="h-full bg-accent transition-all duration-1000 ease-out" 
-                style={{ width: `${gender?.femalePercentage || 50}%` }} 
+              <div
+                className="h-full bg-accent transition-all duration-1000 ease-out"
+                style={{ width: `${gender?.femalePercentage || 50}%` }}
               />
             </div>
           </div>

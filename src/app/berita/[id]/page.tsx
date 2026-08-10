@@ -8,14 +8,46 @@ import { useLanguage } from '@/context/LanguageContext';
 import { NEWS_ITEMS, NewsItem } from '@/lib/constants';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { useState, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
 
 export default function NewsDetail() {
   const { id } = useParams();
   const { language } = useLanguage();
+  const [newsItem, setNewsItem] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  const newsItem = NEWS_ITEMS.find((item: NewsItem) => item.id === id);
+  useEffect(() => {
+    const fetchNewsDetail = async () => {
+      const supabase = createClient();
+      const { data } = await supabase.from('news').select('*').eq('id', id).single();
+      
+      if (data) {
+        setNewsItem(data);
+      } else {
+        // Fallback to constants if not in DB
+        const fallback = NEWS_ITEMS.find((item: NewsItem) => item.id === id);
+        if (fallback) setNewsItem(fallback);
+      }
+      setLoading(false);
+    };
+    
+    fetchNewsDetail();
+  }, [id]);
 
-
+  if (loading) {
+    return (
+      <>
+        <Navbar forceBackground />
+        <div className="min-h-screen pt-32 flex items-center justify-center bg-background">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p className="text-foreground-muted">Memuat berita...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   if (!newsItem) {
     return (
@@ -42,32 +74,41 @@ export default function NewsDetail() {
     <>
       <Navbar forceBackground />
       <main className="min-h-screen bg-background relative">
-        
+
         {/* Full Screen Hero Image — lighter gradient so photo is visible */}
         <div className="relative w-full h-[55vh] md:h-[65vh] lg:h-[72vh] bg-background overflow-hidden group">
           <Image
-            src={newsItem.image}
-            alt={language === 'id' ? newsItem.title_id : newsItem.title_en}
+            src={newsItem.image_url || newsItem.image || ''}
+            alt={(language === 'id' ? newsItem.title_id : newsItem.title_en) || newsItem.title_id}
             fill
             className="object-cover"
             sizes="100vw"
             priority
           />
-          
+
           {/* Lighter gradient — only bottom third fades out, top stays clear */}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 
           {/* Date Badge positioned over the image */}
           <div className="absolute top-28 right-4 md:right-8 bg-accent/90 backdrop-blur-sm text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2 font-bold text-sm tracking-wider uppercase">
             <FaCalendarAlt />
-            <span>{language === 'id' ? newsItem.date_id : newsItem.date_en}</span>
+            <span>
+              {(() => {
+                if (newsItem.date_id) return language === 'id' ? newsItem.date_id : newsItem.date_en;
+                try {
+                  return new Date(newsItem.date).toLocaleDateString(language === 'id' ? 'id-ID' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+                } catch {
+                  return newsItem.date;
+                }
+              })()}
+            </span>
           </div>
         </div>
 
         {/* Header Content — sits BELOW the image, not overlaid */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-foreground leading-tight">
-            {language === 'id' ? newsItem.title_id : newsItem.title_en}
+            {(language === 'id' ? newsItem.title_id : newsItem.title_en) || newsItem.title_id}
           </h1>
 
           <div className="mt-4 h-1 w-16 bg-primary rounded-full" />
@@ -76,7 +117,7 @@ export default function NewsDetail() {
         {/* Article Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <article className="prose prose-lg dark:prose-invert max-w-none">
-            {(language === 'id' ? newsItem.description_id : newsItem.description_en)
+            {((language === 'id' ? newsItem.description_id : newsItem.description_en) || newsItem.description_id || '')
               .split('\n')
               .map((paragraph: string, index: number) => (
                 <p key={index} className="text-foreground-light leading-relaxed mb-6 text-justify text-lg md:text-xl">

@@ -28,9 +28,8 @@ function OfficialCard({ name, position, photo, featured = false, delay = 0 }: Of
       initial={{ opacity: 0, y: 30, scale: 0.95 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}
-      className={`group premium-card p-6 text-center flex flex-col items-center justify-center ${
-        featured ? 'border-2 border-accent/30 shadow-xl' : 'hover:shadow-lg'
-      } transition-shadow duration-300`}
+      className={`group premium-card p-6 text-center flex flex-col items-center justify-center ${featured ? 'border-2 border-accent/30 shadow-xl' : 'hover:shadow-lg'
+        } transition-shadow duration-300`}
     >
       {/* Photo */}
       <div className={`relative ${featured ? 'w-32 h-32' : 'w-24 h-24'} rounded-full overflow-hidden mb-5 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:scale-105 transition-transform duration-500 shadow-inner`}>
@@ -61,7 +60,7 @@ export default function GovernmentSection() {
   useEffect(() => {
     const fetchData = async () => {
       const supabase = createClient();
-      
+
       // Fetch Officials
       const { data: oData } = await supabase
         .from('officials')
@@ -78,12 +77,12 @@ export default function GovernmentSection() {
           name_id: n.name_id,
           name_en: n.name_en,
           head: { name: n.head_name || '-', phone: n.head_phone || '-' },
-          rts: rtData 
+          rts: rtData
             ? rtData.filter(rt => rt.neighborhood_id === n.id).map(rt => ({
-                name: rt.name || '-',
-                position: rt.position || '-',
-                phone: rt.phone || '-'
-              }))
+              name: rt.name || '-',
+              position: rt.position || '-',
+              phone: rt.phone || '-'
+            }))
             : []
         }));
         setNeighborhoods(mapped);
@@ -100,19 +99,19 @@ export default function GovernmentSection() {
     photo_url: OFFICIALS.lurah.photo
   };
 
-  const staff = officials.filter(o => o.type === 'staff').length > 0 
+  const staff = officials.filter(o => o.type === 'staff').length > 0
     ? officials.filter(o => o.type === 'staff')
     : OFFICIALS.staff.map(s => ({
-        id: s.name,
-        name: s.name,
-        position_id: s.position_id,
-        position_en: s.position_en,
-        photo_url: s.photo,
-        type: 'staff' as const,
-        phone: '',
-        display_order: 0,
-        created_at: ''
-      }));
+      id: s.name,
+      name: s.name,
+      position_id: s.position_id,
+      position_en: s.position_en,
+      photo_url: s.photo,
+      type: 'staff' as const,
+      phone: '',
+      display_order: 0,
+      created_at: ''
+    }));
 
   return (
     <section id="government" className="relative pt-6 pb-20 md:pt-10 md:pb-28 bg-background-alt overflow-hidden">

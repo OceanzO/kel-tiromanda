@@ -24,7 +24,7 @@ export default function PotentialsSection() {
         .from('potentials')
         .select('*')
         .order('display_order', { ascending: true });
-      
+
       if (data && data.length > 0) {
         setPotentials(data);
       }
@@ -77,11 +77,11 @@ export default function PotentialsSection() {
 
                 {/* Gradient background as placeholder */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/10 to-accent/20 group-hover:scale-110 transition-transform duration-700" />
-                
+
                 {/* Use potential image if available */}
                 {((potential as any).image_url || ('image' in potential && potential.image)) && (
-                  <Image 
-                    src={(potential as any).image_url || ('image' in potential ? potential.image : '') || ''} 
+                  <Image
+                    src={(potential as any).image_url || ('image' in potential ? potential.image : '') || ''}
                     alt={language === 'id' ? potential.title_id : potential.title_en}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"

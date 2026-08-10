@@ -32,7 +32,7 @@ export default function FacilitiesSection() {
         .from('facilities')
         .select('*')
         .order('display_order', { ascending: true });
-      
+
       if (data && data.length > 0) {
         setFacilities(data);
       }
@@ -84,7 +84,7 @@ export default function FacilitiesSection() {
                   </div>
                 )}
               </div>
-              
+
               {/* Text Area */}
               <div className="px-4 py-3 flex-grow flex items-center justify-center text-center">
                 <h3 className="text-foreground font-medium text-sm sm:text-base line-clamp-2">
