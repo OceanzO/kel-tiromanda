@@ -62,9 +62,9 @@ export default function AboutSection() {
   
         if (statsRes.data) {
           setStats({
-            total: statsRes.data.total_penduduk,
-            households: statsRes.data.kepala_keluarga,
-            area: statsRes.data.luas_wilayah
+            total: statsRes.data.total_penduduk ? Number(statsRes.data.total_penduduk).toLocaleString('id-ID') : '0',
+            households: statsRes.data.kepala_keluarga ? Number(statsRes.data.kepala_keluarga).toLocaleString('id-ID') : '0',
+            area: statsRes.data.luas_wilayah || '0'
           });
         }
         
@@ -261,7 +261,7 @@ export default function AboutSection() {
                   </p>
                   {gender ? (
                     <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-bold text-foreground">{gender.male}</span>
+                      <span className="text-2xl font-bold text-foreground">{gender.male.toLocaleString('id-ID')}</span>
                       <span className="text-sm text-foreground-muted">({Math.round(gender.malePercentage)}%)</span>
                     </div>
                   ) : (
@@ -278,7 +278,7 @@ export default function AboutSection() {
                   </p>
                   {gender ? (
                     <div className="flex items-baseline gap-2 md:justify-end">
-                      <span className="text-2xl font-bold text-foreground">{gender.female}</span>
+                      <span className="text-2xl font-bold text-foreground">{gender.female.toLocaleString('id-ID')}</span>
                       <span className="text-sm text-foreground-muted">({Math.round(gender.femalePercentage)}%)</span>
                     </div>
                   ) : (

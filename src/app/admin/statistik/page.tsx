@@ -90,10 +90,13 @@ export default function StatistikPage() {
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Total Penduduk</label>
             <input
-              type="number"
-              value={data.total_penduduk ?? ''}
-              onChange={(e) => setData({ ...data, total_penduduk: e.target.value ? Number(e.target.value) : null })}
-              placeholder="Ketik total jiwa (Misal: 1250)"
+              type="text"
+              value={data.total_penduduk ? data.total_penduduk.toLocaleString('id-ID') : ''}
+              onChange={(e) => {
+                const val = e.target.value.replace(/[^0-9]/g, '');
+                setData({ ...data, total_penduduk: val ? Number(val) : null });
+              }}
+              placeholder="Ketik total jiwa (Misal: 1.250)"
               className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
             />
           </div>
@@ -102,9 +105,12 @@ export default function StatistikPage() {
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Kepala Keluarga (KK)</label>
             <input
-              type="number"
-              value={data.kepala_keluarga ?? ''}
-              onChange={(e) => setData({ ...data, kepala_keluarga: e.target.value ? Number(e.target.value) : null })}
+              type="text"
+              value={data.kepala_keluarga ? data.kepala_keluarga.toLocaleString('id-ID') : ''}
+              onChange={(e) => {
+                const val = e.target.value.replace(/[^0-9]/g, '');
+                setData({ ...data, kepala_keluarga: val ? Number(val) : null });
+              }}
               placeholder="Ketik jumlah KK (Misal: 450)"
               className="w-full px-4 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
             />
@@ -115,11 +121,13 @@ export default function StatistikPage() {
             <label className="block text-sm font-semibold text-foreground mb-2">Luas Wilayah</label>
             <div className="relative">
               <input
-                type="number"
-                step="any"
-                value={data.luas_wilayah?.replace(/[^0-9.]/g, '') ?? ''}
-                onChange={(e) => setData({ ...data, luas_wilayah: e.target.value })}
-                placeholder="Ketik angka saja (Misal: 12.5)"
+                type="text"
+                value={data.luas_wilayah ?? ''}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/[^0-9.,]/g, '');
+                  setData({ ...data, luas_wilayah: val });
+                }}
+                placeholder="Ketik angka (Misal: 12,5)"
                 className="w-full pl-4 pr-16 py-3 bg-background-alt border border-foreground/10 rounded-xl text-foreground placeholder-foreground-muted/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all"
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">

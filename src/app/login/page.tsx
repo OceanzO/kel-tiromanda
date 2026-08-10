@@ -204,16 +204,7 @@ function LoginInner() {
                 </div>
               </div>
 
-              {/* Forgot link */}
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => switchView('forgot')}
-                  className="text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
-                >
-                  {language === 'id' ? 'Lupa kata sandi?' : 'Forgot password?'}
-                </button>
-              </div>
+              {/* Forgot link (Removed) */}
 
               {/* Submit */}
               <button
@@ -250,101 +241,7 @@ function LoginInner() {
           </div>
         )}
 
-        {/* ─ Forgot Password Card ───────────────────────────────────────────── */}
-        {view === 'forgot' && (
-          <div
-            className="rounded-2xl p-8 md:p-10"
-            style={{
-              background: 'rgba(255,255,255,0.04)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
-            }}
-          >
-            {/* Icon + Title */}
-            <div className="mb-7">
-              <div className="w-11 h-11 rounded-xl bg-amber-400/10 flex items-center justify-center mb-5">
-                <FaEnvelope className="text-amber-400 text-lg" />
-              </div>
-              <h1 className="font-heading text-2xl font-bold text-white mb-1.5">
-                {language === 'id' ? 'Pemulihan Kata Sandi' : 'Password Recovery'}
-              </h1>
-              <p className="text-sm text-white/40 leading-relaxed">
-                {language === 'id'
-                  ? 'Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi.'
-                  : "Enter your email and we'll send you a link to reset your password."}
-              </p>
-            </div>
-
-            {/* Error */}
-            {error && (
-              <div className="mb-5 flex items-start gap-3 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                <FaExclamationCircle className="shrink-0 mt-0.5" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            {/* Success */}
-            {successMsg === 'sent' && (
-              <div className="mb-5 flex items-start gap-3 p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm">
-                <FaCheckCircle className="shrink-0 mt-0.5" />
-                <span>
-                  {language === 'id'
-                    ? 'Tautan reset dikirim ke email Anda. Periksa kotak masuk atau folder spam.'
-                    : 'Reset link sent to your email. Check your inbox or spam folder.'}
-                </span>
-              </div>
-            )}
-
-            <form onSubmit={handleForgot} className="space-y-4">
-              <div>
-                <label htmlFor="forgot-email" className="block text-sm font-medium text-white/60 mb-2">
-                  Email
-                </label>
-                <div className="relative">
-                  <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-white/25 text-sm pointer-events-none" />
-                  <input
-                    id="forgot-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="kkn116tiromanda@gmail.com"
-                    required
-                    className={inputCls + ' pl-11 pr-4'}
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading || successMsg === 'sent'}
-                className="w-full py-3.5 rounded-xl font-bold text-sm text-white flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{
-                  background: 'linear-gradient(135deg, #E3A73A 0%, #c98f20 100%)',
-                  boxShadow: '0 8px 24px rgba(227,167,58,0.25)',
-                }}
-              >
-                {loading ? (
-                  <><FaSpinner className="animate-spin" /> {language === 'id' ? 'Mengirim...' : 'Sending...'}</>
-                ) : (
-                  <><FaEnvelope /> {language === 'id' ? 'Kirim Tautan Reset' : 'Send Reset Link'}</>
-                )}
-              </button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <button
-                type="button"
-                onClick={() => switchView('login')}
-                className="inline-flex items-center gap-2 text-sm font-medium text-white/35 hover:text-white/70 transition-colors"
-              >
-                <FaArrowLeft className="text-xs" />
-                {language === 'id' ? 'Kembali ke Halaman Masuk' : 'Back to Login'}
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Forgot Password Card (Removed) */}
       </div>
     </div>
   );
