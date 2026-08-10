@@ -164,7 +164,7 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
               whileHover={{ scale: 1.02 }}
             >
               <div className="relative w-11 h-11 flex items-center justify-center flex-shrink-0">
-                <Image src="/logo-custom.png" alt="Logo Tana Toraja" width={44} height={44} className="w-full h-full object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105" priority />
+                <Image src="/logo-toraja-baru.png" alt="Logo Tana Toraja" width={44} height={44} className="w-full h-full object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105" priority />
               </div>
               <div className="flex flex-col justify-center">
                 <span className="font-heading font-bold text-base sm:text-lg leading-tight block text-white drop-shadow-sm">{t('general.village_name')}</span>
@@ -316,7 +316,7 @@ export default function Navbar({ forceBackground = false }: NavbarProps) {
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
                   <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0">
-                    <Image src="/logo-custom.png" alt="Logo Tana Toraja" width={40} height={40} className="w-full h-full object-contain drop-shadow-md" />
+                    <Image src="/logo-toraja-baru.png" alt="Logo Tana Toraja" width={40} height={40} className="w-full h-full object-contain drop-shadow-md" />
                   </div>
                   <div>
                     <span className="font-heading font-bold text-lg text-white block leading-tight">{t('general.village_name')}</span>

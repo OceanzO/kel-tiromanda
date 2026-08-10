@@ -61,7 +61,7 @@ export default function Footer() {
             {/* Logo */}
             <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white flex items-center justify-center shadow-2xl p-2 flex-shrink-0 ring-4 ring-accent/20">
               <Image
-                src="/logo-tana-toraja.png"
+                src="/logo-toraja-baru.png"
                 alt="Logo Kabupaten Tana Toraja"
                 width={88}
                 height={88}

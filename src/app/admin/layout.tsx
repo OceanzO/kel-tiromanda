@@ -149,7 +149,7 @@ function Sidebar({
           <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5">
             <div className="w-9 h-9 rounded-full bg-amber-400/20 overflow-hidden flex items-center justify-center shrink-0 ring-2 ring-amber-400/30">
               <Image
-                src="/logo-custom.png"
+                src="/logo-toraja-baru.png"
                 alt="Logo"
                 width={36}
                 height={36}
@@ -207,7 +207,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   );
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-white flex">
       {/* Mobile Backdrop */}
       {sidebarOpen && (
         <div

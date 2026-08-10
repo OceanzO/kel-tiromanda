@@ -49,9 +49,9 @@ export const metadata: Metadata = {
     google: "notranslate",
   },
   icons: {
-    icon: "/logo-tana-toraja-transparent.png",
-    shortcut: "/logo-tana-toraja-transparent.png",
-    apple: "/logo-tana-toraja-transparent.png",
+    icon: "/logo-toraja-baru.png",
+    shortcut: "/logo-toraja-baru.png",
+    apple: "/logo-toraja-baru.png",
   },
 };
 
