@@ -19,7 +19,7 @@ export default function BeritaPage() {
   const supabase = createClient();
 
   const fetchData = useCallback(async () => {
-    const { data } = await supabase.from('news').select('*').order('date', { ascending: true });
+    const { data } = await supabase.from('news').select('*').order('date', { ascending: false });
     if (data) setItems(data);
     setLoading(false);
   }, [supabase]);

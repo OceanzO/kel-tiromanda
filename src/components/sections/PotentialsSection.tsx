@@ -16,6 +16,7 @@ export default function PotentialsSection() {
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   const [selectedPotential, setSelectedPotential] = useState<Potential | typeof POTENTIALS[0] | null>(null);
   const [potentials, setPotentials] = useState<Potential[]>([]);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const fetchPotentials = async () => {
@@ -34,6 +35,12 @@ export default function PotentialsSection() {
   }, []);
 
   const displayData = potentials.length > 0 ? potentials : POTENTIALS;
+
+  const showButtonMobile = displayData.length > 3;
+  const showButtonDesktop = displayData.length > 6;
+  const buttonWrapperClass = showButtonDesktop 
+    ? 'flex' 
+    : (showButtonMobile ? 'flex md:hidden' : 'hidden');
 
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -68,7 +75,15 @@ export default function PotentialsSection() {
                 delay: index * 0.08,
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
-              className="group premium-card overflow-hidden cursor-pointer flex flex-col h-full"
+              className={`group premium-card overflow-hidden cursor-pointer flex-col h-full ${
+                !isExpanded
+                  ? index < 3
+                    ? 'flex'
+                    : index < 6
+                    ? 'hidden md:flex'
+                    : 'hidden'
+                  : 'flex'
+              }`}
               onClick={() => setSelectedPotential(potential)}
             >
               {/* Image */}
@@ -108,6 +123,20 @@ export default function PotentialsSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* See More Button */}
+        {(showButtonMobile || showButtonDesktop) && (
+          <div className={`mt-10 justify-center ${buttonWrapperClass}`}>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-light transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-300"
+            >
+              {isExpanded 
+                ? (language === 'id' ? 'Tampilkan Lebih Sedikit' : 'Show Less') 
+                : (language === 'id' ? 'Lihat Selengkapnya' : 'See More')}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Modal */}

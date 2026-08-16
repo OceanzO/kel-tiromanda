@@ -13,6 +13,7 @@ import { NEWS_ITEMS } from '@/lib/constants';
 export default function NewsSection() {
   const { language, t } = useLanguage();
   const [newsData, setNewsData] = useState<any[]>([]);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -20,7 +21,7 @@ export default function NewsSection() {
       const { data } = await supabase
         .from('news')
         .select('*')
-        .order('date', { ascending: true });
+        .order('date', { ascending: false });
         
       if (data && data.length > 0) {
         setNewsData(data);
@@ -31,6 +32,12 @@ export default function NewsSection() {
     
     fetchNews();
   }, []);
+
+  const showButtonMobile = newsData.length > 3;
+  const showButtonDesktop = newsData.length > 6;
+  const buttonWrapperClass = showButtonDesktop 
+    ? 'flex' 
+    : (showButtonMobile ? 'flex md:hidden' : 'hidden');
 
   return (
     <section id="news" className="relative min-h-[85vh] flex flex-col pt-6 pb-20 md:pt-10 md:pb-28 bg-background overflow-hidden scroll-mt-[72px]">
@@ -45,7 +52,20 @@ export default function NewsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {newsData.map((item, index: number) => (
-            <ScrollAnimation key={item.id} variant="fadeUp" delay={index * 0.1}>
+            <ScrollAnimation 
+              key={item.id} 
+              variant="fadeUp" 
+              delay={index * 0.1}
+              className={`${
+                !isExpanded
+                  ? index < 3
+                    ? 'block'
+                    : index < 6
+                    ? 'hidden md:block'
+                    : 'hidden'
+                  : 'block'
+              }`}
+            >
               <div className="premium-card group h-full flex flex-col bg-background overflow-hidden hover:-translate-y-2 transition-transform duration-300">
                 {/* Image Container */}
                 <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -87,6 +107,20 @@ export default function NewsSection() {
             </ScrollAnimation>
           ))}
         </div>
+
+        {/* See More Button */}
+        {(showButtonMobile || showButtonDesktop) && (
+          <div className={`mt-10 justify-center ${buttonWrapperClass}`}>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-light transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-300"
+            >
+              {isExpanded 
+                ? (language === 'id' ? 'Tampilkan Lebih Sedikit' : 'Show Less') 
+                : (language === 'id' ? 'Lihat Selengkapnya' : 'See More')}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

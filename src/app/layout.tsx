@@ -18,7 +18,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kel. Tiromanda",
+  metadataBase: new URL("https://tiromanda.tanatorajakab.go.id"),
+  title: {
+    default: "Kelurahan Tiromanda",
+    template: "%s | Kelurahan Tiromanda"
+  },
   description:
     "Portal resmi Kelurahan Tiromanda, Kecamatan Makale Selatan, Kabupaten Tana Toraja, Sulawesi Selatan. Temukan informasi pemerintahan, potensi wisata, UMKM, fasilitas, dan layanan masyarakat.",
   keywords: [
@@ -44,6 +48,16 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: '/',
   },
   other: {
     google: "notranslate",
