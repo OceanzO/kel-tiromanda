@@ -1,11 +1,12 @@
 # 🏛️ Kelurahan Tiromanda — Portal Digital Resmi
 
 <div align="center">
-  <img src="public/icon.png" alt="Logo Kelurahan Tiromanda" width="120" />
+  <img src="public/logo-kkn.png" alt="Logo KKN Unhas Gel. 116" width="150" />
 </div>
 
 <p align="center">
-  <strong>Portal Informasi dan Layanan Publik Digital Kelurahan Tiromanda, Makale Selatan, Tana Toraja.</strong>
+  <strong>Portal Informasi dan Layanan Publik Digital Kelurahan Tiromanda, Makale Selatan, Tana Toraja.</strong><br>
+  <em>Dikembangkan oleh Tim KKN Tematik Universitas Hasanuddin Gel. 116</em>
 </p>
 
 <p align="center">
