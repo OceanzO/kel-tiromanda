@@ -1,7 +1,7 @@
 # 🏛️ Kelurahan Tiromanda — Portal Digital Resmi
 
 <div align="center">
-  <img src="public/logo-kkn.png" alt="Logo KKN Unhas Gel. 116" width="150" />
+  <img src="public/logo-kkn-unhas.png" alt="Logo KKN Unhas Gel. 116" width="150" />
 </div>
 
 <p align="center">
